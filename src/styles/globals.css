@@ -8,3 +8,7 @@
   background: var(--radial);
   height: 100vh;
 }
+
+.holder h1 {
+  color: var(--primaryOnCon);
+}
