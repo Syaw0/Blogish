@@ -88,3 +88,44 @@
     ),
     #fcfcfa;
 }
+
+.transitionToken {
+  --colorTransition: color 0.5s;
+  --bgTransition: background-color 0.5s, fill 0.5s;
+  --boxShadowTransition: box-shadow 0.5s;
+}
+
+.shadows {
+  --shadow1dp: 0px 0px 2px 0px #00000024, 0px 2px 2px 0px #0000001f,
+    0px 1px 3px 0px #00000033;
+  --shadow8dp: 0px 8px 10px 1px #00000024, 0px 3px 14px 3px #0000001f,
+    0px 4px 15px 0px #00000033;
+  --shadow24dp: 0px 24px 38px 3px #00000024, 0px 9px 46px 8px #0000001f,
+    0px 11px 15px 0px #00000033;
+}
+
+.font_sizes {
+  --headline1: 60px;
+  --headline2: 50px;
+  --headline3: 43px;
+  --headline4: 24px;
+  --headline5: 22px;
+  --headline6: 18px;
+  --subhead1: 16px;
+  --subhead2: 14px;
+  --subhead3: 12px;
+  --button: 15px;
+}
+
+.line_height {
+  --headline1_lineHeight: 75px;
+  --headline2_lineHeight: 60px;
+  --headline3_lineHeight: 53px;
+  --headline4_lineHeight: 32px;
+  --headline5_lineHeight: 28px;
+  --headline6_lineHeight: 24px;
+  --subhead1_lineHeight: 24px;
+  --subhead2_lineHeight: 20px;
+  --subhead3_lineHeight: 18px;
+  --button_lineHeight: 20px;
+}

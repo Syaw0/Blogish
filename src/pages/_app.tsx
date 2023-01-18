@@ -21,7 +21,16 @@ const lato = Lato({
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <div className={`${style.color_light} ${lato.variable} ${arvo.variable}`}>
+    <div
+      className={`
+      ${lato.variable}
+      ${arvo.variable} 
+      ${style.color_light}
+      ${style.transitionToken}
+      ${style.shadows}
+      ${style.font_sizes}
+      ${style.line_height}`}
+    >
       <Component {...pageProps} />
     </div>
   );

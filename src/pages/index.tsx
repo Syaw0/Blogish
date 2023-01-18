@@ -2,7 +2,7 @@ import Head from "next/head";
 
 export default function Home() {
   return (
-    <>
+    <div>
       <Head>
         <title>Blogish</title>
         <meta name="description" content="blogish home page" />
@@ -10,9 +10,9 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="holder">
-        <h1>BLOGISH</h1>
+        <p className="header1">BLOGISH</p>
         <h1>BLOG APPLICATION</h1>
       </div>
-    </>
+    </div>
   );
 }
