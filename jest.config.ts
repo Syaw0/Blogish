@@ -1,6 +1,6 @@
 const config = {
   transform: {
-    "^.+\\.tsx?$": "ts-jest",
+    "^.+\\.tsx?$": ["ts-jest", { tsconfig: "tsconfig.jest.json" }],
     "^.+\\.css$": "jest-transform-css",
   },
   testRegex: "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
