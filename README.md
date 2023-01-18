@@ -1,2 +1,0 @@
-# Blogish
-**Simple Blog App**
