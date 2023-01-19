@@ -12,6 +12,7 @@ interface ButtonType {
   EndIcon?: (params: IconTypes) => JSX.Element;
   loader?: boolean;
   disabled?: boolean;
+  className?: string;
 }
 const Button = ({
   children,
@@ -24,6 +25,7 @@ const Button = ({
   EndIcon,
   disabled = false,
   loader = false,
+  className = "",
 }: ButtonType) => {
   return (
     <button
@@ -31,7 +33,7 @@ const Button = ({
       data-testid={testid}
       id={id}
       onClick={onClick}
-      className={`${style.button} ${style[color]} ${style[variant]} `}
+      className={`${style.button} ${style[color]} ${style[variant]} ${className} `}
     >
       {loader ? (
         <CircleLoader />

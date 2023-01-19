@@ -1,9 +1,13 @@
 .holder {
-  background-color: aliceblue;
-  width: 100%;
-  height: 100vh;
+  background-color: var(--bg);
+  width: 24rem;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.holder > * {
+  margin-bottom: 1rem;
 }

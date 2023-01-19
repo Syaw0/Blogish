@@ -29,7 +29,9 @@ export default function App({ Component, pageProps }: AppProps) {
       ${style.transitionToken}
       ${style.shadows}
       ${style.font_sizes}
-      ${style.line_height}`}
+      ${style.line_height}
+      rootHolder
+      `}
     >
       <Component {...pageProps} />
     </div>

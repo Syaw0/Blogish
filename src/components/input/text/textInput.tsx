@@ -5,22 +5,24 @@ interface TextInputType {
   placeholder: string;
   onChange: any;
   value: any;
-  id: string;
+  id?: string;
   type: "text" | "email";
   testId: string;
+  className?: string;
 }
 
 const TextInput = ({
-  id,
+  id = "",
   label,
   placeholder,
   onChange,
   value,
   type,
   testId,
+  className = "",
 }: TextInputType) => {
   return (
-    <div className={style.holder}>
+    <div className={`${style.holder} ${className}`}>
       <label htmlFor={id}>{label}</label>
       <input
         placeholder={placeholder}

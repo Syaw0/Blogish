@@ -1,7 +1,7 @@
 import style from "./typography.module.css";
 
 interface Text {
-  children: string;
+  children: any;
   variant?:
     | "headline1"
     | "headline2"
@@ -15,17 +15,30 @@ interface Text {
     | "button";
   id?: string;
   testid?: string;
+  className?: string;
+  as?: "span" | "a" | "p";
+  onClick?: () => void;
 }
 
-const Text = ({ children, variant = "subhead1", testid, id }: Text) => {
+const Text = ({
+  children,
+  variant = "subhead1",
+  testid,
+  id,
+  className,
+  as = "p",
+  ...params
+}: Text) => {
+  const TypographyComponent = `${as}` as keyof JSX.IntrinsicElements;
   return (
-    <p
+    <TypographyComponent
+      {...params}
       data-testid={testid}
       id={id}
-      className={`${style.typography} ${style[variant]}`}
+      className={`${style.typography} ${style[variant]} ${className}`}
     >
       {children}
-    </p>
+    </TypographyComponent>
   );
 };
 

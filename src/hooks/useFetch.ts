@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 
+// ? Should i test this hook?
+
 interface FetcherState {
   state: FetchStateTypes;
   data: any;

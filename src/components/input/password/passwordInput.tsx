@@ -8,17 +8,19 @@ interface PasswordInputType {
   placeholder: string;
   onChange: any;
   value: any;
-  id: string;
+  id?: string;
   testId: string;
+  className?: string;
 }
 
 const PasswordInput = ({
-  id,
+  id = "",
   label,
   placeholder,
   onChange,
   value,
   testId,
+  className = "",
 }: PasswordInputType) => {
   const [showPassword, setShowPassword] = useState(false);
   const changePasswordVisibility = (e: React.MouseEvent<SVGAElement>) => {
@@ -26,7 +28,7 @@ const PasswordInput = ({
     setShowPassword(id === "iconEyeClose" ? false : true);
   };
   return (
-    <div className={style.holder}>
+    <div className={`${style.holder} ${className}`}>
       <label htmlFor={id}>{label}</label>
       <div>
         <input
