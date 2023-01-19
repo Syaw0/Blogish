@@ -5,6 +5,7 @@ declare global {
     onClick?(e: any): void;
     id?: string;
     "data-testId"?: string;
+    className?: string;
   }
 }
 export {};

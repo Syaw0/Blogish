@@ -1,3 +1,4 @@
+import { ReactNode } from "react";
 import style from "./button.module.css";
 
 interface ButtonType {
@@ -7,10 +8,9 @@ interface ButtonType {
   onClick?: any;
   id?: string;
   testid?: string;
-  startIcon?: SVGElement;
-  endIcon?: SVGElement;
+  StartIcon?: (params: IconTypes) => JSX.Element;
+  EndIcon?: (params: IconTypes) => JSX.Element;
 }
-// TODO fix start and end icon and implement loader
 const Button = ({
   children,
   variant = "contained",
@@ -18,8 +18,8 @@ const Button = ({
   testid,
   id,
   onClick,
-  startIcon,
-  endIcon,
+  StartIcon,
+  EndIcon,
 }: ButtonType) => {
   console.log(style[variant]);
   return (
@@ -29,7 +29,15 @@ const Button = ({
       onClick={onClick}
       className={`${style.button} ${style[color]} ${style[variant]} `}
     >
-      {children}
+      <>
+        {StartIcon != null && (
+          <StartIcon className={style.leftIcon} height="20" width="20" />
+        )}
+        {children}
+        {EndIcon != null && (
+          <EndIcon className={style.rightIcon} height="20" width="20" />
+        )}
+      </>
     </button>
   );
 };

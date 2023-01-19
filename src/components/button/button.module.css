@@ -14,11 +14,30 @@
   font-weight: 600;
   font-family: var(--font-sub);
   box-shadow: var(--shadow3dp);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.button svg {
+  fill: var(--onMain);
+}
+
+.leftIcon {
+  margin-right: 0.5rem;
+}
+
+.rightIcon {
+  margin-left: 0.5rem;
 }
 
 .button:hover {
   background-color: var(--onMain);
   color: var(--main);
+}
+
+.button:hover svg {
+  fill: var(--main);
 }
 
 .button:active {
