@@ -8,7 +8,9 @@
     "start": "next start",
     "lint": "next lint",
     "test": "jest",
-    "prettier": "npx prettier . -c -w"
+    "prettier": "npx prettier . -c -w",
+    "test:component": "npx jest ./src/components",
+    "test:pages": "npx jest ./src/__test__/"
   },
   "dependencies": {
     "@next/font": "13.1.2",
