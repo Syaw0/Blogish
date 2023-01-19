@@ -1,4 +1,3 @@
-import { type } from "os";
 import style from "./textInput.module.css";
 
 interface TextInputType {
