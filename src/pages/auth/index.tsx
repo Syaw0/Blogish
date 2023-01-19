@@ -5,8 +5,13 @@ import { ChangeEvent, useState } from "react";
 import style from "../../styles/pagesStyle/auth.module.css";
 import IconEyeClose from "../../assets/icons/iconEyeClose";
 import Text from "../../components/typography/typography";
+import useFetch from "@/hooks/useFetch";
+import getData from "@/utils/getData";
 
 const AuthenticatePage = () => {
+  const [data, success, loader, error, pending, trigger]: any =
+    useFetch(getData);
+  console.log(data, success, loader, error, pending, trigger);
   const [inputData, setInputData] = useState({ email: "", password: "" });
 
   const inputChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
@@ -35,7 +40,14 @@ const AuthenticatePage = () => {
         value={inputData.password}
       />
       <Text>se</Text>
-      <Button StartIcon={IconEyeClose} variant="contained" color="primary">
+      <Button
+        onClick={() => {
+          trigger();
+        }}
+        StartIcon={IconEyeClose}
+        variant="contained"
+        color="primary"
+      >
         Hello Dear
       </Button>
     </div>
