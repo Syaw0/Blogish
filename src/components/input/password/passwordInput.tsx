@@ -1,5 +1,5 @@
-import IconEyeClose from "@/assets/icons/iconEyeClose";
-import IconEyeOpen from "@/assets/icons/iconEyeOpen";
+import IconEyeClose from "../../../assets/icons/iconEyeClose";
+import IconEyeOpen from "../../../assets/icons/iconEyeOpen";
 import React, { useState } from "react";
 import style from "./passwordInput.module.css";
 
@@ -10,7 +10,6 @@ interface PasswordInputType {
   value: any;
   id: string;
   testId: string;
-  showPassword: boolean;
 }
 
 const PasswordInput = ({
@@ -24,10 +23,8 @@ const PasswordInput = ({
   const [showPassword, setShowPassword] = useState(false);
   const changePasswordVisibility = (e: React.MouseEvent<SVGAElement>) => {
     const { id } = e.currentTarget;
-    console.log(id);
     setShowPassword(id === "iconEyeClose" ? false : true);
   };
-  console.log(showPassword);
   return (
     <div className={style.holder}>
       <label htmlFor={id}>{label}</label>
