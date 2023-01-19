@@ -3,7 +3,8 @@ import PasswordInput from "../../components/input/password/passwordInput";
 import TextInput from "../../components/input/text/textInput";
 import { ChangeEvent, useState } from "react";
 import style from "../../styles/pagesStyle/auth.module.css";
-import IconEyeClose from "@/assets/icons/iconEyeClose";
+import IconEyeClose from "../../assets/icons/iconEyeClose";
+import Text from "../../components/typography/typography";
 
 const AuthenticatePage = () => {
   const [inputData, setInputData] = useState({ email: "", password: "" });
@@ -33,6 +34,7 @@ const AuthenticatePage = () => {
         testId="auth-pass"
         value={inputData.password}
       />
+      <Text>se</Text>
       <Button StartIcon={IconEyeClose} variant="contained" color="primary">
         Hello Dear
       </Button>
