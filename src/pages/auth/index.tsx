@@ -7,11 +7,9 @@ const AuthenticatePage = () => {
   const [inputData, setInputData] = useState({ email: "", password: "" });
 
   const inputChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.currentTarget;
-    if (e.type == "password") {
-      return;
-    }
-    setInputData((s) => ({ ...s, email: value }));
+    let { value, type } = e.currentTarget;
+    if (type == "text") type = "password";
+    setInputData((s) => ({ ...s, [type]: value }));
   };
   return (
     <div className={style.holder}>
@@ -22,8 +20,17 @@ const AuthenticatePage = () => {
         onChange={inputChangeHandler}
         placeholder="Enter your email address"
         value={inputData.email}
+        testId="auth-input"
       />
-      <PasswordInput />
+      <PasswordInput
+        id="pass"
+        label="Password"
+        onChange={inputChangeHandler}
+        placeholder="Enter your password"
+        showPassword={false}
+        testId="auth-pass"
+        value={inputData.password}
+      />
     </div>
   );
 };
