@@ -9,5 +9,10 @@ declare global {
   }
   type FetchStateTypes = "error" | "success" | "pending" | "loader";
   type MessageStateType = FetchStateTypes | "warn";
+  interface FetchResponse {
+    status: boolean;
+    msg: string;
+    data?: any;
+  }
 }
 export {};

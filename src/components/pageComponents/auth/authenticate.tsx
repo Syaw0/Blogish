@@ -1,13 +1,17 @@
-import Button from "@/components/button/button";
-import PasswordInput from "@/components/input/password/passwordInput";
-import TextInput from "@/components/input/text/textInput";
-import Message from "@/components/message/message";
+import Button from "../../../components/button/button";
+import PasswordInput from "../../../components/input/password/passwordInput";
+import TextInput from "../../../components/input/text/textInput";
+import Message from "../../../components/message/message";
+import useFetch from "../../../hooks/useFetch";
 import { ChangeEvent, useState } from "react";
 import IconLogo from "../../../assets/icons/IconLogo";
 import Text from "../../../components/typography/typography";
 import style from "./authenticate.module.css";
+import authenticateObject from "@/utils/authenticate";
 
 const Authenticate = () => {
+  let [authData, trigger, authState, msg, setMsg] =
+    useFetch(authenticateObject);
   const [pageState, setPageState] = useState({
     password: "",
     email: "",
@@ -20,10 +24,39 @@ const Authenticate = () => {
     setPageState((s) => ({ ...s, [type]: value }));
   };
 
-  const startAuth = () => {};
+  const startAuth = () => {
+    if (!checkInputs()) {
+      return;
+    }
+    // setPageState((s) => ({ ...s, email: "", password: "" }));
+    trigger(pageState.isLogin ? "signin" : "signup");
+  };
+
+  const checkInputs = () => {
+    if (pageState.email.trim() == "" && pageState.password.trim() == "") {
+      setMsg("error", "Please fill all inputs and then click on submit");
+      return false;
+    } else if (!checkEmail(pageState.email)) {
+      setMsg("error", "Please use a Valid Email Address");
+      return false;
+    } else if (pageState.password.length < 8) {
+      setMsg("error", "Please Use Password with 8 or more Character");
+      return false;
+    }
+    return true;
+  };
+
   const changeAuthType = () => {
     setPageState((s) => ({ ...s, isLogin: !s.isLogin }));
   };
+
+  const checkEmail = (addr: string) => {
+    if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(addr)) {
+      return true;
+    }
+    return false;
+  };
+
   return (
     <>
       <IconLogo className={style.logo} width="100" height="100" />
@@ -56,7 +89,13 @@ const Authenticate = () => {
         className={style.passwordInput}
       />
 
-      <Button className={style.button} testid="authButton" onClick={startAuth}>
+      <Button
+        loader={authState == "loader"}
+        disabled={authState == "loader" || authState == "success"}
+        className={style.button}
+        testid="authButton"
+        onClick={startAuth}
+      >
         {pageState.isLogin ? "Login" : "Register"}
       </Button>
 
@@ -74,7 +113,7 @@ const Authenticate = () => {
         </Text>
       </Text>
 
-      {/* <Message type="warn" msg="hello" /> */}
+      <Message type={authState} msg={msg} />
     </>
   );
 };

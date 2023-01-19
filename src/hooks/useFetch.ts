@@ -7,14 +7,22 @@ interface FetcherState {
   data: any;
   run: boolean;
   msg: string;
+  params: any;
+  setMsg(type: FetchStateTypes, msg: string): void;
 }
 
 interface FetcherObject {
-  fetcher: () => Promise<any>;
+  fetcher: (...params: any) => Promise<FetchResponse>;
   loaderMsg: string;
 }
 
-type UseFetchReturnType = [any, () => void, FetchStateTypes, string];
+type UseFetchReturnType = [
+  any,
+  (...args: any) => void,
+  FetchStateTypes,
+  string,
+  (type: FetchStateTypes, msg: string) => void
+];
 
 const useFetch = (fetcherObject: FetcherObject): UseFetchReturnType => {
   const [state, setState] = useState<FetcherState>({
@@ -22,32 +30,46 @@ const useFetch = (fetcherObject: FetcherObject): UseFetchReturnType => {
     data: null,
     run: false,
     msg: "",
+    params: {},
+    setMsg(type, msg) {
+      setState((s) => ({ ...s, msg: msg, state: type }));
+    },
   });
 
-  const trigger = () => {
+  const trigger = (...args: any) => {
     setState((s) => ({
       ...s,
       run: true,
       data: null,
       state: "loader",
       msg: fetcherObject.loaderMsg,
+      params: args,
     }));
   };
   useEffect(() => {
     try {
       if (state.run) {
         fetcherObject
-          .fetcher()
-          .then((res: any) => {
-            setTimeout(() => {
-              setState((s) => ({
-                ...s,
-                state: "success",
-                run: false,
-                data: res,
-                msg: "successfully set Data",
-              }));
-            }, 2000);
+          .fetcher(...state.params)
+          .then((res) => {
+            if (res.status) {
+              setTimeout(() => {
+                setState((s) => ({
+                  ...s,
+                  state: "success",
+                  run: false,
+                  data: res.data,
+                  msg: res.msg,
+                }));
+              }, 2000);
+              return;
+            }
+            setState((s) => ({
+              ...s,
+              state: "error",
+              run: false,
+              msg: res.msg,
+            }));
           })
           .catch(() => {
             setState((s) => ({
@@ -66,12 +88,13 @@ const useFetch = (fetcherObject: FetcherObject): UseFetchReturnType => {
         msg: "error from client",
       }));
     }
-  }, [fetcherObject, state.run]);
+  }, [fetcherObject, state.run, state.params]);
   return [
     state.data != null ? state.data : null,
     trigger,
     state.state,
     state.msg,
+    state.setMsg,
   ];
 };
 
