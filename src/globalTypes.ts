@@ -7,5 +7,7 @@ declare global {
     "data-testId"?: string;
     className?: string;
   }
+  type FetchStateTypes = "error" | "success" | "pending" | "loader";
+  type MessageStateType = FetchStateTypes | "warn";
 }
 export {};

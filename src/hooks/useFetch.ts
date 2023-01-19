@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 
-type States = "error" | "success" | "pending" | "loader";
 interface FetcherState {
-  state: States;
+  state: FetchStateTypes;
   data: any;
   run: boolean;
   msg: string;
@@ -13,7 +12,7 @@ interface FetcherObject {
   loaderMsg: string;
 }
 
-type UseFetchReturnType = [any, () => void, States, string];
+type UseFetchReturnType = [any, () => void, FetchStateTypes, string];
 
 const useFetch = (fetcherObject: FetcherObject): UseFetchReturnType => {
   const [state, setState] = useState<FetcherState>({
