@@ -8,6 +8,7 @@ interface TextInputType {
   value: any;
   id: string;
   type: "text" | "email";
+  testId: string;
 }
 
 const TextInput = ({
@@ -17,12 +18,14 @@ const TextInput = ({
   onChange,
   value,
   type,
+  testId,
 }: TextInputType) => {
   return (
     <div className={style.holder}>
       <label htmlFor={id}>{label}</label>
       <input
         placeholder={placeholder}
+        data-testid={testId}
         id={id}
         onChange={onChange}
         value={value}
