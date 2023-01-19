@@ -7,11 +7,10 @@ import IconEyeClose from "../../assets/icons/iconEyeClose";
 import Text from "../../components/typography/typography";
 import useFetch from "@/hooks/useFetch";
 import getData from "@/utils/getData";
+import Message from "@/components/message/message";
 
 const AuthenticatePage = () => {
-  const [data, success, loader, error, pending, trigger]: any =
-    useFetch(getData);
-  console.log(data, success, loader, error, pending, trigger);
+  const [data, trigger, state, msg] = useFetch(getData);
   const [inputData, setInputData] = useState({ email: "", password: "" });
 
   const inputChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
@@ -41,6 +40,7 @@ const AuthenticatePage = () => {
       />
       <Text>se</Text>
       <Button
+        disabled={state == "loader" || state == "success"}
         onClick={() => {
           trigger();
         }}
@@ -50,6 +50,7 @@ const AuthenticatePage = () => {
       >
         Hello Dear
       </Button>
+      <Message type={state} msg={msg} />
     </div>
   );
 };

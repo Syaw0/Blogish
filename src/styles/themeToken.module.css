@@ -76,6 +76,19 @@
   --gray200: rgba(150, 150, 150, 0.2);
   --gray100: rgba(150, 150, 150, 0.1);
 
+  --success: rgba(202, 241, 225, 1);
+  --onSuccess: rgba(14, 77, 9, 1);
+  --onSuccess500: rgba(14, 77, 9, 0.5);
+
+  --error: rgba(241, 202, 202, 1);
+  --error300: rgba(241, 202, 202, 0.3);
+  --onError: rgba(77, 9, 9, 1);
+  --onError500: rgba(77, 9, 9, 0.5);
+
+  --warn: rgba(241, 228, 202, 1);
+  --onWarn: rgba(77, 54, 9, 1);
+  --onWarn500: rgba(77, 54, 9, 0.5);
+
   --radial: radial-gradient(
       29.67% 64.18% at 82.5% 18.29%,
       rgba(149, 221, 206, 0.2) 0%,
@@ -102,7 +115,7 @@
 
 .transitionToken {
   --colorTransition: color 0.5s;
-  --bgTransition: background-color 0.5s, fill 0.5s;
+  --bgTransition: background-color 0.5s, fill 0.2s;
   --boxShadowTransition: box-shadow 0.2s;
 }
 

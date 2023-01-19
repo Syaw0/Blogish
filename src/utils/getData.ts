@@ -4,4 +4,8 @@ const getData = async () => {
   return result;
 };
 
-export default getData;
+const fetcherObject = {
+  fetcher: getData,
+  loaderMsg: "wait to authenticate your information",
+};
+export default fetcherObject;

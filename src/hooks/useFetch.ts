@@ -1,48 +1,76 @@
 import { useEffect, useState } from "react";
 
+type States = "error" | "success" | "pending" | "loader";
 interface FetcherState {
-  state: "error" | "success" | "pending" | "loader";
+  state: States;
   data: any;
   run: boolean;
+  msg: string;
 }
 
-const useFetch = (fetcher: any) => {
+interface FetcherObject {
+  fetcher: () => Promise<any>;
+  loaderMsg: string;
+}
+
+type UseFetchReturnType = [any, () => void, States, string];
+
+const useFetch = (fetcherObject: FetcherObject): UseFetchReturnType => {
   const [state, setState] = useState<FetcherState>({
     state: "pending",
     data: null,
     run: false,
+    msg: "",
   });
 
   const trigger = () => {
-    setState((s) => ({ ...s, run: true, data: null, state: "loader" }));
+    setState((s) => ({
+      ...s,
+      run: true,
+      data: null,
+      state: "loader",
+      msg: fetcherObject.loaderMsg,
+    }));
   };
   useEffect(() => {
     try {
       if (state.run) {
-        fetcher()
+        fetcherObject
+          .fetcher()
           .then((res: any) => {
-            setState((s) => ({
-              ...s,
-              state: "success",
-              run: false,
-              data: res,
-            }));
+            setTimeout(() => {
+              setState((s) => ({
+                ...s,
+                state: "success",
+                run: false,
+                data: res,
+                msg: "successfully set Data",
+              }));
+            }, 2000);
           })
           .catch(() => {
-            setState((s) => ({ ...s, state: "error" }));
+            setState((s) => ({
+              ...s,
+              state: "error",
+              run: false,
+              msg: "error from server",
+            }));
           });
       }
     } catch (err) {
-      setState((s) => ({ ...s, state: "error" }));
+      setState((s) => ({
+        ...s,
+        state: "error",
+        run: false,
+        msg: "error from client",
+      }));
     }
-  }, [fetcher, state.run]);
+  }, [fetcherObject, state.run]);
   return [
     state.data != null ? state.data : null,
-    state.state == "success",
-    state.state == "loader",
-    state.state == "error",
-    state.state == "pending",
     trigger,
+    state.state,
+    state.msg,
   ];
 };
 
