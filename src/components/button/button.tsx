@@ -11,6 +11,7 @@ interface ButtonType {
   StartIcon?: (params: IconTypes) => JSX.Element;
   EndIcon?: (params: IconTypes) => JSX.Element;
   loader?: boolean;
+  disabled?: boolean;
 }
 const Button = ({
   children,
@@ -21,12 +22,12 @@ const Button = ({
   onClick,
   StartIcon,
   EndIcon,
+  disabled = false,
   loader = false,
 }: ButtonType) => {
-  console.log(style[variant]);
   return (
     <button
-      disabled={loader}
+      disabled={disabled}
       data-testid={testid}
       id={id}
       onClick={onClick}
@@ -37,11 +38,21 @@ const Button = ({
       ) : (
         <>
           {StartIcon != null && (
-            <StartIcon className={style.leftIcon} height="20" width="20" />
+            <StartIcon
+              className={style.leftIcon}
+              data-testid={testid + "-startIcon"}
+              height="20"
+              width="20"
+            />
           )}
           {children}
           {EndIcon != null && (
-            <EndIcon className={style.rightIcon} height="20" width="20" />
+            <EndIcon
+              className={style.rightIcon}
+              data-testid={testid + "-endIcon"}
+              height="20"
+              width="20"
+            />
           )}
         </>
       )}

@@ -22,7 +22,7 @@ const CustomParent = () => {
   );
 };
 
-describe("Component Test : Input Text", () => {
+describe("Component Test : Input Password", () => {
   beforeEach(() => {
     render(<CustomParent />);
   });
