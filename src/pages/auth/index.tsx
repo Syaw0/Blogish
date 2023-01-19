@@ -13,6 +13,7 @@ const AuthenticatePage = () => {
     if (type == "text") type = "password";
     setInputData((s) => ({ ...s, [type]: value }));
   };
+
   return (
     <div className={style.holder}>
       <TextInput
@@ -33,10 +34,6 @@ const AuthenticatePage = () => {
         value={inputData.password}
       />
       <Button StartIcon={IconEyeClose} variant="contained" color="primary">
-        Hello Dear
-      </Button>
-
-      <Button EndIcon={IconEyeClose} variant="contained" color="primary">
         Hello Dear
       </Button>
     </div>

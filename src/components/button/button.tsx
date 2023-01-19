@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import CircleLoader from "../loader/circleLoader";
 import style from "./button.module.css";
 
 interface ButtonType {
@@ -10,6 +10,7 @@ interface ButtonType {
   testid?: string;
   StartIcon?: (params: IconTypes) => JSX.Element;
   EndIcon?: (params: IconTypes) => JSX.Element;
+  loader?: boolean;
 }
 const Button = ({
   children,
@@ -20,24 +21,30 @@ const Button = ({
   onClick,
   StartIcon,
   EndIcon,
+  loader = false,
 }: ButtonType) => {
   console.log(style[variant]);
   return (
     <button
+      disabled={loader}
       data-testid={testid}
       id={id}
       onClick={onClick}
       className={`${style.button} ${style[color]} ${style[variant]} `}
     >
-      <>
-        {StartIcon != null && (
-          <StartIcon className={style.leftIcon} height="20" width="20" />
-        )}
-        {children}
-        {EndIcon != null && (
-          <EndIcon className={style.rightIcon} height="20" width="20" />
-        )}
-      </>
+      {loader ? (
+        <CircleLoader />
+      ) : (
+        <>
+          {StartIcon != null && (
+            <StartIcon className={style.leftIcon} height="20" width="20" />
+          )}
+          {children}
+          {EndIcon != null && (
+            <EndIcon className={style.rightIcon} height="20" width="20" />
+          )}
+        </>
+      )}
     </button>
   );
 };

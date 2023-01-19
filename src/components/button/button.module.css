@@ -17,6 +17,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  min-width: 10rem;
 }
 
 .button svg {
@@ -40,8 +41,33 @@
   fill: var(--main);
 }
 
+.button:hover span {
+  border-top: 3px solid var(--main);
+}
+
 .button:active {
   box-shadow: none;
+}
+
+.button:disabled {
+  background-color: var(--gray700);
+  color: var(--onBg800);
+  cursor: not-allowed;
+}
+
+.button:disabled span {
+  border-top: 3px solid var(--onBg800);
+}
+
+.button:disabled svg {
+  fill: var(--onBg800);
+}
+
+.button:disabled:hover {
+  background-color: var(--gray700);
+}
+.button:disabled:active {
+  box-shadow: var(--shadow3dp);
 }
 
 .contained {
