@@ -1,5 +1,6 @@
-import PasswordInput from "@/components/input/password/passwordInput";
-import TextInput from "@/components/input/text/textInput";
+import Button from "../../components/button/button";
+import PasswordInput from "../../components/input/password/passwordInput";
+import TextInput from "../../components/input/text/textInput";
 import { ChangeEvent, useState } from "react";
 import style from "../../styles/pagesStyle/auth.module.css";
 
@@ -27,10 +28,12 @@ const AuthenticatePage = () => {
         label="Password"
         onChange={inputChangeHandler}
         placeholder="Enter your password"
-        showPassword={false}
         testId="auth-pass"
         value={inputData.password}
       />
+      <Button variant="contained" color="primary">
+        Hello Dear
+      </Button>
     </div>
   );
 };

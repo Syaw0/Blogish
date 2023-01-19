@@ -54,7 +54,7 @@
   --tertiaryCon200: rgba(210, 229, 247, 0.2);
   --tertiaryCon100: rgba(210, 229, 247, 0.1);
 
-  --tertiaryCon: rgba(10, 29, 42, 1);
+  --tertiaryOnCon: rgba(10, 29, 42, 1);
   --tertiaryOnCon900: rgba(10, 29, 42, 0.9);
   --tertiaryOnCon800: rgba(11, 14, 17, 0.8);
   --tertiaryOnCon700: rgba(10, 29, 42, 0.7);
@@ -92,12 +92,19 @@
 .transitionToken {
   --colorTransition: color 0.5s;
   --bgTransition: background-color 0.5s, fill 0.5s;
-  --boxShadowTransition: box-shadow 0.5s;
+  --boxShadowTransition: box-shadow 0.2s;
 }
 
 .shadows {
   --shadow1dp: 0px 0px 2px 0px #00000024, 0px 2px 2px 0px #0000001f,
     0px 1px 3px 0px #00000033;
+
+  --shadow2dp: 0px 0px 4px 0px #00000024, 0px 3px 4px 0px #0000001f,
+    0px 1px 5px 0px #00000033;
+
+  --shadow3dp: 0px 3px 3px 0px #00000024, 0px 3px 4px 0px #0000001f,
+    0px 1px 8px 0px #00000033;
+
   --shadow8dp: 0px 8px 10px 1px #00000024, 0px 3px 14px 3px #0000001f,
     0px 4px 15px 0px #00000033;
   --shadow24dp: 0px 24px 38px 3px #00000024, 0px 9px 46px 8px #0000001f,

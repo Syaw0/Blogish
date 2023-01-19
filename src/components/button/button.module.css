@@ -1,0 +1,87 @@
+.button {
+  --main: var(--primaryCon);
+  --onMain: var(--primaryOnCon);
+  --onMain500: var(--primaryOnCon500);
+  --onMain200: var(--primaryOnCon200);
+
+  border: none;
+  padding: 0.4rem 1rem;
+  border-radius: 8px;
+  background-color: var(--main);
+  color: var(--onMain);
+  cursor: pointer;
+  font-size: var(--button);
+  font-weight: 600;
+  font-family: var(--font-sub);
+  box-shadow: var(--shadow3dp);
+}
+
+.button:hover {
+  background-color: var(--onMain);
+  color: var(--main);
+}
+
+.button:active {
+  box-shadow: none;
+}
+
+.contained {
+  background-color: var(--main);
+  color: var(--onMain);
+}
+
+.shadow {
+  box-shadow: none;
+  background-color: transparent;
+  color: var(--onMain);
+}
+
+.shadow:hover {
+  box-shadow: none;
+  background-color: var(--onMain200);
+  color: var(--onMain);
+}
+
+.shadow:active {
+  box-shadow: none;
+  background-color: var(--onMain500);
+  color: var(--onMain);
+}
+
+.outlined {
+  border: 1.5px solid var(--onMain);
+  background-color: transparent;
+  color: var(--onMain);
+  box-shadow: none;
+}
+
+.outlined:hover {
+  border: 1.5px solid var(--onMain);
+  background-color: var(--onMain200);
+  color: var(--onMain);
+  box-shadow: none;
+}
+
+.outlined:active {
+  background-color: var(--onMain500);
+}
+
+.primary {
+  --main: var(--primaryCon);
+  --onMain: var(--primaryOnCon);
+  --onMain500: var(--primaryOnCon500);
+  --onMain200: var(--primaryOnCon200);
+}
+.secondary {
+  --main: var(--secondaryCon);
+  --onMain: var(--secondaryOnCon);
+  --onMain500: var(--secondaryOnCon500);
+  --onMain200: var(--secondaryOnCon200);
+}
+
+.tertiary {
+  --main: var(--tertiaryCon);
+  --onMain: var(--tertiaryOnCon);
+  --onMain500: var(--tertiaryOnCon500);
+  --onMain200: var(--tertiaryOnCon200);
+}
