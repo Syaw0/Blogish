@@ -116,7 +116,6 @@ describe("Test Page : Authentication Page", () => {
       fireEvent.click(screen.getByTestId("authSwitchAuthType"));
       const button = screen.getByTestId("authButton");
       fireEvent.click(button);
-      console.log(mockFetcher.mock.calls);
       await waitFor(() =>
         expect(mockFetcher.mock.calls[0][0]).toEqual("signin")
       );

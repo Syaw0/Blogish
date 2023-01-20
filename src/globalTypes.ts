@@ -14,13 +14,19 @@ declare global {
     msg: string;
     data?: any;
   }
+
+  interface ProfilePropsType {
+    profileUrl: string;
+    profileAlt: string;
+  }
   interface PostType {
-    profile: { profileUrl: string; profileAlt: string };
+    profile: ProfilePropsType;
     author: string;
     postHead: string;
     postSubhead: string;
     publishDate: Date | string;
     tagName: string;
+    id: string;
   }
 }
 export {};

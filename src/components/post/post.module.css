@@ -6,7 +6,7 @@
   width: 34rem;
   border-bottom: 1px solid var(--onBg100);
   padding: 0.6rem;
-  border-radius: 8px;
+  width: 100%;
 }
 
 .holder:hover {

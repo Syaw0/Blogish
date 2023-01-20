@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { KeyboardEventHandler, ReactNode } from "react";
 import style from "./textInput.module.css";
 
 interface TextInputType {
@@ -11,7 +11,7 @@ interface TextInputType {
   testId: string;
   className?: string;
   EndIcon?: ReactNode;
-  onKeyDown?: () => void;
+  onKeyDown?: (e: any) => void;
 }
 
 const TextInput = ({

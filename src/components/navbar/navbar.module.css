@@ -1,0 +1,57 @@
+.holder {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.7rem calc(1rem * 6);
+  border-bottom: 1px solid var(--onBg200);
+  background-color: transparent;
+  position: -webkit-sticky;
+  position: sticky;
+  right: 0;
+  top: 0;
+  z-index: 1000;
+  background: var(--radial);
+  border-radius: 0 0 10px 10px;
+}
+
+.left {
+  width: fit-content;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.searchBox {
+  margin-left: 1rem;
+}
+
+.writeButton {
+  min-width: fit-content;
+  margin-right: 1rem;
+}
+
+.writeButton svg {
+  fill: none;
+  stroke: var(--onMain);
+  margin-right: 0.4rem;
+}
+.writeButton:hover svg {
+  fill: none;
+  stroke: var(--onMain);
+}
+
+.right {
+  width: fit-content;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.authButton {
+  min-width: fit-content;
+}
+
+.logo {
+  width: 35px;
+  height: 35px;
+}

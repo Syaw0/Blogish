@@ -94,14 +94,14 @@
 }
 
 .outlined {
-  border: 1.5px solid var(--onMain);
+  border: 2px solid var(--onMain);
   background-color: transparent;
   color: var(--onMain);
   box-shadow: none;
 }
 
 .outlined:hover {
-  border: 1.5px solid var(--onMain);
+  border: 2px solid var(--onMain);
   background-color: var(--onMain200);
   color: var(--onMain);
   box-shadow: none;

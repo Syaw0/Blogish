@@ -17,6 +17,7 @@ const Post = ({
   tagName,
   onClick,
   testid,
+  id,
 }: PostPropsType) => {
   return (
     <div data-testid={testid} onClick={onClick} className={style.holder}>

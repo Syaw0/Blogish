@@ -137,6 +137,7 @@
 }
 
 .font_sizes {
+  --headline0: 75px;
   --headline1: 60px;
   --headline2: 50px;
   --headline3: 43px;
@@ -150,6 +151,7 @@
 }
 
 .line_height {
+  --headline0_lineHeight: 85px;
   --headline1_lineHeight: 75px;
   --headline2_lineHeight: 60px;
   --headline3_lineHeight: 53px;

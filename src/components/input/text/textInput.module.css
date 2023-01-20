@@ -35,7 +35,13 @@
   right: 0;
   top: 50%;
   bottom: 50%;
-  transform: translate(-50%, -50%);
-  fill: var(--onBg800);
+  transform: translate(-40%, -55%);
+  stroke-width: 1.3px;
+  stroke: var(--onBg700);
+  fill: none;
   cursor: pointer;
+}
+
+.holder svg:hover {
+  stroke: var(--onBg900);
 }

@@ -1,12 +1,4 @@
 .holder {
-}
-.holder .searchIcon {
-  stroke-width: 1.3px;
-  stroke: var(--onBg700);
-  fill: none;
-  cursor: pointer;
-}
-
-.holder .searchIcon:hover {
-  stroke: var(--onBg);
+  width: 100%;
+  position: relative;
 }
