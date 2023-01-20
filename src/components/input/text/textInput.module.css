@@ -2,6 +2,7 @@
   width: 20rem;
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
 .holder label {
@@ -27,4 +28,14 @@
   background-color: var(--primaryCon400);
   outline-offset: 2px;
   color: var(--primaryOnCon);
+}
+
+.holder svg {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  bottom: 50%;
+  transform: translate(-50%, -50%);
+  fill: var(--onBg800);
+  cursor: pointer;
 }

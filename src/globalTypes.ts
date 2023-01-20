@@ -4,7 +4,7 @@ declare global {
     width: string;
     onClick?(e: any): void;
     id?: string;
-    "data-testId"?: string;
+    "data-testid"?: string;
     className?: string;
   }
   type FetchStateTypes = "error" | "success" | "pending" | "loader";

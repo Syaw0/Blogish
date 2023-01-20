@@ -115,7 +115,7 @@
 
 .transitionToken {
   --colorTransition: color 0.5s;
-  --bgTransition: background-color 0.5s, fill 0.2s;
+  --bgTransition: background-color 0.5s, fill 0.2s, stroke 0.5s;
   --boxShadowTransition: box-shadow 0.2s;
 }
 
