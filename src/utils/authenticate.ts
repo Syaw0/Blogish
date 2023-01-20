@@ -1,7 +1,6 @@
 type AuthenticateType = "signup" | "signin";
 
 const authenticate = async (type: AuthenticateType): Promise<FetchResponse> => {
-  console.log(type);
   const resp = await fetch("");
   // const data = await resp.json();
   const data = {
@@ -11,9 +10,7 @@ const authenticate = async (type: AuthenticateType): Promise<FetchResponse> => {
   return data;
 };
 
-const authenticateObject = {
-  fetcher: authenticate,
-  loaderMsg: "Wait until Authentication process Complete",
-};
+const loaderMsg = "Wait until Authentication process Complete";
 
-export default authenticateObject;
+export default authenticate;
+export { loaderMsg };

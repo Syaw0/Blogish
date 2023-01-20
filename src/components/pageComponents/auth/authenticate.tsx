@@ -7,11 +7,13 @@ import { ChangeEvent, useState } from "react";
 import IconLogo from "../../../assets/icons/IconLogo";
 import Text from "../../../components/typography/typography";
 import style from "./authenticate.module.css";
-import authenticateObject from "@/utils/authenticate";
+import authenticate, { loaderMsg } from "../../../utils/authenticate";
 
 const Authenticate = () => {
-  let [authData, trigger, authState, msg, setMsg] =
-    useFetch(authenticateObject);
+  let [authData, trigger, authState, msg, setMsg] = useFetch(
+    authenticate,
+    loaderMsg
+  );
   const [pageState, setPageState] = useState({
     password: "",
     email: "",
@@ -74,6 +76,7 @@ const Authenticate = () => {
         label="Email Address"
         placeholder="Enter your email address"
         testId="authTextInput"
+        id="authTextInput"
         type="email"
         value={pageState.email}
         onChange={handleInputChange}
@@ -81,6 +84,7 @@ const Authenticate = () => {
       />
 
       <PasswordInput
+        id="authPasswordInput"
         testId="authPasswordInput"
         label="Password"
         placeholder="Enter Your account password"
@@ -108,6 +112,7 @@ const Authenticate = () => {
           as="span"
           variant="subhead2"
           className={style.subButton2}
+          testid="authSwitchAuthType"
         >
           {pageState.isLogin ? "Register Account" : "Sign in  "}
         </Text>
