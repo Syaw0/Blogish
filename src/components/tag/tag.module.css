@@ -1,0 +1,8 @@
+.holder {
+  border: 1.5px solid var(--tertiaryOnCon600);
+  border-radius: 1rem;
+  padding: 0.2rem 0.5rem;
+  background-color: var(--tertiaryCon);
+  color: var(--tertiaryOnCon);
+  cursor: pointer;
+}
