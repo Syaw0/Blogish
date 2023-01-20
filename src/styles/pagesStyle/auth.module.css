@@ -11,3 +11,10 @@
 .holder > * {
   margin-bottom: 1rem;
 }
+
+@media (max-width: 450px) {
+  .holder {
+    width: 100%;
+    padding: 0 1rem;
+  }
+}

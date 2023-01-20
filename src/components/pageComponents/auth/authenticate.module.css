@@ -39,3 +39,16 @@
 .subButton2:hover {
   color: var(--onBg);
 }
+
+@media (max-width: 450px) {
+  .header {
+    font-size: var(--headline3);
+    line-height: var(--headline3);
+    text-align: center;
+  }
+
+  .subButton2,
+  .subButton {
+    font-size: var(--subhead3);
+  }
+}
