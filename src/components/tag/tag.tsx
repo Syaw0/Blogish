@@ -1,9 +1,15 @@
 import Text from "../typography/typography";
 import style from "./tag.module.css";
 
-const Tag = ({ name }: any) => {
+interface TagType {
+  name: string;
+  onClick?: () => void;
+  "data-testid"?: string;
+}
+
+const Tag = ({ name, ...params }: TagType) => {
   return (
-    <div className={style.holder}>
+    <div {...params} className={style.holder}>
       <Text variant="subhead2">{name}</Text>
     </div>
   );
