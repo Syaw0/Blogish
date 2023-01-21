@@ -31,15 +31,12 @@ describe("Component Test : Navbar", () => {
   it("if click on the iconLogo navigate to home page", () => {
     render(<CustomParent isLogin={true} />, { wrapper: MemoryRouterProvider });
     const logo = screen.getByTestId("navIconLogo");
-    const profile = screen.getByTestId("navProfile");
     fireEvent.click(logo);
-    console.log(mockRouter);
     expect(mockRouter.asPath).toEqual("/");
   });
 
   it("if click on the profile navigate to user page page", () => {
     render(<CustomParent isLogin={true} />, { wrapper: MemoryRouterProvider });
-
     const profile = screen.getByTestId("navProfile");
     fireEvent.click(profile);
     expect(mockRouter.asPath).toEqual("/me");

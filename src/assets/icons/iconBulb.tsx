@@ -1,11 +1,6 @@
-const IconBulb = ({ height, width }: IconTypes) => {
+const IconBulb = ({ ...params }: IconTypes) => {
   return (
-    <svg
-      width={width}
-      height={height}
-      viewBox="0 0 400 480"
-      xmlns="http://www.w3.org/2000/svg"
-    >
+    <svg {...params} viewBox="0 0 400 480" xmlns="http://www.w3.org/2000/svg">
       <path
         d="M154.284 342.857H245.713V396.191C245.713 402.253 243.305 408.066 239.018 412.353C234.731 416.639 228.918 419.048 222.856 419.048H177.141C171.079 419.048 165.265 416.639 160.979 412.353C156.692 408.066 154.284 402.253 154.284 396.191V342.857Z"
         fill="#6DD0FC"

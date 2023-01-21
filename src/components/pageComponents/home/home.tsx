@@ -7,7 +7,7 @@ import Layout from "../../../components/layout/layout";
 import Navbar from "../../../components/navbar/navbar";
 import PostHolder from "./postHolder";
 import TrendTags from "./trendTag";
-import Landpage from "./landpage";
+import Landpage from "../../landpage/landpage";
 
 const Home = ({ isLogin }: any) => {
   return (
