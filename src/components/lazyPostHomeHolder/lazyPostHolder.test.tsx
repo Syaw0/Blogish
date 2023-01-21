@@ -22,7 +22,7 @@ posts.map((p: any, i) => {
 const CustomParent = () => {
   return (
     <Provider store={makeStore(posts)}>
-      <LazyPostHolder />
+      <LazyPostHolder headText="some head text" />
     </Provider>
   );
 };
@@ -38,6 +38,7 @@ describe("Component Test : Post", () => {
     expect(screen.getByTestId("post-3")).toBeInTheDocument();
     expect(screen.getByTestId("postHolder")).toBeInTheDocument();
     expect(screen.getByTestId("lazyPostHolderButton")).toBeInTheDocument();
+    expect(screen.getByText("some head text")).toBeInTheDocument();
   });
 
   it("if we click on the button loader show up", async () => {

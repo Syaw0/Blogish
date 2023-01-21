@@ -3,9 +3,9 @@ import Layout from "../../../components/layout/layout";
 import Navbar from "../../../components/navbar/navbar";
 import TrendTags from "../../trendTags/trendTag";
 import Landpage from "../../landpage/landpage";
-import LazyPostHolder from "../../../components/lazyPostHolder/lazyPostHolder";
+import LazyPostHolder from "../../lazyPostHomeHolder/lazyPostHolder";
 
-const Home = ({ isLogin, profileData }: HomePagePropsType) => {
+const Home = ({ isLogin, profileData }: MainPagePropsType) => {
   return (
     <div className={style.holder}>
       <Navbar
@@ -17,7 +17,7 @@ const Home = ({ isLogin, profileData }: HomePagePropsType) => {
       />
       {!isLogin && <Landpage />}
       <Layout
-        leftSide={<LazyPostHolder />}
+        leftSide={<LazyPostHolder headText="Lets Traverse Articles..." />}
         rightSide={<TrendTags tags={["Programming", "Nature", "socket"]} />}
       />
     </div>

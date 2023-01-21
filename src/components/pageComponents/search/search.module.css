@@ -1,0 +1,17 @@
+.holder {
+  width: 100%;
+}
+.searchBox {
+  display: none;
+}
+
+.leftHolder {
+  width: 100%;
+}
+@media (max-width: 850px) {
+  .searchBox {
+    display: flex;
+    margin-top: 1.5rem;
+    width: 100%;
+  }
+}

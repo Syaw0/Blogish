@@ -20,12 +20,16 @@ const Navbar = ({ isLogin, profileData }: NavbarPropsType) => {
   //TODO may is better write hook for this:
 
   useEffect(() => {
+    if (location.pathname != "/") {
+      divRef.current.style.background = "var(--bg)";
+      divRef.current.style.boxShadow = "var(--shadow2dp)";
+    }
     let scrollEvent = () => {
       const y = divRef.current.offsetTop;
       if (y > 54) {
         divRef.current.style.background = "var(--bg)";
         divRef.current.style.boxShadow = "var(--shadow2dp)";
-      } else {
+      } else if (location.pathname == "/") {
         divRef.current.style.background = "var(--radial)";
         divRef.current.style.boxShadow = "none";
       }
@@ -53,6 +57,9 @@ const Navbar = ({ isLogin, profileData }: NavbarPropsType) => {
   const startSearch = () => {
     if (checkInput()) return;
     router.replace(`/search?query=${searchQuery}`);
+    if (location.pathname == "/search") {
+      router.reload();
+    }
   };
 
   const checkInput = () => {
@@ -92,11 +99,17 @@ const Navbar = ({ isLogin, profileData }: NavbarPropsType) => {
       </div>
       <div className={style.right}>
         {/* // TODO write icon button component and reuse that */}
-        <Link href="/search">
-          <Button variant="shadow" className={style.searchButton}>
-            <IconSearch width="20" height="20" />
-          </Button>
-        </Link>
+        <Button
+          onClick={() => {
+            if (location.pathname != "/search") {
+              router.replace("/search");
+            }
+          }}
+          variant="shadow"
+          className={style.searchButton}
+        >
+          <IconSearch width="20" height="20" />
+        </Button>
         {!isLogin && (
           <>
             <Link data-testid="navAuthButton" href={"/auth"}>

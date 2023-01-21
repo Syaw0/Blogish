@@ -5,14 +5,12 @@ import { fakePost } from "../shared/fakePost";
 import { Provider } from "react-redux";
 import makeStore from "../store/home/homeStore";
 
-export default function HomePage({ ...params }: HomePagePropsType) {
+export default function HomePage({ ...params }: MainPagePropsType) {
   return (
     <>
       <Head>
         <title>Blogish</title>
-        <meta name="description" content="blogish home page" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
+        <meta name="description" content="blogish Home Page" />
       </Head>
 
       <Provider store={makeStore(params.posts != null ? params.posts : [])}>
@@ -31,7 +29,7 @@ posts = posts.map((p, i) => {
 });
 
 export const getServerSideProps: GetServerSideProps = async (): Promise<
-  GetServerSidePropsResult<HomePagePropsType>
+  GetServerSidePropsResult<MainPagePropsType>
 > => {
   // here we must check session and send this props to component
   // also we must fetch for data in database
@@ -41,7 +39,7 @@ export const getServerSideProps: GetServerSideProps = async (): Promise<
 
   return {
     props: {
-      isLogin: true,
+      isLogin: false,
       posts,
       profileData: { ...fakePost.profile },
     },

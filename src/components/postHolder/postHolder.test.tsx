@@ -14,7 +14,7 @@ posts.map((p: any, i) => {
 });
 
 const CustomParent = () => {
-  return <PostHolder posts={posts} />;
+  return <PostHolder headText={"some head text"} posts={posts} />;
 };
 
 describe("Component Test : Post", () => {
@@ -27,5 +27,6 @@ describe("Component Test : Post", () => {
     expect(screen.getByTestId("post-2")).toBeInTheDocument();
     expect(screen.getByTestId("post-3")).toBeInTheDocument();
     expect(screen.getByTestId("postHolder")).toBeInTheDocument();
+    expect(screen.getByText("some head text")).toBeInTheDocument();
   });
 });

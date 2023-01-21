@@ -9,7 +9,11 @@ import { homeStateAddPost } from "../../store/home/homeStore";
 import { useDispatch } from "react-redux";
 import { useHomeSelector } from "../../store/home/homeStoreHooks";
 
-const LazyPostHolder = () => {
+interface LazyPostHolderPropsType {
+  headText: string;
+}
+
+const LazyPostHolder = ({ headText }: LazyPostHolderPropsType) => {
   let [data, trigger, state, msg, setMsg] = useFetch(loadMorePosts, loaderMsg);
   const posts = useHomeSelector((s) => s.posts);
   const dispatch = useDispatch();
@@ -27,7 +31,7 @@ const LazyPostHolder = () => {
   };
   return (
     <div data-testid="lazyPostHolder" className={style.holder}>
-      <PostHolder posts={posts} />
+      <PostHolder headText={headText} posts={posts} />
       <Button
         loader={state == "loader"}
         disabled={state == "loader"}

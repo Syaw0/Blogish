@@ -29,7 +29,7 @@ declare global {
     id: string;
   }
 
-  interface HomePagePropsType {
+  interface MainPagePropsType {
     isLogin: boolean;
     posts?: PostType[];
     profileData?: ProfilePropsType;
