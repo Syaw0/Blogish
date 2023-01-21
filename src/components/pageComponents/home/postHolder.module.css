@@ -12,3 +12,9 @@
 .holder > * {
   margin-bottom: 1rem;
 }
+
+@media (max-width: 850px) {
+  .holder {
+    padding-right: 0;
+  }
+}

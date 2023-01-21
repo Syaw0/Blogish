@@ -1,5 +1,6 @@
 .holder {
   display: flex;
+  flex-direction: column;
 }
 .tagHolder {
   display: flex;
