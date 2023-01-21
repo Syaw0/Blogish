@@ -21,7 +21,7 @@ const Post = ({
 }: PostPropsType) => {
   return (
     <div data-testid={testid} onClick={onClick} className={style.holder}>
-      <div className={style.head}>
+      <div data-testid="post-head" className={style.head}>
         <Profile
           alt={profile.profileAlt}
           height={20}

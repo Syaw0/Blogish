@@ -28,5 +28,11 @@ declare global {
     tagName: string;
     id: string;
   }
+
+  interface HomePagePropsType {
+    isLogin: boolean;
+    posts?: PostType[];
+    profileData?: ProfilePropsType;
+  }
 }
 export {};

@@ -66,7 +66,7 @@ const Navbar = ({ isLogin, profileData }: NavbarPropsType) => {
   };
 
   return (
-    <div ref={divRef} className={`${style.holder} `}>
+    <div data-testid="navbar" ref={divRef} className={`${style.holder} `}>
       <div className={style.left}>
         <Link data-testid="navIconLogo" href={"/"}>
           <IconLogo className={style.logo} width="32" height="32" />

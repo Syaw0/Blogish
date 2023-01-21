@@ -8,7 +8,7 @@ interface LayoutPropsTypes {
 
 const Layout = ({ leftSide, rightSide }: LayoutPropsTypes) => {
   return (
-    <div className={style.holder}>
+    <div data-testid="layoutHolder" className={style.holder}>
       <div data-testid="layoutLeft" className={style.left}>
         {leftSide}
       </div>

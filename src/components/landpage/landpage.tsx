@@ -6,7 +6,7 @@ import style from "./landpage.module.css";
 
 const Landpage = ({}: any) => {
   return (
-    <div className={`${style.holder} `}>
+    <div data-testid="landpage" className={`${style.holder} `}>
       <div className={style.left}>
         <h1 data-testid="landpageHead" className={style.head}>
           Where IDEAS Are Made 🌱️️

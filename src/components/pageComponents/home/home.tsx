@@ -1,28 +1,23 @@
 import style from "./home.module.css";
-import { fakePost } from "../../../shared/fakePost";
 import Layout from "../../../components/layout/layout";
 import Navbar from "../../../components/navbar/navbar";
-import PostHolder from "../../postHolder/postHolder";
 import TrendTags from "../../trendTags/trendTag";
 import Landpage from "../../landpage/landpage";
+import LazyPostHolder from "../../../components/lazyPostHolder/lazyPostHolder";
 
-const Home = ({ isLogin }: any) => {
+const Home = ({ isLogin, profileData }: HomePagePropsType) => {
   return (
     <div className={style.holder}>
       <Navbar
         isLogin={isLogin}
         profileData={{
-          profileAlt: "",
-          profileUrl: fakePost.profile.profileUrl,
+          profileAlt: profileData != null ? profileData.profileAlt : "",
+          profileUrl: profileData != null ? profileData.profileUrl : "",
         }}
       />
       {!isLogin && <Landpage />}
       <Layout
-        leftSide={
-          <PostHolder
-            posts={[fakePost, fakePost, fakePost, fakePost, fakePost, fakePost]}
-          />
-        }
+        leftSide={<LazyPostHolder />}
         rightSide={<TrendTags tags={["Programming", "Nature", "socket"]} />}
       />
     </div>
