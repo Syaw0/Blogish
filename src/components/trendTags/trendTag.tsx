@@ -1,5 +1,5 @@
-import Tag from "../../../components/tag/tag";
-import Text from "../../../components/typography/typography";
+import Tag from "../tag/tag";
+import Text from "../typography/typography";
 import style from "./trendTag.module.css";
 
 interface TrendTagsPropsType {

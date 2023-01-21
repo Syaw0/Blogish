@@ -1,5 +1,5 @@
-import Text from "@/components/typography/typography";
-import Post from "../../../components/post/post";
+import Text from "../../components/typography/typography";
+import Post from "../post/post";
 import style from "./postHolder.module.css";
 
 interface PostHolderPropsType {
@@ -8,18 +8,13 @@ interface PostHolderPropsType {
 
 const PostHolder = ({ posts }: PostHolderPropsType) => {
   return (
-    <div className={style.holder}>
+    <div data-testid="postHolder" className={style.holder}>
       <Text className={style.head} variant="headline4">
         Lets Traverse Articles...
       </Text>
       {posts.map((post, i) => {
         return (
-          <Post
-            key={post.id + i}
-            {...post}
-            onClick={() => {}}
-            testid={post.id}
-          />
+          <Post key={post.id} {...post} onClick={() => {}} testid={post.id} />
         );
       })}
     </div>

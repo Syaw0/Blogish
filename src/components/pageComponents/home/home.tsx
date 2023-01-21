@@ -1,12 +1,9 @@
-import IconEyeClose from "../../../assets/icons/iconEyeClose";
-import IconSearch from "../../../assets/icons/iconSearch";
-import Post from "../../../components/post/post";
 import style from "./home.module.css";
 import { fakePost } from "../../../shared/fakePost";
 import Layout from "../../../components/layout/layout";
 import Navbar from "../../../components/navbar/navbar";
-import PostHolder from "./postHolder";
-import TrendTags from "./trendTag";
+import PostHolder from "../../postHolder/postHolder";
+import TrendTags from "../../trendTags/trendTag";
 import Landpage from "../../landpage/landpage";
 
 const Home = ({ isLogin }: any) => {

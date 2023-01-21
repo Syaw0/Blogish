@@ -36,7 +36,7 @@
   font-size: var(--headline4);
   font-family: var(--font-head);
   font-weight: 400;
-  line-height: var(--headline4);
+  line-height: var(--headline4_lineHeight);
   margin-bottom: 0.8rem;
   display: -webkit-box;
   -webkit-box-orient: vertical;
@@ -62,4 +62,20 @@
 
 .date {
   margin-right: 1rem;
+}
+
+@media (max-width: 1000px) {
+  .postHead {
+    font-size: var(--headline5);
+    line-height: var(--headline5_lineHeight);
+  }
+}
+@media (max-width: 500px) {
+  .postHead {
+    -webkit-line-clamp: 2;
+  }
+  .postSubhead {
+    font-size: var(--subhead2);
+    line-height: var(--subhead2_lineHeight);
+  }
 }

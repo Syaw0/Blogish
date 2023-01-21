@@ -3,7 +3,7 @@ import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import { fakePost } from "../../shared/fakePost";
 import Post from "../post/post";
-import TrendTags from "../pageComponents/home/trendTag";
+import TrendTags from "../trendTags/trendTag";
 
 const LeftChild = () => {
   return <Post testid="post" {...fakePost} />;
@@ -17,7 +17,7 @@ const CustomParent = () => {
   return <Layout leftSide={<LeftChild />} rightSide={<RightChild />} />;
 };
 
-describe("Component Test : Navbar", () => {
+describe("Component Test : Layout", () => {
   it("check if given data is correct", () => {
     render(<CustomParent />);
     expect(screen.getByTestId("layoutLeft")).toBeInTheDocument();

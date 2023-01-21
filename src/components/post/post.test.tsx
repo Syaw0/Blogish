@@ -17,7 +17,7 @@ const CustomParent = () => {
   );
 };
 
-describe("Component Test : Profile", () => {
+describe("Component Test : Post", () => {
   beforeEach(() => {
     render(<CustomParent />);
   });
