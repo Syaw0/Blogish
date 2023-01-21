@@ -1,6 +1,6 @@
-import IconLogo from "@/assets/icons/IconLogo";
-import IconSearch from "@/assets/icons/iconSearch";
-import IconWrite from "@/assets/icons/iconWrite";
+import IconLogo from "../../assets/icons/IconLogo";
+import IconSearch from "../../assets/icons/iconSearch";
+import IconWrite from "../../assets/icons/iconWrite";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { ChangeEvent, useEffect, useRef, useState } from "react";
@@ -68,7 +68,7 @@ const Navbar = ({ isLogin, profileData }: NavbarPropsType) => {
   return (
     <div ref={divRef} className={`${style.holder} `}>
       <div className={style.left}>
-        <Link href={"/"}>
+        <Link data-testid="navIconLogo" href={"/"}>
           <IconLogo className={style.logo} width="32" height="32" />
         </Link>
 
@@ -77,23 +77,38 @@ const Navbar = ({ isLogin, profileData }: NavbarPropsType) => {
           value={searchQuery}
           onChange={handleChangeInput}
           testId="navSearchBox"
-          EndIcon={<IconSearch onClick={startSearch} width="18" height="18" />}
+          EndIcon={
+            <IconSearch
+              data-testid="navSearchBoxIcon"
+              onClick={startSearch}
+              width="18"
+              height="18"
+            />
+          }
           placeholder={"Search through 9.000 articles..."}
           className={style.searchBox}
           onKeyDown={handleKeyDown}
         />
       </div>
       <div className={style.right}>
+        {/* // TODO write icon button component and reuse that */}
+        <Link href="/search">
+          <Button variant="shadow" className={style.searchButton}>
+            <IconSearch width="20" height="20" />
+          </Button>
+        </Link>
         {!isLogin && (
-          <Link href={"/auth"}>
-            <Button variant="outlined" className={style.authButton}>
-              Sign up / Sign in
-            </Button>
-          </Link>
+          <>
+            <Link data-testid="navAuthButton" href={"/auth"}>
+              <Button variant="outlined" className={style.authButton}>
+                Sign up / Sign in
+              </Button>
+            </Link>
+          </>
         )}
         {isLogin && profileData != null && (
           <>
-            <Link href={"/write"}>
+            <Link data-testid="navWriteButton" href={"/write"}>
               <Button
                 StartIcon={IconWrite}
                 variant="outlined"
@@ -103,7 +118,13 @@ const Navbar = ({ isLogin, profileData }: NavbarPropsType) => {
               </Button>
             </Link>
 
-            <Link href={"/me"}>
+            <Link href="/write">
+              <Button variant="shadow" className={style.writeIconButton}>
+                <IconWrite width="20" height="20" />
+              </Button>
+            </Link>
+
+            <Link data-testid="navProfile" href={"/me"}>
               <Profile
                 alt={profileData.profileAlt}
                 height={20}

@@ -2,7 +2,7 @@ import CircleLoader from "../loader/circleLoader";
 import style from "./button.module.css";
 
 interface ButtonType {
-  children: string;
+  children: any;
   variant?: "contained" | "outlined" | "shadow";
   color?: "primary" | "secondary" | "tertiary";
   onClick?: any;

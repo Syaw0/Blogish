@@ -87,6 +87,10 @@
   color: var(--onMain);
 }
 
+.shadow:hover svg {
+  fill: var(--onMain);
+}
+
 .shadow:active {
   box-shadow: none;
   background-color: var(--onMain500);
@@ -105,6 +109,10 @@
   background-color: var(--onMain200);
   color: var(--onMain);
   box-shadow: none;
+}
+
+.outlined:hover svg {
+  fill: var(--onMain);
 }
 
 .outlined:active {

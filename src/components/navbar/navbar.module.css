@@ -31,13 +31,7 @@
 }
 
 .writeButton svg {
-  fill: none;
-  stroke: var(--onMain);
   margin-right: 0.4rem;
-}
-.writeButton:hover svg {
-  fill: none;
-  stroke: var(--onMain);
 }
 
 .right {
@@ -54,4 +48,38 @@
 .logo {
   width: 35px;
   height: 35px;
+}
+
+.searchButton,
+.writeIconButton {
+  min-width: fit-content;
+  padding: 0.3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  display: none;
+  margin-right: 0.5rem;
+}
+
+@media (max-width: 1000px) {
+  .holder {
+    padding: 0.7rem calc(1rem * 3);
+  }
+}
+
+@media (max-width: 850px) {
+  .searchBox,
+  .writeButton {
+    display: none;
+  }
+  .searchButton,
+  .writeIconButton {
+    display: flex;
+  }
+}
+
+@media (max-width: 600px) {
+  .holder {
+    padding: 0.7rem calc(1rem * 1);
+  }
 }
