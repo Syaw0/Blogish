@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { useEffect } from "react";
 import Profile from "../profile/profile";
 import Tag from "../tag/tag";
 import Text from "../typography/typography";

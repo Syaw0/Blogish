@@ -1,3 +1,5 @@
+import md from "./somemd";
+
 const fakePost: PostType = {
   author: {
     name: "siavash",
@@ -8,8 +10,8 @@ const fakePost: PostType = {
   },
   postHead:
     "Nature is a teacher - What happens when you allow everything to be as it is?",
-  postSubhead:
-    "A number of years ago I went on holiday to a beautiful part of Portugal. We stayed in a converted farmhouse in the middle of a national park. The farmhouse was in a valley. We arrived in the evening when the birds were just starting to roost. It was still warm and the air smelled sweet with pollen. You could hear the hum of crickets. A small river flowed through that valley. We opened a rickety gate and crossed a small wooden bridge. As we walked along the narrow path that led to our house I had a clear vision of what my morning routine would be like for the next fourteen days. I had been working hard",
+  postSubhead: "some Description about post",
+  postDetail: md,
   publishDate: "Jan 20",
   tagName: "Nature",
   id: "123",

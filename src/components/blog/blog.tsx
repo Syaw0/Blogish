@@ -15,6 +15,7 @@ const Blog = ({
   publishDate,
   tagName,
   similar,
+  postDetail,
 }: BlogPropsType) => {
   return (
     <div className={style.holder}>
@@ -23,7 +24,7 @@ const Blog = ({
         {...author}
         description={publishDate}
       />
-      <BlogMD header={postHead} body={postSubhead} />
+      <BlogMD description={postSubhead} header={postHead} body={postDetail} />
       <PostHolder
         headText={`Love This Post? See Other From ${author.name}`}
         isAuthors={true}

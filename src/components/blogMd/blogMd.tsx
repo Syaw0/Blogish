@@ -4,17 +4,27 @@ import style from "./blogMd.module.css";
 interface BlogMDPropsType {
   header: string;
   body: string;
+  description: string;
 }
 
-const BlogMD = ({ header, body }: BlogMDPropsType) => {
+const BlogMD = ({ header, body, description }: BlogMDPropsType) => {
   return (
     <div data-testid="blogMdHolder" className={style.holder}>
       <Text testid="blogMdHead" className={style.head}>
         {header}
       </Text>
-      <Text testid="blogMdBody" className={style.body}>
-        {body}
+      <Text
+        variant="headline6"
+        testid="blogMdSubhead"
+        className={style.subhead}
+      >
+        {description}
       </Text>
+      <div
+        data-testid="blogMdBody"
+        className={style.mdHolder}
+        dangerouslySetInnerHTML={{ __html: body }}
+      ></div>
     </div>
   );
 };

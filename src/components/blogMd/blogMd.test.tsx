@@ -5,6 +5,7 @@ import "@testing-library/jest-dom";
 const blogDetail = {
   header: "someHead",
   body: "someBody",
+  description: "someDescription",
 };
 const CustomParent = () => {
   return <BlogMD {...blogDetail} />;
@@ -17,5 +18,8 @@ describe("Component Test : Layout", () => {
       blogDetail.header
     );
     expect(screen.getByTestId("blogMdBody")).toHaveTextContent(blogDetail.body);
+    expect(screen.getByTestId("blogMdSubhead")).toHaveTextContent(
+      blogDetail.description
+    );
   });
 });
