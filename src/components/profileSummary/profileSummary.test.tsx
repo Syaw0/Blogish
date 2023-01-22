@@ -15,10 +15,13 @@ describe("Component Test : Profile", () => {
   });
 
   it("check component render perfectly", () => {
-    expect(screen.getByAltText(fakeUser.name)).toBeInTheDocument();
-    expect(screen.getByText(fakeUser.name)).toBeInTheDocument();
-    expect(screen.getByText(fakeUser.description)).toBeInTheDocument();
-    expect(screen.getByText(fakeUser.description)).toBeInTheDocument();
     expect(screen.getByTestId("profileSummaryProfile")).toBeInTheDocument();
+    expect(screen.getByTestId("profileSummaryHolder")).toBeInTheDocument();
+    expect(screen.getByTestId("profileSummaryDescription")).toHaveTextContent(
+      fakeUser.description
+    );
+    expect(screen.getByTestId("profileSummaryName")).toHaveTextContent(
+      fakeUser.name
+    );
   });
 });

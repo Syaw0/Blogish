@@ -12,7 +12,10 @@ type ProfileSummaryPropsType = Omit<
 const ProfileSummary = ({ user, className = "" }: ProfileSummaryPropsType) => {
   const { name, profileUrl, description } = user;
   return (
-    <div className={`${style.holder}  ${className}`}>
+    <div
+      data-testid="profileSummaryHolder"
+      className={`${style.holder}  ${className}`}
+    >
       <Profile
         data-testid="profileSummaryProfile"
         className={style.image}
