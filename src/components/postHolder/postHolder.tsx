@@ -5,11 +5,16 @@ import style from "./postHolder.module.css";
 interface PostHolderPropsType {
   posts: PostType[];
   headText: string | null;
+  className?: string;
 }
 
-const PostHolder = ({ posts, headText }: PostHolderPropsType) => {
+const PostHolder = ({
+  posts,
+  headText,
+  className = "",
+}: PostHolderPropsType) => {
   return (
-    <div data-testid="postHolder" className={style.holder}>
+    <div data-testid="postHolder" className={`${style.holder} ${className}`}>
       {headText != null && (
         <Text className={style.head} variant="headline4">
           {headText}

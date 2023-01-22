@@ -5,14 +5,14 @@
   align-items: flex-start;
   width: 34rem;
   border-bottom: 1px solid var(--onBg100);
-  padding: 0.6rem;
+  padding: 0.6rem 1rem 0.6rem 0;
   width: 100%;
 }
 
-.holder:hover {
+/* .holder:hover {
   background-color: var(--onBg50);
   cursor: pointer;
-}
+} */
 
 .head {
   display: flex;

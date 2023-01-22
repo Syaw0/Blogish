@@ -1,0 +1,11 @@
+.holder {
+  width: 100%;
+}
+
+.head {
+  padding: 1rem 0;
+}
+
+.postHolderHead > p {
+  font-family: var(--font-sub);
+}

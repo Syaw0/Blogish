@@ -8,11 +8,19 @@ interface ProfileType {
   alt: string;
   onClick?: () => void;
   "data-testid"?: string;
+  className?: string;
 }
 
-const Profile = ({ url, width, height, alt, ...params }: ProfileType) => {
+const Profile = ({
+  url,
+  width,
+  height,
+  alt,
+  className = "",
+  ...params
+}: ProfileType) => {
   return (
-    <div {...params} className={style.holder}>
+    <div {...params} className={`${style.holder} ${className}`}>
       <Image src={`${url}`} width={width} height={height} alt={alt} />
     </div>
   );

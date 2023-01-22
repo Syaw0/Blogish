@@ -1,0 +1,11 @@
+.name {
+  margin-top: 0.5rem;
+}
+.description {
+  color: var(--onBg600);
+}
+
+.image {
+  width: 200px;
+  height: 200px;
+}
