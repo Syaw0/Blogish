@@ -1,3 +1,4 @@
+import BlogMD from "../blogMd/blogMd";
 import PostHolder from "../postHolder/postHolder";
 import ProfileSummary from "../profileSummary/profileSummary";
 import style from "./blog.module.css";
@@ -22,6 +23,7 @@ const Blog = ({
         {...author}
         description={publishDate}
       />
+      <BlogMD header={postHead} body={postSubhead} />
       <PostHolder
         headText={`Love This Post? See Other From ${author.name}`}
         isAuthors={true}
