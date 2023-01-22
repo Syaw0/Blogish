@@ -36,13 +36,15 @@ declare global {
   }
   interface UserPagePropsType {
     posts: PostType[];
-    user: {
-      name: string;
-      description?: string;
-      profile: ProfilePropsType;
-    };
+    user: User;
     isLogin: boolean;
     profileData?: ProfilePropsType;
+  }
+  interface User {
+    name: string;
+    description: string;
+    profileUrl: string;
+    posts?: PostType[];
   }
 }
 export {};

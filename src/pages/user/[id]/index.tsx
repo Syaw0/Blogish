@@ -1,7 +1,7 @@
 import User from "../../../components/pageComponents/user/user";
 import Head from "next/head";
 import { GetServerSideProps, GetServerSidePropsResult } from "next";
-import { fakePost } from "@/shared/fakePost";
+import { fakePost } from "../../../shared/fakePost";
 
 const UserPage = ({ ...params }: UserPagePropsType) => {
   return (
@@ -51,7 +51,7 @@ export const getServerSideProps: GetServerSideProps = async ({
       user: {
         name: "siavash",
         description: "hello there im here to help people",
-        profile: fakePost.profile,
+        profileUrl: fakePost.profile.profileUrl,
       },
       profileData: fakePost.profile,
     },

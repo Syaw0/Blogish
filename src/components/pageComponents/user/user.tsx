@@ -1,8 +1,7 @@
-import Layout from "@/components/layout/layout";
-import Navbar from "@/components/navbar/navbar";
-import PostHolder from "@/components/postHolder/postHolder";
-import ProfileSummary from "@/components/profileSummary/profileSummary";
-import Text from "@/components/typography/typography";
+import Layout from "../../../components/layout/layout";
+import Navbar from "../../../components/navbar/navbar";
+import PostHolder from "../../../components/postHolder/postHolder";
+import ProfileSummary from "../../../components/profileSummary/profileSummary";
 import style from "./user.module.css";
 
 const User = ({ profileData, isLogin, posts, user }: UserPagePropsType) => {
@@ -12,9 +11,7 @@ const User = ({ profileData, isLogin, posts, user }: UserPagePropsType) => {
       <Layout
         leftSide={
           <>
-            <Text className={style.head} variant="headline3">
-              {user.name}
-            </Text>
+            <ProfileSummary className={style.leftProfileSummary} user={user} />
             <PostHolder
               className={style.postHolderHead}
               posts={posts}

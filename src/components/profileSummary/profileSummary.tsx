@@ -5,25 +5,38 @@ import style from "./profileSummary.module.css";
 type ProfileSummaryPropsType = Omit<
   UserPagePropsType,
   "posts" | "isLogin" | "profileData"
->;
+> & {
+  className?: string;
+};
 
-const ProfileSummary = ({ user }: ProfileSummaryPropsType) => {
-  const { name, profile, description } = user;
+const ProfileSummary = ({ user, className = "" }: ProfileSummaryPropsType) => {
+  const { name, profileUrl, description } = user;
   return (
-    <div className={style.holder}>
+    <div className={`${style.holder}  ${className}`}>
       <Profile
+        data-testid="profileSummaryProfile"
         className={style.image}
-        alt={profile.profileAlt}
-        url={profile.profileUrl}
+        alt={name}
+        url={profileUrl}
         height={100}
         width={100}
       />
-      <Text variant="headline4" className={style.name}>
-        {name}
-      </Text>
-      <Text variant="subhead1" className={style.description}>
-        {description}
-      </Text>
+      <div>
+        <Text
+          testid="profileSummaryName"
+          variant="headline4"
+          className={style.name}
+        >
+          {name}
+        </Text>
+        <Text
+          testid="profileSummaryDescription"
+          variant="subhead1"
+          className={style.description}
+        >
+          {description}
+        </Text>
+      </div>
     </div>
   );
 };
