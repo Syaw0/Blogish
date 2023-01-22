@@ -17,12 +17,18 @@ declare global {
 
   interface ProfilePropsType {
     profileUrl: string;
-    profileAlt: string;
+    name: string;
   }
+
+  interface Author {
+    id: string;
+    name: string;
+    description: string;
+    profileUrl: string;
+  }
+
   interface PostType {
-    profile: ProfilePropsType;
-    author: string;
-    authorId: string;
+    author: Author;
     postHead: string;
     postSubhead: string;
     publishDate: Date | string;
@@ -35,17 +41,20 @@ declare global {
     posts?: PostType[];
     profileData?: ProfilePropsType;
   }
-  interface UserPagePropsType {
-    posts: PostType[];
+  interface UserPagePropsType extends MainPagePropsType {
     user: User;
-    isLogin: boolean;
-    profileData?: ProfilePropsType;
+  }
+
+  interface PostPagePropsType extends Omit<MainPagePropsType, "posts"> {
+    post: PostType;
+    similar: PostType[] | [];
   }
   interface User {
     name: string;
     description: string;
     profileUrl: string;
     posts?: PostType[];
+    id: string;
   }
 }
 export {};

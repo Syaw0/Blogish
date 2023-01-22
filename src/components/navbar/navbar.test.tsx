@@ -7,7 +7,7 @@ import { MemoryRouterProvider } from "next-router-mock/MemoryRouterProvider";
 jest.mock("next/router", () => require("next-router-mock"));
 
 const CustomParent = ({ isLogin }: { isLogin: boolean }) => {
-  return <Navbar isLogin={isLogin} profileData={fakePost.profile} />;
+  return <Navbar isLogin={isLogin} profileData={fakePost.author} />;
 };
 
 describe("Component Test : Navbar", () => {

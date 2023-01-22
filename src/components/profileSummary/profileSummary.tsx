@@ -2,15 +2,16 @@ import Profile from "../profile/profile";
 import Text from "../typography/typography";
 import style from "./profileSummary.module.css";
 
-type ProfileSummaryPropsType = Omit<
-  UserPagePropsType,
-  "posts" | "isLogin" | "profileData"
-> & {
+interface ProfileSummaryPropsType extends Author, User {
   className?: string;
-};
+}
 
-const ProfileSummary = ({ user, className = "" }: ProfileSummaryPropsType) => {
-  const { name, profileUrl, description } = user;
+const ProfileSummary = ({
+  name,
+  profileUrl,
+  description,
+  className = "",
+}: ProfileSummaryPropsType) => {
   return (
     <div
       data-testid="profileSummaryHolder"

@@ -4,11 +4,12 @@ import { GetServerSideProps, GetServerSidePropsResult } from "next";
 import { fakePost } from "../../../shared/fakePost";
 
 const UserPage = ({ ...params }: UserPagePropsType) => {
+  const { name } = params.user;
   return (
     <>
       <Head>
-        <title></title>
-        <meta name="description" content="blogish User App" />
+        <title>{name}</title>
+        <meta name="description" content={`blogish User Page ${name}`} />
       </Head>
 
       <User {...params} />
@@ -51,9 +52,11 @@ export const getServerSideProps: GetServerSideProps = async ({
       user: {
         name: "siavash",
         description: "hello there im here to help people",
-        profileUrl: fakePost.profile.profileUrl,
+        profileUrl: fakePost.author.profileUrl,
+        id: "24",
+        posts: [],
       },
-      profileData: fakePost.profile,
+      profileData: fakePost.author,
     },
   };
 };

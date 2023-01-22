@@ -10,7 +10,6 @@ interface PostPropsType extends PostType {
 }
 
 const Post = ({
-  profile,
   author,
   postHead,
   postSubhead,
@@ -19,20 +18,19 @@ const Post = ({
   onClick,
   testid,
   id,
-  authorId,
 }: PostPropsType) => {
   return (
     <div data-testid={testid} onClick={onClick} className={style.holder}>
-      <Link data-testid="postHeadAnchor" href={`/user/${authorId}`}>
+      <Link data-testid="postHeadAnchor" href={`/user/${author.id}`}>
         <div data-testid="post-head" className={style.head}>
           <Profile
-            alt={profile.profileAlt}
+            alt={author.name}
             height={20}
             width={20}
-            url={profile.profileUrl}
+            url={author.profileUrl}
             data-testid={`${author}-profile`}
           />
-          <Text>{author}</Text>
+          <Text>{author.name}</Text>
         </div>
       </Link>
 

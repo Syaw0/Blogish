@@ -139,7 +139,7 @@ const Navbar = ({ isLogin, profileData }: NavbarPropsType) => {
 
             <Link data-testid="navProfile" href={"/me"}>
               <Profile
-                alt={profileData.profileAlt}
+                alt={profileData.name}
                 height={20}
                 width={20}
                 url={profileData.profileUrl}

@@ -11,15 +11,15 @@ const User = ({ profileData, isLogin, posts, user }: UserPagePropsType) => {
       <Layout
         leftSide={
           <>
-            <ProfileSummary className={style.leftProfileSummary} user={user} />
+            <ProfileSummary className={style.leftProfileSummary} {...user} />
             <PostHolder
               className={style.postHolderHead}
-              posts={posts}
+              posts={posts != null ? posts : []}
               headText={"Posts"}
             />
           </>
         }
-        rightSide={<ProfileSummary user={user} />}
+        rightSide={<ProfileSummary {...user} />}
       />
     </div>
   );

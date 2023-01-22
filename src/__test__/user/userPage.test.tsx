@@ -22,7 +22,7 @@ describe("Test Page : Search!", () => {
         user={fakeUser}
         isLogin={true}
         posts={posts}
-        profileData={fakePost.profile}
+        profileData={fakePost.author}
       />
     );
     const postHolder = screen.getByTestId("postHolder");

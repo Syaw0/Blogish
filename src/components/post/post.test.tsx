@@ -26,13 +26,11 @@ describe("Component Test : Post", () => {
   });
 
   it("check component render perfectly", () => {
-    expect(
-      screen.getByAltText(fakePost.profile.profileAlt)
-    ).toBeInTheDocument();
+    expect(screen.getByAltText(fakePost.author.name)).toBeInTheDocument();
     expect(
       screen.getByTestId(`${fakePost.author}-profile`)
     ).toBeInTheDocument();
-    expect(screen.getByText(fakePost.author)).toBeInTheDocument();
+    expect(screen.getByText(fakePost.author.name)).toBeInTheDocument();
     expect(screen.getByText(fakePost.postHead)).toBeInTheDocument();
     expect(screen.getByText(fakePost.postSubhead)).toBeInTheDocument();
     expect(
@@ -48,7 +46,7 @@ describe("Component Test : Post", () => {
 
   it("if click on the post author or profile of it we navigate to user page", () => {
     fireEvent.click(screen.getByTestId("postHeadAnchor"));
-    expect(mockRouter.asPath).toEqual(`/user/${fakePost.authorId}`);
+    expect(mockRouter.asPath).toEqual(`/user/${fakePost.author.id}`);
   });
 
   it("if click on the post Header we navigate to Post page", () => {

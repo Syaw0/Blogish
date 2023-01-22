@@ -41,7 +41,7 @@ export const getServerSideProps: GetServerSideProps = async (): Promise<
     props: {
       isLogin: false,
       posts,
-      profileData: { ...fakePost.profile },
+      profileData: { ...fakePost.author },
     },
   };
 };

@@ -18,7 +18,7 @@ posts.map((p: any, i) => {
 describe("Test Page : Home!", () => {
   it("if user is log in the site so we just show posts and nav with profile ...", () => {
     render(
-      <HomePage isLogin={true} posts={posts} profileData={fakePost.profile} />
+      <HomePage isLogin={true} posts={posts} profileData={fakePost.author} />
     );
     const postHolder = screen.getByTestId("postHolder");
     expect(postHolder).toBeInTheDocument();
@@ -40,7 +40,7 @@ describe("Test Page : Home!", () => {
 
   it("if user is not log in the site we show landpage and nav just have auth button", () => {
     render(
-      <HomePage isLogin={false} posts={posts} profileData={fakePost.profile} />
+      <HomePage isLogin={false} posts={posts} profileData={fakePost.author} />
     );
     const postHolder = screen.getByTestId("postHolder");
     expect(postHolder).toBeInTheDocument();

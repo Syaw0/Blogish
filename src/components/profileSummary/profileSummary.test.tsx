@@ -6,7 +6,7 @@ import { fakeUser } from "../../shared/fakePost";
 const mockCallback = jest.fn(() => {});
 
 const CustomParent = () => {
-  return <ProfileSummary user={fakeUser} />;
+  return <ProfileSummary {...fakeUser} />;
 };
 
 describe("Component Test : Profile", () => {

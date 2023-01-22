@@ -8,13 +8,7 @@ import LazyPostHolder from "../../lazyPostHomeHolder/lazyPostHolder";
 const Home = ({ isLogin, profileData }: MainPagePropsType) => {
   return (
     <div className={style.holder}>
-      <Navbar
-        isLogin={isLogin}
-        profileData={{
-          profileAlt: profileData != null ? profileData.profileAlt : "",
-          profileUrl: profileData != null ? profileData.profileUrl : "",
-        }}
-      />
+      <Navbar isLogin={isLogin} profileData={profileData} />
       {!isLogin && <Landpage />}
       <Layout
         leftSide={<LazyPostHolder headText="Lets Traverse Articles..." />}

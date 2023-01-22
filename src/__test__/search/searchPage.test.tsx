@@ -22,7 +22,7 @@ describe("Test Page : Search!", () => {
         query={{ query: "" }}
         isLogin={true}
         posts={posts}
-        profileData={fakePost.profile}
+        profileData={fakePost.author}
       />
     );
     const postHolder = screen.getByTestId("postHolder");
@@ -50,7 +50,7 @@ describe("Test Page : Search!", () => {
         query={{ query: "query" }}
         isLogin={true}
         posts={posts}
-        profileData={fakePost.profile}
+        profileData={fakePost.author}
       />
     );
     expect(screen.getByText("Result For : query")).toBeInTheDocument();

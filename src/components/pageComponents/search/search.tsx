@@ -24,13 +24,7 @@ const Search = ({ isLogin, profileData }: MainPagePropsType) => {
   };
   return (
     <div className={style.holder}>
-      <Navbar
-        isLogin={isLogin}
-        profileData={{
-          profileAlt: profileData != null ? profileData.profileAlt : "",
-          profileUrl: profileData != null ? profileData.profileUrl : "",
-        }}
-      />
+      <Navbar isLogin={isLogin} profileData={profileData} />
       <Layout
         leftSide={
           <div className={style.leftHolder}>
