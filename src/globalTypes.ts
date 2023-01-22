@@ -22,6 +22,7 @@ declare global {
   interface PostType {
     profile: ProfilePropsType;
     author: string;
+    authorId: string;
     postHead: string;
     postSubhead: string;
     publishDate: Date | string;

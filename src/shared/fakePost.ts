@@ -1,4 +1,5 @@
 const fakePost: PostType = {
+  authorId: "123",
   profile: {
     profileAlt: "some Alt",
     profileUrl:
