@@ -31,7 +31,7 @@ declare global {
     author: Author;
     postHead: string;
     postSubhead: string;
-    publishDate: Date | string;
+    publishDate: string;
     tagName: string;
     id: string;
   }

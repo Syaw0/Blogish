@@ -6,7 +6,7 @@ import Post from "../post/post";
 import TrendTags from "../trendTags/trendTag";
 
 const LeftChild = () => {
-  return <Post testid="post" {...fakePost} />;
+  return <Post isAuthors={true} testid="post" {...fakePost} />;
 };
 
 const RightChild = () => {

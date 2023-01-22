@@ -31,7 +31,7 @@ const LazyPostHolder = ({ headText }: LazyPostHolderPropsType) => {
   };
   return (
     <div data-testid="lazyPostHolder" className={style.holder}>
-      <PostHolder headText={headText} posts={posts} />
+      <PostHolder isAuthors={false} headText={headText} posts={posts} />
       <Button
         loader={state == "loader"}
         disabled={state == "loader"}

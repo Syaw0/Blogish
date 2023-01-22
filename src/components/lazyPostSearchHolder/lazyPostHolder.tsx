@@ -16,7 +16,11 @@ const LazyPostSearchHolder = ({ headText }: LazyPostHolderPropsType) => {
   };
   return (
     <div data-testid="lazySearchPostHolder" className={style.holder}>
-      <PostHolder headText={headText} posts={posts.slice(0, postRenderer)} />
+      <PostHolder
+        isAuthors={false}
+        headText={headText}
+        posts={posts.slice(0, postRenderer)}
+      />
       {posts.length >= postRenderer && (
         <Button
           onClick={getPosts}

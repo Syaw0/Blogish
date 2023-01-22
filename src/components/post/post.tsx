@@ -7,6 +7,7 @@ import style from "./post.module.css";
 interface PostPropsType extends PostType {
   onClick?: () => void;
   testid?: string;
+  isAuthors: boolean;
 }
 
 const Post = ({
@@ -18,19 +19,25 @@ const Post = ({
   onClick,
   testid,
   id,
+  isAuthors,
 }: PostPropsType) => {
   return (
     <div data-testid={testid} onClick={onClick} className={style.holder}>
+      {isAuthors && <Text className={style.date}>{publishDate}</Text>}
       <Link data-testid="postHeadAnchor" href={`/user/${author.id}`}>
         <div data-testid="post-head" className={style.head}>
-          <Profile
-            alt={author.name}
-            height={20}
-            width={20}
-            url={author.profileUrl}
-            data-testid={`${author}-profile`}
-          />
-          <Text>{author.name}</Text>
+          {!isAuthors && (
+            <>
+              <Profile
+                alt={author.name}
+                height={20}
+                width={20}
+                url={author.profileUrl}
+                data-testid={`${author}-profile`}
+              />
+              <Text>{author.name}</Text>
+            </>
+          )}
         </div>
       </Link>
 
@@ -44,7 +51,7 @@ const Post = ({
       </div>
 
       <div className={style.bottom}>
-        <Text className={style.date}>{publishDate}</Text>
+        {!isAuthors && <Text className={style.date}>{publishDate}</Text>}
         <Tag name={tagName} />
       </div>
     </div>

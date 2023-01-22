@@ -1,20 +1,14 @@
+import Blog from "../../../components/blog/blog";
 import Layout from "../../../components/layout/layout";
 import Navbar from "../../../components/navbar/navbar";
 import ProfileSummary from "../../../components/profileSummary/profileSummary";
 import style from "./post.module.css";
-const Post = ({ isLogin, post, profileData }: PostPagePropsType) => {
+const Post = ({ isLogin, post, profileData, similar }: PostPagePropsType) => {
   return (
     <div className={style.holder}>
       <Navbar isLogin={isLogin} profileData={profileData} />
       <Layout
-        leftSide={
-          <>
-            <ProfileSummary
-              className={style.leftProfileSummary}
-              {...post.author}
-            />
-          </>
-        }
+        leftSide={<Blog {...post} similar={similar} />}
         rightSide={<ProfileSummary {...post.author} />}
       />
     </div>

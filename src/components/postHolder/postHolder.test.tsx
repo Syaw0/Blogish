@@ -14,7 +14,9 @@ posts.map((p: any, i) => {
 });
 
 const CustomParent = () => {
-  return <PostHolder headText={"some head text"} posts={posts} />;
+  return (
+    <PostHolder isAuthors={false} headText={"some head text"} posts={posts} />
+  );
 };
 
 describe("Component Test : Post", () => {

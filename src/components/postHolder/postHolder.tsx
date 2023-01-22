@@ -6,12 +6,14 @@ interface PostHolderPropsType {
   posts: PostType[];
   headText: string | null;
   className?: string;
+  isAuthors: boolean;
 }
 
 const PostHolder = ({
   posts,
   headText,
   className = "",
+  isAuthors = false,
 }: PostHolderPropsType) => {
   return (
     <div data-testid="postHolder" className={`${style.holder} ${className}`}>
@@ -22,7 +24,13 @@ const PostHolder = ({
       )}
       {posts.map((post, i) => {
         return (
-          <Post key={post.id} {...post} onClick={() => {}} testid={post.id} />
+          <Post
+            isAuthors={isAuthors}
+            key={post.id}
+            {...post}
+            onClick={() => {}}
+            testid={post.id}
+          />
         );
       })}
     </div>

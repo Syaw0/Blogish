@@ -13,6 +13,7 @@ const User = ({ profileData, isLogin, posts, user }: UserPagePropsType) => {
           <>
             <ProfileSummary className={style.leftProfileSummary} {...user} />
             <PostHolder
+              isAuthors={true}
               className={style.postHolderHead}
               posts={posts != null ? posts : []}
               headText={"Posts"}
