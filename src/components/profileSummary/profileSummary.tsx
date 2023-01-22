@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Profile from "../profile/profile";
 import Text from "../typography/typography";
 import style from "./profileSummary.module.css";
@@ -11,6 +12,7 @@ const ProfileSummary = ({
   profileUrl,
   description,
   className = "",
+  id,
 }: ProfileSummaryPropsType) => {
   return (
     <div
@@ -26,13 +28,15 @@ const ProfileSummary = ({
         width={100}
       />
       <div>
-        <Text
-          testid="profileSummaryName"
-          variant="headline4"
-          className={style.name}
-        >
-          {name}
-        </Text>
+        <Link href={`/user/${id}`}>
+          <Text
+            testid="profileSummaryName"
+            variant="headline4"
+            className={style.name}
+          >
+            {name}
+          </Text>
+        </Link>
         <Text
           testid="profileSummaryDescription"
           variant="subhead1"

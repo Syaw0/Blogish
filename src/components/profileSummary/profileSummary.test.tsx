@@ -2,8 +2,10 @@ import ProfileSummary from "./profileSummary";
 import { fireEvent, render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import { fakeUser } from "../../shared/fakePost";
+import mockRouter from "next-router-mock";
+import { MemoryRouterProvider } from "next-router-mock/dist/MemoryRouterProvider";
 
-const mockCallback = jest.fn(() => {});
+jest.mock("next/router", () => require("next-router-mock"));
 
 const CustomParent = () => {
   return <ProfileSummary {...fakeUser} />;
@@ -11,7 +13,7 @@ const CustomParent = () => {
 
 describe("Component Test : Profile", () => {
   beforeEach(() => {
-    render(<CustomParent />);
+    render(<CustomParent />, { wrapper: MemoryRouterProvider });
   });
 
   it("check component render perfectly", () => {
@@ -23,5 +25,10 @@ describe("Component Test : Profile", () => {
     expect(screen.getByTestId("profileSummaryName")).toHaveTextContent(
       fakeUser.name
     );
+  });
+
+  it("click on the name and go to the user page", () => {
+    fireEvent.click(screen.getByTestId("profileSummaryName"));
+    expect(mockRouter.asPath).toEqual(`/user/${fakeUser.id}`);
   });
 });
