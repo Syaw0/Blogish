@@ -32,6 +32,21 @@
   margin-bottom: 1.2rem;
 }
 
+.top {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.top svg {
+  fill: var(--onBg700);
+  cursor: pointer;
+}
+
+.top svg:hover {
+  fill: var(--onBg);
+}
+
 .postHead {
   font-size: var(--headline4);
   font-family: var(--font-head);

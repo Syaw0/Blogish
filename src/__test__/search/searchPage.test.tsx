@@ -19,7 +19,7 @@ describe("Test Page : Search!", () => {
   it("let see if components mount correctly", () => {
     render(
       <SearchPage
-        query={{ query: "" }}
+        query=""
         isLogin={true}
         posts={posts}
         profileData={fakePost.author}
@@ -47,7 +47,7 @@ describe("Test Page : Search!", () => {
   it("if query is not empty show another text", () => {
     render(
       <SearchPage
-        query={{ query: "query" }}
+        query="query"
         isLogin={true}
         posts={posts}
         profileData={fakePost.author}

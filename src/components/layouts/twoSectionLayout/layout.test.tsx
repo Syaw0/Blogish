@@ -1,9 +1,13 @@
 import Layout from "./layout";
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import { fakePost } from "../../../shared/fakePost";
+import { fakePost, fakeUser } from "../../../shared/fakePost";
 import Post from "../../post/post";
 import TrendTags from "../../trendTags/trendTag";
+import { Provider } from "react-redux";
+import makeStore from "../../../store/user/userStore";
+
+jest.mock("next/router", () => require("next-router-mock"));
 
 const LeftChild = () => {
   return <Post isAuthors={true} testid="post" {...fakePost} />;
@@ -14,7 +18,11 @@ const RightChild = () => {
 };
 
 const CustomParent = () => {
-  return <Layout leftSide={<LeftChild />} rightSide={<RightChild />} />;
+  return (
+    <Provider store={makeStore({ isLogin: true, profileData: fakeUser })}>
+      <Layout leftSide={<LeftChild />} rightSide={<RightChild />} />
+    </Provider>
+  );
 };
 
 describe("Component Test : Layout", () => {

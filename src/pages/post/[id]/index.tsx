@@ -1,8 +1,10 @@
 import Post from "../../../components/pageComponents/post/post";
-import { fakePost, fakeUser } from "../../../shared/fakePost";
+import { fakePost } from "../../../shared/fakePost";
 import { GetServerSideProps, GetServerSidePropsResult } from "next";
 import Head from "next/head";
 import showdown from "showdown";
+import { Provider } from "react-redux";
+import makeStore from "../../../store/user/userStore";
 
 const PostPage = ({ ...params }: PostPagePropsType) => {
   const { postHead } = params.post;
@@ -12,7 +14,9 @@ const PostPage = ({ ...params }: PostPagePropsType) => {
         <title>{postHead}</title>
         <meta name="description" content={`blogish Post ${postHead}`} />
       </Head>
-      <Post {...params} />
+      <Provider store={makeStore(params)}>
+        <Post {...params} />
+      </Provider>
     </>
   );
 };

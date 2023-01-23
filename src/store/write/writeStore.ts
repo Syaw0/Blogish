@@ -5,18 +5,12 @@ import {
   PayloadAction,
 } from "@reduxjs/toolkit";
 
-interface WriteStateTypes {
-  isEdit: boolean;
-  postHead: string;
-  postSubhead: string;
-  postDetail: string;
-}
-
-const initState: WriteStateTypes = {
+const initState: WritePagePropsType = {
   isEdit: false,
   postDetail: "",
   postHead: "",
   postSubhead: "",
+  isLogin: false,
 };
 
 const writeSlice = createSlice({
@@ -51,6 +45,8 @@ const makeStore = ({
   postDetail,
   postHead,
   postSubhead,
+  isLogin,
+  profileData,
 }: WritePagePropsType) => {
   return configureStore({
     reducer: writeSlice.reducer,
@@ -59,6 +55,8 @@ const makeStore = ({
       postHead,
       postDetail,
       postSubhead,
+      isLogin,
+      profileData,
     },
   });
 };

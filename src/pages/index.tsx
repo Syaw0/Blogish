@@ -13,7 +13,7 @@ export default function HomePage({ ...params }: MainPagePropsType) {
         <meta name="description" content="blogish Home Page" />
       </Head>
 
-      <Provider store={makeStore(params.posts != null ? params.posts : [])}>
+      <Provider store={makeStore(params)}>
         <Home {...params} />
       </Provider>
     </>

@@ -1,10 +1,18 @@
 import Blog from "./blog";
 import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
-import { fakePost } from "../../shared/fakePost";
+import { fakePost, fakeUser } from "../../shared/fakePost";
+import { Provider } from "react-redux";
+import makeStore from "../../store/post/postStore";
+
+jest.mock("next/router", () => require("next-router-mock"));
 
 const CustomParent = () => {
-  return <Blog {...fakePost} similar={[fakePost]} />;
+  return (
+    <Provider store={makeStore({ isLogin: true, profileData: fakeUser })}>
+      <Blog {...fakePost} similar={[fakePost]} />
+    </Provider>
+  );
 };
 
 describe("Component Test : Blog", () => {

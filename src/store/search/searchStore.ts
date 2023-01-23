@@ -5,14 +5,10 @@ import {
   PayloadAction,
 } from "@reduxjs/toolkit";
 
-interface SearchStateTypes {
-  posts: PostType[];
-  query: string;
-}
-
-const initState: SearchStateTypes = {
+const initState: SearchPagePropsType = {
   posts: [],
   query: "",
+  isLogin: false,
 };
 
 const searchSlice = createSlice({
@@ -20,17 +16,27 @@ const searchSlice = createSlice({
   name: "searchStore",
   reducers: {
     addPost(preState, action: PayloadAction<PostType[]>) {
-      preState.posts.push(...action.payload);
+      return {
+        ...preState,
+        posts: [...preState.posts, ...action.payload],
+      };
     },
   },
 });
 
-const makeStore = (initStates: PostType[], query: string | string[]) => {
+const makeStore = ({
+  isLogin,
+  posts,
+  query,
+  profileData,
+}: SearchPagePropsType) => {
   return configureStore({
     reducer: searchSlice.reducer,
     preloadedState: {
-      posts: initStates,
-      query: `${query}`,
+      posts,
+      isLogin,
+      profileData,
+      query,
     },
   });
 };

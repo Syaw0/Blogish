@@ -1,23 +1,35 @@
 import Post from "./post";
 import { fireEvent, render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import { fakePost } from "../../shared/fakePost";
+import { fakePost, fakeUser } from "../../shared/fakePost";
 import mockRouter from "next-router-mock";
 import { MemoryRouterProvider } from "next-router-mock/MemoryRouterProvider";
+import { Provider } from "react-redux";
+import makeStore from "../../store/user/userStore";
 
 jest.mock("next/router", () => require("next-router-mock"));
 const mockCallback = jest.fn(() => {});
 
-const CustomParent = ({ isAuthors }: any) => {
+const myFakePost = fakePost;
+const myFakeUser = fakeUser;
+const CustomParent = ({ isAuthors, post, user }: any) => {
   return (
-    <Post
-      isAuthors={isAuthors}
-      {...fakePost}
-      onClick={() => {
-        mockCallback();
-      }}
-      testid="postID"
-    />
+    // its not difference which store be used we need profileData that pass in all stores
+    <Provider
+      store={makeStore({
+        isLogin: true,
+        profileData: user == null ? fakeUser : user,
+      })}
+    >
+      <Post
+        isAuthors={isAuthors}
+        {...(post == null ? fakePost : post)}
+        onClick={() => {
+          mockCallback();
+        }}
+        testid="postID"
+      />
+    </Provider>
   );
 };
 
@@ -79,5 +91,44 @@ describe("Component Test : Post", () => {
     });
     fireEvent.click(screen.getByTestId("postTitleAnchor"));
     expect(mockRouter.asPath).toEqual(`/post/${fakePost.id}`);
+  });
+
+  it("if user is not a author of post don't show the menu", () => {
+    myFakePost.author.id = "some other id";
+    render(<CustomParent isAuthors={false} post={myFakePost} />, {
+      wrapper: MemoryRouterProvider,
+    });
+    let menu;
+    try {
+      menu = screen.getByTestId("menuHolder");
+    } catch (err) {}
+    expect(menu).toBeUndefined();
+  });
+
+  it("if user is a author of post  show the menu", () => {
+    myFakePost.author.id = "1";
+    myFakeUser.id = "1";
+    render(
+      <CustomParent user={myFakeUser} isAuthors={false} post={myFakePost} />,
+      {
+        wrapper: MemoryRouterProvider,
+      }
+    );
+
+    expect(screen.getByTestId("menuHolder")).toBeInTheDocument();
+  });
+
+  it("if user click on the menu item1 (edit post) will navigate to the write", () => {
+    myFakePost.author.id = "1";
+    myFakeUser.id = "1";
+    render(
+      <CustomParent user={myFakeUser} isAuthors={false} post={myFakePost} />,
+      {
+        wrapper: MemoryRouterProvider,
+      }
+    );
+    fireEvent.click(screen.getByTestId("menuHolderIcon"));
+    fireEvent.click(screen.getByTestId("Edit article"));
+    expect(mockRouter.asPath).toEqual("/write?edit=true&id=123");
   });
 });

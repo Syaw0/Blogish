@@ -2,6 +2,8 @@ import User from "../../../components/pageComponents/user/user";
 import Head from "next/head";
 import { GetServerSideProps, GetServerSidePropsResult } from "next";
 import { fakePost } from "../../../shared/fakePost";
+import { Provider } from "react-redux";
+import makeStore from "../../../store/user/userStore";
 
 const UserPage = ({ ...params }: UserPagePropsType) => {
   const { name } = params.user;
@@ -12,7 +14,9 @@ const UserPage = ({ ...params }: UserPagePropsType) => {
         <meta name="description" content={`blogish User Page ${name}`} />
       </Head>
 
-      <User {...params} />
+      <Provider store={makeStore(params)}>
+        <User {...params} />
+      </Provider>
     </>
   );
 };

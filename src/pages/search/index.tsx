@@ -4,14 +4,8 @@ import makeStore from "../../store/search/searchStore";
 import { GetServerSideProps, GetServerSidePropsResult } from "next";
 import Head from "next/head";
 import { Provider } from "react-redux";
-import { ParsedUrlQuery } from "querystring";
-
-interface SearchPagePropsType extends MainPagePropsType {
-  query: ParsedUrlQuery;
-}
 
 const SearchPage = ({ ...props }: SearchPagePropsType) => {
-  const query = props.query.query;
   return (
     <>
       <Head>
@@ -19,12 +13,7 @@ const SearchPage = ({ ...props }: SearchPagePropsType) => {
         <meta name="description" content="blogish Search Page" />
       </Head>
 
-      <Provider
-        store={makeStore(
-          props.posts != null ? props.posts : [],
-          query != null ? query : ""
-        )}
-      >
+      <Provider store={makeStore(props)}>
         <Search {...props} />
       </Provider>
     </>
@@ -49,7 +38,7 @@ export const getServerSideProps: GetServerSideProps = async ({
       isLogin: false,
       posts,
       profileData: fakePost.author,
-      query,
+      query: query.query as string,
     },
   };
 };

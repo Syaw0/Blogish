@@ -17,7 +17,7 @@ interface Text {
   testid?: string;
   className?: string;
   as?: "span" | "a" | "p";
-  onClick?: () => void;
+  onClick?: (e: any) => void;
 }
 
 const Text = ({

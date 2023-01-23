@@ -1,7 +1,11 @@
 import PostHolder from "./postHolder";
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import { fakePost } from "../../shared/fakePost";
+import { fakePost, fakeUser } from "../../shared/fakePost";
+import { Provider } from "react-redux";
+import makeStore from "../../store/user/userStore";
+
+jest.mock("next/router", () => require("next-router-mock"));
 
 const post1 = { ...fakePost };
 const post2 = { ...fakePost };
@@ -15,7 +19,9 @@ posts.map((p: any, i) => {
 
 const CustomParent = () => {
   return (
-    <PostHolder isAuthors={false} headText={"some head text"} posts={posts} />
+    <Provider store={makeStore({ isLogin: true, profileData: fakeUser })}>
+      <PostHolder isAuthors={false} headText={"some head text"} posts={posts} />
+    </Provider>
   );
 };
 

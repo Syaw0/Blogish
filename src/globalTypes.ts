@@ -18,6 +18,7 @@ declare global {
   interface ProfilePropsType {
     profileUrl: string;
     name: string;
+    id: string;
   }
 
   interface Author {
@@ -39,7 +40,7 @@ declare global {
 
   interface MainPagePropsType {
     isLogin: boolean;
-    posts?: PostType[];
+    posts: PostType[] | [];
     profileData?: ProfilePropsType;
   }
   interface UserPagePropsType extends MainPagePropsType {
@@ -63,6 +64,10 @@ declare global {
     profileUrl: string;
     posts?: PostType[];
     id: string;
+  }
+
+  interface SearchPagePropsType extends MainPagePropsType {
+    query: string;
   }
 }
 export {};

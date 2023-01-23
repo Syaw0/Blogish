@@ -1,11 +1,12 @@
 import LazyPostHolder from "./lazyPostHolder";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import { fakePost } from "../../shared/fakePost";
+import { fakePost, fakeUser } from "../../shared/fakePost";
 import loadMorePosts from "../../utils/loadMorePosts";
 import { Provider } from "react-redux";
 import makeStore from "../../store/home/homeStore";
 
+jest.mock("next/router", () => require("next-router-mock"));
 jest.mock("../../utils/loadMorePosts");
 let mockLoadMorePosts = loadMorePosts as jest.Mock;
 
@@ -21,7 +22,9 @@ posts.map((p: any, i) => {
 
 const CustomParent = () => {
   return (
-    <Provider store={makeStore(posts)}>
+    <Provider
+      store={makeStore({ isLogin: true, posts, profileData: fakeUser })}
+    >
       <LazyPostHolder headText="some head text" />
     </Provider>
   );

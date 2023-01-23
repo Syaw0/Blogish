@@ -7,10 +7,13 @@ import {
 
 interface HomeStateTypes {
   posts: PostType[];
+  isLogin: boolean;
+  profileData?: ProfilePropsType;
 }
 
 const initState: HomeStateTypes = {
   posts: [],
+  isLogin: false,
 };
 
 const postSlice = createSlice({
@@ -23,11 +26,13 @@ const postSlice = createSlice({
   },
 });
 
-const makeStore = (initStates: PostType[]) => {
+const makeStore = ({ isLogin, posts, profileData }: HomeStateTypes) => {
   return configureStore({
     reducer: postSlice.reducer,
     preloadedState: {
-      posts: initStates,
+      posts,
+      isLogin,
+      profileData,
     },
   });
 };
