@@ -9,12 +9,14 @@ interface LayoutMultipleSectionItems {
 
 interface LayoutMultipleSection {
   layoutData: LayoutMultipleSectionItems[];
-  topNavExtraComponent: ReactNode;
+  topNavExtraComponent?: ReactNode;
+  className?: string;
 }
 
 const Layout = ({
   layoutData,
-  topNavExtraComponent,
+  topNavExtraComponent = <div></div>,
+  className = "",
 }: LayoutMultipleSection) => {
   const [activeSection, setActiveSection] = useState(layoutData[0]);
   const changeSection = (e: number) => {
@@ -23,7 +25,10 @@ const Layout = ({
     }
   };
   return (
-    <div data-testid="layoutMultipleHolder" className={style.holder}>
+    <div
+      data-testid="layoutMultipleHolder"
+      className={`${style.holder} ${className}`}
+    >
       <div data-testid="layoutMultipleTop" className={style.top}>
         <div className={style.topLeft}>
           {layoutData.map((f, i) => {

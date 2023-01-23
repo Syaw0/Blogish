@@ -1,14 +1,11 @@
-import Layout from "../../components/layouts/multiSectionLayout/layout";
+import Write from "../../components/pageComponents/write/write";
 import Head from "next/head";
-import Button from "../../components/button/button";
-import Write from "../../components/write/write";
+import { GetServerSideProps, GetServerSidePropsResult } from "next";
+import { fakeUser } from "../../shared/fakePost";
+import { Provider } from "react-redux";
+import makeStore from "../../store/write/writeStore";
 
-const fakeData = [
-  { sectionName: "Write", component: <div>seciont1</div> },
-  { sectionName: "Preview", component: <div>section2 Component</div> },
-];
-
-const WritePage = () => {
+const WritePage = ({ ...params }: WritePagePropsType) => {
   return (
     <>
       <Head>
@@ -16,12 +13,26 @@ const WritePage = () => {
         <meta name="description" content="blogish Write Page" />
       </Head>
 
-      <Layout
-        topNavExtraComponent={<Button>Hello</Button>}
-        layoutData={fakeData}
-      />
+      <Provider store={makeStore(params)}>
+        <Write {...params} />
+      </Provider>
     </>
   );
+};
+
+export const getServerSideProps: GetServerSideProps = async (): Promise<
+  GetServerSidePropsResult<WritePagePropsType>
+> => {
+  return {
+    props: {
+      isLogin: true,
+      profileData: fakeUser,
+      isEdit: false,
+      postDetail: "",
+      postHead: "",
+      postSubhead: "",
+    },
+  };
 };
 
 export default WritePage;

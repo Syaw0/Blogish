@@ -1,0 +1,12 @@
+.holder {
+  width: 100%;
+}
+
+.layout {
+  padding-top: 1rem;
+}
+
+.topRightButton {
+  min-width: fit-content;
+  box-shadow: none;
+}

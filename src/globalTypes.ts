@@ -50,6 +50,13 @@ declare global {
     post: PostType;
     similar: PostType[] | [];
   }
+
+  interface WritePagePropsType extends Omit<MainPagePropsType, "posts"> {
+    isEdit: boolean;
+    postHead: string;
+    postSubhead: string;
+    postDetail: string;
+  }
   interface User {
     name: string;
     description: string;

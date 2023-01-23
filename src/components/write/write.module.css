@@ -7,7 +7,6 @@
   padding-right: 1rem;
   width: 10rem;
   font-family: var(--font-head);
-  color: var(--onBg900);
 }
 
 .headInput input,
@@ -15,8 +14,7 @@
 .bodyInput textarea {
   border: none;
   border-bottom: 1px solid var(--onBg100);
-  /* border-radius: 0; */
-  width: 90%;
+  width: 100%;
 }
 
 .headInput,
@@ -70,6 +68,7 @@
   font-size: var(--headline6);
   line-height: var(--headline6_lineHeight);
   color: var(--onBg900);
+  font-weight: 400;
 }
 
 .bottom {
@@ -79,5 +78,47 @@
 
 .bottom textarea {
   border: 1px solid var(--onBg100);
-  height: 100vh;
+  height: 75vh;
+  font-family: var(--font-sub);
+}
+
+@media (max-width: 800px) {
+  .head,
+  .middle,
+  .bottom {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+  .holder > div p {
+    margin-bottom: 0.5rem;
+    color: var(--onBg800);
+  }
+}
+
+@media (max-width: 450px) {
+  .head p {
+    font-size: var(--headline5);
+    line-height: var(--headline5_lineHeight);
+  }
+
+  .head input {
+    font-weight: 400;
+    font-family: var(--font-head);
+    font-size: var(--headline5);
+    line-height: var(--headline5_lineHeight);
+  }
+
+  .middle p {
+    font-size: var(--subHead1);
+    line-height: var(--subHead1_lineHeight);
+  }
+
+  .middle input {
+    font-size: var(--subHead1);
+    line-height: var(--subHead1_lineHeight);
+    color: var(--onBg900);
+    font-weight: 400;
+  }
 }

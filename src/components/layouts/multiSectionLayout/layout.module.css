@@ -61,7 +61,4 @@
   .holder {
     padding: 0 calc(1rem * 1);
   }
-  .topRight {
-    display: none;
-  }
 }
