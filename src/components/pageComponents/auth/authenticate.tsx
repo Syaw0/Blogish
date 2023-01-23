@@ -60,7 +60,7 @@ const Authenticate = () => {
   };
 
   return (
-    <>
+    <div className={style.holder}>
       <IconLogo className={style.logo} width="100" height="100" />
 
       <Text variant="headline2" className={style.header}>
@@ -119,7 +119,7 @@ const Authenticate = () => {
       </Text>
 
       <Message type={authState} msg={msg} />
-    </>
+    </div>
   );
 };
 
