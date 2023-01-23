@@ -1,5 +1,5 @@
-import { KeyboardEventHandler, ReactNode } from "react";
-import style from "./textInput.module.css";
+import { ReactNode } from "react";
+import style from "./textAreaInput.module.css";
 
 interface TextInputType {
   label?: string;
@@ -7,42 +7,36 @@ interface TextInputType {
   onChange: any;
   value: any;
   id?: string;
-  type: "text" | "email" | "search";
   testId: string;
   className?: string;
-  EndIcon?: ReactNode;
   onKeyDown?: (e: any) => void;
   name?: string;
 }
 
-const TextInput = ({
+const TextArea = ({
   id = "",
   label = "",
   placeholder = "",
   onChange,
   value,
-  type,
   testId,
   className = "",
-  EndIcon,
   onKeyDown,
   name = "",
 }: TextInputType) => {
   return (
     <div onKeyDown={onKeyDown} className={`${style.holder} ${className}`}>
       {label !== "" && <label htmlFor={id}>{label}</label>}
-      <input
-        name={name}
+      <textarea
         placeholder={placeholder}
         data-testid={testId}
         id={id}
+        name={name}
         onChange={onChange}
         value={value}
-        type={type}
       />
-      {EndIcon != null && EndIcon}
     </div>
   );
 };
 
-export default TextInput;
+export default TextArea;

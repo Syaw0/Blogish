@@ -1,12 +1,11 @@
 import Layout from "../../components/layouts/multiSectionLayout/layout";
 import Head from "next/head";
-import Button from "@/components/button/button";
+import Button from "../../components/button/button";
+import Write from "../../components/write/write";
 
 const fakeData = [
-  { sectionName: "Write", component: <div>section1 Component</div> },
+  { sectionName: "Write", component: <div>seciont1</div> },
   { sectionName: "Preview", component: <div>section2 Component</div> },
-  { sectionName: "section3", component: <div>section3 Component</div> },
-  { sectionName: "section4", component: <div>section4 Component</div> },
 ];
 
 const WritePage = () => {
