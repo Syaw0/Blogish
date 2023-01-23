@@ -1,5 +1,5 @@
 import Blog from "../../../components/blog/blog";
-import Layout from "../../../components/layout/layout";
+import Layout from "../../layouts/twoSectionLayout/layout";
 import Navbar from "../../../components/navbar/navbar";
 import ProfileSummary from "../../../components/profileSummary/profileSummary";
 import style from "./post.module.css";

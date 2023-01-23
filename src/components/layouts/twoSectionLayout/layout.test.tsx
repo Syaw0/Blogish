@@ -1,9 +1,9 @@
 import Layout from "./layout";
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import { fakePost } from "../../shared/fakePost";
-import Post from "../post/post";
-import TrendTags from "../trendTags/trendTag";
+import { fakePost } from "../../../shared/fakePost";
+import Post from "../../post/post";
+import TrendTags from "../../trendTags/trendTag";
 
 const LeftChild = () => {
   return <Post isAuthors={true} testid="post" {...fakePost} />;

@@ -2,7 +2,7 @@ import IconSearch from "../../../assets/icons/iconSearch";
 import TextInput from "../../../components/input/text/textInput";
 import { useRouter } from "next/router";
 import { ChangeEvent, useState } from "react";
-import Layout from "../../../components/layout/layout";
+import Layout from "../../layouts/twoSectionLayout/layout";
 import LazyPostSearchHolder from "../../../components/lazyPostSearchHolder/lazyPostHolder";
 import Navbar from "../../../components/navbar/navbar";
 import TrendTags from "../../../components/trendTags/trendTag";

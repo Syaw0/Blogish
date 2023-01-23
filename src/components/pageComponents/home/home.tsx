@@ -1,5 +1,5 @@
 import style from "./home.module.css";
-import Layout from "../../../components/layout/layout";
+import Layout from "../../layouts/twoSectionLayout/layout";
 import Navbar from "../../../components/navbar/navbar";
 import TrendTags from "../../trendTags/trendTag";
 import Landpage from "../../landpage/landpage";

@@ -1,4 +1,4 @@
-import Layout from "../../../components/layout/layout";
+import Layout from "../../layouts/twoSectionLayout/layout";
 import Navbar from "../../../components/navbar/navbar";
 import PostHolder from "../../../components/postHolder/postHolder";
 import ProfileSummary from "../../../components/profileSummary/profileSummary";
