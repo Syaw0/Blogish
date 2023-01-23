@@ -1,5 +1,5 @@
 import IconDotsVertical from "../../assets/icons/iconDotsVertical";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import Text from "../typography/typography";
 import style from "./menu.module.css";
 import useOutsideClickHandler from "../../hooks/useOutsideClickHandle";
