@@ -25,7 +25,7 @@ const Text = ({
   variant = "subhead1",
   testid,
   id,
-  className,
+  className = "",
   as = "p",
   ...params
 }: Text) => {

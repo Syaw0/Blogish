@@ -24,11 +24,13 @@ const writeSlice = createSlice({
   name: "writeStore",
   reducers: {
     editHead(preState, action: PayloadAction<string>) {
-      preState.postHead = action.payload;
+      return {
+        ...preState,
+        postHead: action.payload,
+      };
     },
 
     editBody(preState, action: PayloadAction<string>) {
-      console.log("hello", action.payload);
       return {
         ...preState,
         postDetail: action.payload,
@@ -36,7 +38,10 @@ const writeSlice = createSlice({
     },
 
     editSubHead(preState, action: PayloadAction<string>) {
-      preState.postSubhead = action.payload;
+      return {
+        ...preState,
+        postSubhead: action.payload,
+      };
     },
   },
 });

@@ -15,7 +15,7 @@ posts.map((p: any, i) => {
   return p;
 });
 
-describe("Test Page : Home!", () => {
+describe("Test Page : Post!", () => {
   beforeEach(() => {
     render(
       <PostPage

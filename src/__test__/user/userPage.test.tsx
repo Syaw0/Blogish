@@ -15,7 +15,7 @@ posts.map((p: any, i) => {
   return p;
 });
 
-describe("Test Page : Search!", () => {
+describe("Test Page : User!", () => {
   it("let see if components mount correctly", () => {
     render(
       <UserPage

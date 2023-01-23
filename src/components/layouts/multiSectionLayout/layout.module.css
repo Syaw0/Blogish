@@ -14,6 +14,7 @@
   overflow-x: auto;
   justify-content: space-between;
   align-items: center;
+  overflow: visible;
 }
 
 .topLeft {
