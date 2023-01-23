@@ -24,7 +24,7 @@ const CustomParent = () => {
   );
 };
 
-describe("Component Test : Input Text", () => {
+describe("Component Test : Write component", () => {
   it("check if given data is correct", () => {
     render(<CustomParent />);
     expect(screen.getByTestId("writeComponentHeadInput")).toBeInTheDocument();

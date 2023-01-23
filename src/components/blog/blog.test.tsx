@@ -7,7 +7,7 @@ const CustomParent = () => {
   return <Blog {...fakePost} similar={[fakePost]} />;
 };
 
-describe("Component Test : Layout", () => {
+describe("Component Test : Blog", () => {
   it("check if given data is correct", () => {
     render(<CustomParent />);
     expect(screen.getByTestId("blogMdHolder")).toBeInTheDocument();

@@ -22,7 +22,7 @@ const CustomParent = () => {
   );
 };
 
-describe("Component Test : Input Text", () => {
+describe("Component Test : WriteWrapper", () => {
   it("check if given data is correct", () => {
     render(<CustomParent />);
     expect(screen.getByTestId("writeComponentHeadInput")).toBeInTheDocument();

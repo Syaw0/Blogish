@@ -11,7 +11,7 @@ const CustomParent = () => {
   return <BlogMD {...blogDetail} />;
 };
 
-describe("Component Test : Layout", () => {
+describe("Component Test : BlogMd", () => {
   it("check if given data is correct", () => {
     render(<CustomParent />);
     expect(screen.getByTestId("blogMdHead")).toHaveTextContent(

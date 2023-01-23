@@ -11,7 +11,7 @@ const CustomParent = () => {
   return <ProfileSummary {...fakeUser} />;
 };
 
-describe("Component Test : Profile", () => {
+describe("Component Test : ProfileSummary", () => {
   beforeEach(() => {
     render(<CustomParent />, { wrapper: MemoryRouterProvider });
   });

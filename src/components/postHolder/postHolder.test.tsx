@@ -19,7 +19,7 @@ const CustomParent = () => {
   );
 };
 
-describe("Component Test : Post", () => {
+describe("Component Test : PostHolder", () => {
   beforeEach(() => {
     render(<CustomParent />);
   });

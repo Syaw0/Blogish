@@ -5,20 +5,26 @@ interface BlogMDPropsType {
   header: string;
   body: string;
   description: string;
+  className?: string;
 }
 
-const BlogMD = ({ header, body, description }: BlogMDPropsType) => {
+const BlogMD = ({
+  header,
+  body,
+  description,
+  className = "",
+}: BlogMDPropsType) => {
   return (
-    <div data-testid="blogMdHolder" className={style.holder}>
+    <div data-testid="blogMdHolder" className={`${style.holder} ${className}`}>
       <Text testid="blogMdHead" className={style.head}>
-        {header}
+        {header == "" ? "Empty..." : header}
       </Text>
       <Text
         variant="headline6"
         testid="blogMdSubhead"
         className={style.subhead}
       >
-        {description}
+        {description == "" ? "Empty..." : description}
       </Text>
       <div
         data-testid="blogMdBody"
