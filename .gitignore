@@ -34,3 +34,5 @@ yarn-error.log*
 next-env.d.ts
 
 /src/shared/somemd.ts
+
+.env
