@@ -39,8 +39,8 @@ const userFields = {
     Default: "",
     Extra: "",
   },
-  id: {
-    Field: "id",
+  userId: {
+    Field: "userId",
     Type: "int(11)",
     Null: "NO",
     Key: "PRI",
@@ -50,8 +50,8 @@ const userFields = {
 };
 
 const postFields = {
-  id: {
-    Field: "id",
+  postId: {
+    Field: "postId",
     Type: "int(11)",
     Null: "NO",
     Key: "PRI",

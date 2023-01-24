@@ -1,4 +1,4 @@
-import IconDotsVertical from "@/assets/icons/iconDotsVertical";
+import IconDotsVertical from "../../assets/icons/iconDotsVertical";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
