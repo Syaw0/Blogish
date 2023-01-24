@@ -1,6 +1,7 @@
 import "@/styles/globals.css";
 import { Arvo, Lato } from "@next/font/google";
 import type { AppProps } from "next/app";
+import Head from "next/head";
 import style from "../styles/themeToken.module.css";
 
 const arvo = Arvo({
@@ -24,6 +25,10 @@ export default function App({ Component, pageProps }: AppProps) {
     <div
       className={`${lato.variable} ${arvo.variable} ${style.color_light} ${style.transitionToken} ${style.shadows} ${style.font_sizes} ${style.line_height} rootHolder`}
     >
+      <Head>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <Component {...pageProps} />
     </div>
   );

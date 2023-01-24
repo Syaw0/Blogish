@@ -1,8 +1,8 @@
-// * we need to first create container and seed db!
-
 import { RedisClientType } from "redis";
 import prepareTestDbEnvironment from "../../scripts/initial";
+
 let redisClient: any;
+
 describe("Test : DB", () => {
   beforeAll(async () => {
     redisClient = await prepareTestDbEnvironment();
@@ -14,5 +14,3 @@ describe("Test : DB", () => {
     console.log(d);
   });
 });
-
-export {};
