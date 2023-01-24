@@ -6,14 +6,38 @@ dotEnv.config();
 const RedisPassword = process.env.REDIS_PASSWORD;
 const RedisContainerName = "Redis";
 
-const dockerRunCmd = `docker run -d -p 3232:6379 --rm --name=${RedisContainerName} -e REDIS_PASSWORD=${RedisPassword} public.ecr.aws/ubuntu/redis:latest`;
-const stopAndRmContainerCmd = `docker stop ${RedisContainerName}`;
+const MariaPassword = process.env.Maria_PASSWORD;
+const MariaUser = process.env.Maria_User;
+const MariaContainerName = "Maria";
+
+const dockerRunRedisCmd = `docker run -d -p 3232:6379 --rm --name=${RedisContainerName} -e REDIS_PASSWORD=${RedisPassword} public.ecr.aws/ubuntu/redis:latest`;
+const dockerRunMariaCmd = `docker run -d -p 3030:3306 --rm --name=${MariaContainerName} -e MARIADB_ROOT_PASSWORD=${MariaPassword} public.ecr.aws/docker/library/mariadb:latest
+
+`;
+
+const stopContainerCmd = (name: string) => {
+  return `docker stop ${name}`;
+};
 
 const prepareTestDbEnvironment = async () => {
   try {
-    childProcess.execSync(stopAndRmContainerCmd);
+    childProcess.execSync(stopContainerCmd(RedisContainerName));
   } catch (err) {}
-  childProcess.execSync(dockerRunCmd);
+  try {
+    childProcess.execSync(stopContainerCmd(MariaContainerName));
+  } catch (err) {}
+  childProcess.execSync(dockerRunRedisCmd);
+  childProcess.execSync(dockerRunMariaCmd);
+
+  const { createPool } = await import("mariadb");
+  console.log(createPool);
+  const pool = createPool({
+    port: 3030,
+    host: "localhost",
+    user: MariaUser,
+    password: MariaPassword,
+  });
+
   const redis = await import("redis");
   const redisClient = redis.createClient({
     socket: {
@@ -23,7 +47,7 @@ const prepareTestDbEnvironment = async () => {
     password: RedisPassword,
   });
   await redisClient.connect();
-  await seedDb(redisClient);
-  return redisClient;
+  await seedDb(redisClient, pool);
+  return { redisClient, mariaClient: pool };
 };
 export default prepareTestDbEnvironment;

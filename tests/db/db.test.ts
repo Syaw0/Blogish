@@ -1,16 +1,19 @@
 import { RedisClientType } from "redis";
 import prepareTestDbEnvironment from "../../scripts/initial";
+import { posts, users } from "../../scripts/fakeData";
+
+const fakeUser1 = users[0];
+const fakeUser2 = users[1];
+
+const fakePost1 = posts[0];
+const fakePost2 = posts[1];
 
 let redisClient: any;
 
 describe("Test : DB", () => {
   beforeAll(async () => {
-    redisClient = await prepareTestDbEnvironment();
+    const { redisClient, mariaClient } = await prepareTestDbEnvironment();
+    console.log(redisClient, mariaClient);
   });
-  it("some test", async () => {
-    let redisClient2: RedisClientType = redisClient;
-    await redisClient2.select(1);
-    const d = await redisClient2.hGetAll("0");
-    console.log(d);
-  });
+  it("get Random user!", async () => {});
 });

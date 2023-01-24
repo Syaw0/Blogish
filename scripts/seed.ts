@@ -1,40 +1,15 @@
-import { posts, users } from "./fakeData";
+import { Pool } from "mariadb";
+import { posts } from "./fakeData";
 
-const seedDb = async (redisClient: any) => {
+const seedDb = async (redisClient: any, mariaClient: Pool) => {
   await redisClient.select(1);
-  users.forEach(async (user) => {
-    await redisClient.hSet(`${user.id}`, [
-      "name",
-      user.name,
-      "description",
-      user.description,
-      "profileUrl",
-      user.profileUrl,
-      "id",
-      user.id,
-      "posts",
-      JSON.stringify({ posts: user.posts }),
-    ]);
-  });
-  await redisClient.select(2);
   posts.forEach(async (post) => {
-    await redisClient.hSet(`${post.id}`, [
-      "author",
-      post.author.id,
-      "postSubhead",
-      post.postSubhead,
-      "postHead",
-      post.postHead,
-      "postDetail",
-      post.postDetail,
-      "id",
-      post.id,
-      "tagName",
-      post.tagName,
-      "publishDate",
-      post.publishDate.getTime(),
-    ]);
+    await redisClient.set(post.id, post.postDetail);
   });
+
+  const con = await mariaClient.getConnection();
+  console.log(con);
+  await con.query("CREATE DATABASE blogish");
 };
 
 export default seedDb;
