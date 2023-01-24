@@ -1,8 +1,12 @@
+// TODO write script to generate fake data
+
 const fakeUser = {
   name: "siavash",
   description: "some description",
   profileUrl: "",
   id: 0,
+  email: "something1@gmail.com",
+  password: "root1",
   posts: [1, 2, 3, 4],
 };
 
@@ -11,7 +15,8 @@ const fakeUser2 = {
   description: "some description",
   profileUrl: "",
   id: 1,
-  posts: [5, 7, 10],
+  email: "something2@gmail.com",
+  password: "root2",
 };
 
 const fakeUser3 = {
@@ -19,12 +24,13 @@ const fakeUser3 = {
   description: "some description",
   profileUrl: "",
   id: 2,
-  posts: [6, 8, 9],
+  email: "something3@gmail.com",
+  password: "root3",
 };
 
 const fakePost1 = {
   author: {
-    id: "0",
+    id: "1",
   },
   postHead: "",
   postSubhead: "",
@@ -35,7 +41,7 @@ const fakePost1 = {
 };
 const fakePost2 = {
   author: {
-    id: "0",
+    id: "1",
   },
   postHead: "",
   postSubhead: "",
@@ -46,7 +52,7 @@ const fakePost2 = {
 };
 const fakePost3 = {
   author: {
-    id: "0",
+    id: "1",
   },
   postHead: "",
   postSubhead: "",
@@ -57,7 +63,7 @@ const fakePost3 = {
 };
 const fakePost4 = {
   author: {
-    id: "0",
+    id: "2",
   },
   postHead: "",
   postSubhead: "",
@@ -68,7 +74,7 @@ const fakePost4 = {
 };
 const fakePost5 = {
   author: {
-    id: "1",
+    id: "3",
   },
   postHead: "",
   postSubhead: "",
@@ -90,7 +96,7 @@ const fakePost6 = {
 };
 const fakePost7 = {
   author: {
-    id: "1",
+    id: "3",
   },
   postHead: "",
   postSubhead: "",
@@ -101,7 +107,7 @@ const fakePost7 = {
 };
 const fakePost8 = {
   author: {
-    id: "2",
+    id: "3",
   },
   postHead: "",
   postSubhead: "",
@@ -112,7 +118,7 @@ const fakePost8 = {
 };
 const fakePost9 = {
   author: {
-    id: "2",
+    id: "3",
   },
   postHead: "",
   postSubhead: "",
@@ -123,7 +129,7 @@ const fakePost9 = {
 };
 const fakePost10 = {
   author: {
-    id: "1",
+    id: "2",
   },
   postHead: "",
   postSubhead: "",

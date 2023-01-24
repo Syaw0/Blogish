@@ -1,4 +1,3 @@
-import { RedisClientType } from "redis";
 import prepareTestDbEnvironment from "../../scripts/initial";
 import { posts, users } from "../../scripts/fakeData";
 
