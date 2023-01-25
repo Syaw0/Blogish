@@ -4,7 +4,8 @@ import { GetServerSideProps, GetServerSidePropsResult } from "next";
 import { fakePost } from "../../../shared/fakePost";
 import { Provider } from "react-redux";
 import makeStore from "../../../store/user/userStore";
-
+import getUser from "../../../../db/util/getUser";
+import getUserPosts from "../../../../db/util/getUserPosts";
 const UserPage = ({ ...params }: UserPagePropsType) => {
   const { name } = params.user;
   return (
@@ -34,32 +35,23 @@ posts.map((p: any, i) => {
 export const getServerSideProps: GetServerSideProps = async ({
   params,
 }): Promise<GetServerSidePropsResult<UserPagePropsType>> => {
-  let id;
-  if (params != null && "id" in params) {
-    id = params.id;
-  }
-  if (id == null) {
+  const user = await getUser(params && params.id);
+  const posts = await getUserPosts(params && params.id);
+
+  if (!user.status || !posts.status) {
     return {
       redirect: {
-        destination: "/500",
+        destination: "/404",
         permanent: false,
       },
     };
   }
 
-  // if user not found return notfound
-
   return {
     props: {
-      posts,
+      posts: posts.data,
       isLogin: true,
-      user: {
-        name: "siavash",
-        description: "hello there im here to help people",
-        profileUrl: fakePost.author.profileUrl,
-        id: "24",
-        posts: [],
-      },
+      user: user.data,
       profileData: fakePost.author,
     },
   };

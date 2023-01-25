@@ -1,3 +1,4 @@
+import loader from "../../utils/imageLoader";
 import Image from "next/image";
 import style from "./profile.module.css";
 
@@ -21,7 +22,14 @@ const Profile = ({
 }: ProfileType) => {
   return (
     <div {...params} className={`${style.holder} ${className}`}>
-      <Image src={`${url}`} width={width} height={height} alt={alt} />
+      <Image
+        loader={loader}
+        src={`${url}`}
+        quality={50}
+        width={width}
+        height={height}
+        alt={alt}
+      />
     </div>
   );
 };
