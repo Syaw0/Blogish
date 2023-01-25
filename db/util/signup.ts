@@ -13,7 +13,6 @@ const signup = async (password: string, email: string) => {
         msg: "email exist",
       };
     }
-    console.log(email);
     await con.query(`Insert into users (name,password,email) Values(?,?,?)`, [
       email.split("@")[0],
       password,

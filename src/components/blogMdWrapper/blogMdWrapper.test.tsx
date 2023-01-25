@@ -10,6 +10,7 @@ const blogDetail = {
   postDetail: "detail",
   postSubhead: "subhead",
   isLogin: true,
+  id: "1",
 };
 const CustomParent = () => {
   return (

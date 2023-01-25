@@ -9,16 +9,29 @@ import Message from "../../../components/message/message";
 import useFetch from "../../../hooks/useFetch";
 import publishPost, { loaderMsg } from "../../../utils/publishPost";
 import { useWriteSelector } from "../../../store/write/writeStoreHooks";
+import { useEffect } from "react";
+import { useRouter } from "next/router";
 
 const Write = ({ isLogin, isEdit, profileData }: WritePagePropsType) => {
+  const router = useRouter();
   let [data, trigger, state, msg, setMsg] = useFetch(publishPost, loaderMsg);
   const states = useWriteSelector((s) => s);
-  useCancelNavigate();
+  const canceler = useCancelNavigate();
+
+  useEffect(() => {
+    if (data != null) {
+      router.replace("/");
+    } else {
+      canceler(true);
+    }
+  }, [data, router, canceler]);
+
   const startPublishing = () => {
     if (checkInputs()) {
       setMsg("error", "Please fill all inputs.");
     } else {
-      trigger();
+      canceler(false);
+      trigger(states);
     }
 
     setTimeout(() => {

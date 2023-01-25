@@ -79,7 +79,7 @@ describe("Test : DB", () => {
     expect(user.name).toEqual("Siavash");
     expect(user.email).toEqual("someMagicEmail@gmail.com");
     expect(user.description).toEqual("my bioGraphy");
-    expect(user.profileUrl).toEqual("");
+    expect(user.profileUrl).toEqual("/prof/default.png");
     expect(user.password).toEqual(SHA256("123123").toString());
     // expect(user.id).toEqual('4') //! this is uncertain!
   });

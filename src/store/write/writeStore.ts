@@ -11,6 +11,7 @@ const initState: WritePagePropsType = {
   postHead: "",
   postSubhead: "",
   isLogin: false,
+  id: "",
 };
 
 const writeSlice = createSlice({
@@ -47,6 +48,7 @@ const makeStore = ({
   postSubhead,
   isLogin,
   profileData,
+  id,
 }: WritePagePropsType) => {
   return configureStore({
     reducer: writeSlice.reducer,
@@ -57,6 +59,7 @@ const makeStore = ({
       postSubhead,
       isLogin,
       profileData,
+      id,
     },
   });
 };

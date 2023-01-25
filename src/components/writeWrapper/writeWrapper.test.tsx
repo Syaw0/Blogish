@@ -15,6 +15,7 @@ const CustomParent = () => {
         postHead: "",
         postSubhead: "",
         profileData: fakeUser,
+        id: "1",
       })}
     >
       <WriteWrapper />

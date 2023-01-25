@@ -57,6 +57,7 @@ declare global {
     postHead: string;
     postSubhead: string;
     postDetail: string;
+    id: string;
   }
   interface User {
     name: string;

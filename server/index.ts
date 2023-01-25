@@ -8,6 +8,8 @@ import { SHA256 } from "crypto-js";
 import cookieParser from "cookie-parser";
 import setSession from "../db/util/setSession";
 import signup from "../db/util/signup";
+import publishChangeToArticle from "../db/util/publishChangeToArticle";
+import publishNewArticle from "../db/util/publishNewArticle";
 
 const dev = process.env.NODE_ENV !== "production";
 const hostname = "localhost";
@@ -69,6 +71,16 @@ nextApp
         sameSite: "strict",
         httpOnly: true,
       });
+      res.send(result);
+    });
+
+    app.post("/publish", async (req, res) => {
+      let result;
+      if (req.query && req.query.edit) {
+        result = await publishChangeToArticle(req.body);
+      } else {
+        result = await publishNewArticle(req.body);
+      }
       res.send(result);
     });
 

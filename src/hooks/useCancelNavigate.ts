@@ -1,8 +1,9 @@
 import { useRouter } from "next/router";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const useCancelNavigate = () => {
   const router = useRouter();
+  const [isCancel, setIsCancel] = useState(true);
   useEffect(() => {
     const confirmationMessage = "Changes you made may not be saved.";
     const beforeUnloadHandler = (e: BeforeUnloadEvent) => {
@@ -17,14 +18,20 @@ const useCancelNavigate = () => {
         throw `Route change to "${url}" was aborted (this error can be safely ignored). See https://github.com/zeit/next.js/issues/2476.`;
       }
     };
-    window.addEventListener("beforeunload", beforeUnloadHandler);
-    router.events.on("routeChangeStart", beforeRouteHandler);
+    if (isCancel) {
+      window.addEventListener("beforeunload", beforeUnloadHandler);
+      router.events.on("routeChangeStart", beforeRouteHandler);
+    } else {
+      window.removeEventListener("beforeunload", beforeUnloadHandler);
+      router.events.off("routeChangeStart", beforeRouteHandler);
+    }
 
     return () => {
       window.removeEventListener("beforeunload", beforeUnloadHandler);
       router.events.off("routeChangeStart", beforeRouteHandler);
     };
-  }, [router.events, router.pathname]);
+  }, [isCancel, router.events, router.pathname]);
+  return setIsCancel;
 };
 
 export default useCancelNavigate;

@@ -5,6 +5,8 @@ import { fakePost } from "../../shared/fakePost";
 import publishPost from "../../utils/publishPost";
 
 jest.mock("../../utils/publishPost");
+jest.mock("../../../db/util/getPost.ts", () => jest.fn(() => {}));
+jest.mock("../../../db/util/getPostContent.ts", () => jest.fn(() => {}));
 jest.mock("next/router", () => require("next-router-mock"));
 
 const mockPublish = publishPost as jest.Mock;
@@ -18,6 +20,7 @@ const postDetail = {
   postDetail: "",
   postHead: "",
   postSubhead: "",
+  id: "1",
 };
 
 const postDetail2 = {
@@ -25,6 +28,7 @@ const postDetail2 = {
   postDetail: "someDetail",
   postHead: "someHead",
   postSubhead: "someSubhead",
+  id: "1",
 };
 
 describe("Test Page : Write!", () => {
