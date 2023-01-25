@@ -36,7 +36,7 @@ const userFields = {
     Type: "varchar(100)",
     Null: "NO",
     Key: "",
-    Default: "",
+    Default: "/prof/default.png",
     Extra: "",
   },
   userId: {

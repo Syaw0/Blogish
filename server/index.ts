@@ -2,6 +2,7 @@ import getPostList from "../db/util/getPostList";
 import express from "express";
 import next from "next";
 import fs from "fs";
+import { redisClient } from "../db/dbController";
 
 const dev = process.env.NODE_ENV !== "production";
 const hostname = "localhost";
@@ -12,9 +13,8 @@ const handle = nextApp.getRequestHandler();
 
 nextApp
   .prepare()
-  .then(() => {
+  .then(async () => {
     const app = express();
-
     app.use(express.static(__dirname + "/static"));
 
     app.get("/prof/:id", (req, res) => {

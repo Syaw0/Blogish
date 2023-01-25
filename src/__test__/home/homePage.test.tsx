@@ -2,12 +2,9 @@ import HomePage from "../../pages/index";
 import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
 import { fakePost } from "../../shared/fakePost";
-import getPostList from "../../../db/util/getPostList";
 
 jest.mock("../../../db/util/getPostList.ts", () => jest.fn(() => {}));
 jest.mock("next/router", () => require("next-router-mock"));
-
-const mockGetPostList = getPostList as jest.Mock;
 
 const post1 = { ...fakePost };
 const post2 = { ...fakePost };
@@ -19,11 +16,6 @@ posts.map((p: any, i) => {
   p.id = `post-${i + 1}`;
   return p;
 });
-mockGetPostList.mockReturnValue(
-  new Promise(() => {
-    return posts;
-  })
-);
 
 describe("Test Page : Home!", () => {
   it("if user is log in the site so we just show posts and nav with profile ...", () => {

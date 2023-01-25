@@ -2,15 +2,10 @@ import UserPage from "../../pages/user/[id]/index";
 import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
 import { fakePost, fakeUser } from "../../shared/fakePost";
-import getUser from "../../../db/util/getUser";
-import getUserPosts from "../../../db/util/getUserPosts";
 
 jest.mock("../../../db/util/getUserPosts.ts", () => jest.fn(() => {}));
 jest.mock("../../../db/util/getUser.ts", () => jest.fn(() => {}));
 jest.mock("next/router", () => require("next-router-mock"));
-
-const mockGetUserPosts = getUserPosts as jest.Mock;
-const mockGetUser = getUser as jest.Mock;
 
 let posts: PostType[] = [];
 for (let i = 0; i != 25; i++) {
@@ -21,14 +16,6 @@ posts.map((p: any, i) => {
   p.id = `post-${i + 1}`;
   return p;
 });
-
-mockGetUser.mockReturnValue(new Promise((res) => res(fakeUser)));
-
-mockGetUserPosts.mockReturnValue(
-  new Promise((res) => {
-    return res(posts);
-  })
-);
 
 describe("Test Page : User!", () => {
   it("let see if components mount correctly", () => {

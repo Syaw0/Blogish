@@ -22,6 +22,6 @@ const redisClient = createClient({
     host: "localhost",
   },
   password: RedisPassword,
-}).connect();
+});
 
 export { pool, redisClient };

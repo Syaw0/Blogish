@@ -5,6 +5,10 @@ import Head from "next/head";
 import showdown from "showdown";
 import { Provider } from "react-redux";
 import makeStore from "../../../store/user/userStore";
+import getPost from "../../../../db/util/getPost";
+import getUser from "../../../../db/util/getUser";
+import getSimilarPosts from "../../../../db/util/getSimilarPost";
+import getPostContent from "../../../../db/util/getPostContent";
 
 const PostPage = ({ ...params }: PostPagePropsType) => {
   const { postHead } = params.post;
@@ -21,30 +25,33 @@ const PostPage = ({ ...params }: PostPagePropsType) => {
   );
 };
 
-let posts: PostType[] = [];
-for (let i = 0; i != 5; i++) {
-  posts.push({ ...fakePost });
-}
+export const getServerSideProps: GetServerSideProps = async ({
+  params,
+}): Promise<GetServerSidePropsResult<any>> => {
+  const post = await getPost(params && params.id);
+  if (!post.status) {
+    return { redirect: { destination: "/404", permanent: false } };
+  }
+  const authorId = post.data.author;
+  const user = await getUser(authorId);
+  const similarPost = await getSimilarPosts(authorId, post.data.id);
+  const postContent = await getPostContent("1");
+  if (!postContent.status) {
+    return { redirect: { destination: "/404", permanent: false } };
+  }
 
-posts.map((p: any, i) => {
-  p.id = `post-${i + 1}`;
-  return p;
-});
+  const convertor = new showdown.Converter();
 
-const converter = new showdown.Converter();
-const post = fakePost;
-post.postDetail = converter.makeHtml(post.postDetail);
-
-export const getServerSideProps: GetServerSideProps = async (): Promise<
-  GetServerSidePropsResult<PostPagePropsType>
-> => {
-  // here we get the post and convert its body to html using showdown
+  post.data.author = user.data;
+  post.data.postDetail = convertor.makeHtml(
+    postContent.data != null ? postContent.data : ""
+  );
   return {
     props: {
       profileData: fakePost.author,
       isLogin: true,
-      post: fakePost,
-      similar: posts,
+      post: post.data,
+      similar: similarPost.data,
     },
   };
 };
