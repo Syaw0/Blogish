@@ -26,7 +26,7 @@ export const getServerSideProps: GetServerSideProps = async (): Promise<
 > => {
   const posts = await getPostList(0);
 
-  if (posts.length == 0) {
+  if (!posts.status) {
     return {
       redirect: {
         destination: "/500",
@@ -38,7 +38,7 @@ export const getServerSideProps: GetServerSideProps = async (): Promise<
   return {
     props: {
       isLogin: true,
-      posts,
+      posts: posts.data,
       profileData: { ...fakePost.author },
     },
   };

@@ -1,9 +1,14 @@
 import { createClient } from "redis";
 import { createPool } from "mariadb";
+import dotEnv from "dotenv";
+
+dotEnv.config();
 
 const RedisPassword = process.env.REDIS_PASSWORD;
 const MariaPassword = process.env.Maria_PASSWORD;
 const MariaUser = process.env.Maria_User;
+
+console.log(MariaPassword, MariaUser);
 
 const pool = createPool({
   port: 3030,

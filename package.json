@@ -6,6 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "server": "ts-node-esm --esm -P ./tsconfig.script.json ./server/index.ts",
+    "server:dev": "nodemon",
+    "server:build": "NODE_ENV=production npm run server",
     "lint": "next lint",
     "test": "jest",
     "prettier": "npx prettier . -c -w",
@@ -47,11 +50,19 @@
     "jest-environment-jsdom": "^29.3.1",
     "jest-transform-css": "^6.0.1",
     "next-router-mock": "^0.9.1-beta.0",
+    "nodemon": "^2.0.20",
     "prettier": "^2.8.3",
     "ts-jest": "^29.0.5"
   },
   "author": {
     "name": "syaw0",
     "email": "siamhb7@protonmail.com"
+  },
+  "nodemonConfig": {
+    "watch": [
+      "./server/**/*"
+    ],
+    "exec": "npm run server",
+    "ext": "*.ts"
   }
 }

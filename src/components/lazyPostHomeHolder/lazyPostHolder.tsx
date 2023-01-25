@@ -19,7 +19,7 @@ const LazyPostHolder = ({ headText }: LazyPostHolderPropsType) => {
   const dispatch = useDispatch();
   useEffect(() => {
     if (data != null) {
-      dispatch(homeStateAddPost(data.posts));
+      dispatch(homeStateAddPost(data));
       setTimeout(() => {
         setMsg("pending", "");
       }, 1000);

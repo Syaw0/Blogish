@@ -58,9 +58,7 @@ describe("Component Test : Post", () => {
 
   it("if we click on the button if response is ok load more posts", async () => {
     mockLoadMorePosts.mockReturnValue(
-      new Promise((res) =>
-        res({ status: true, msg: "", data: { posts: [fakePost] } })
-      )
+      new Promise((res) => res({ status: true, msg: "", data: [fakePost] }))
     );
     let postHolder = screen.getByTestId("postHolder");
     let prePostHolderItems = postHolder.querySelectorAll(
