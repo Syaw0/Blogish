@@ -1,12 +1,26 @@
-type AuthenticateType = "signup" | "signin";
+import { SHA256 } from "crypto-js";
 
-const authenticate = async (type: AuthenticateType): Promise<FetchResponse> => {
-  const resp = await fetch("");
-  // const data = await resp.json();
-  const data = {
-    status: false,
-    msg: "Error this email are used before",
-  };
+type AuthenticateType = "login" | "register";
+type AuthenticateData = {
+  password: string;
+  email: string;
+};
+
+const authenticate = async (
+  type: AuthenticateType,
+  userData: AuthenticateData
+): Promise<FetchResponse> => {
+  const hashedPassword = SHA256(userData.password).toString();
+  const resp = await fetch(`${type}`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ password: hashedPassword, email: userData.email }),
+  });
+  const data = await resp.json();
+  console.log(data);
+
   return data;
 };
 

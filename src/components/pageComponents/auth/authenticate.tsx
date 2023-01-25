@@ -3,17 +3,26 @@ import PasswordInput from "../../../components/input/password/passwordInput";
 import TextInput from "../../../components/input/text/textInput";
 import Message from "../../../components/message/message";
 import useFetch from "../../../hooks/useFetch";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import IconLogo from "../../../assets/icons/IconLogo";
 import Text from "../../../components/typography/typography";
 import style from "./authenticate.module.css";
 import authenticate, { loaderMsg } from "../../../utils/authenticate";
+import { useRouter } from "next/router";
 
 const Authenticate = () => {
+  const router = useRouter();
   let [authData, trigger, authState, msg, setMsg] = useFetch(
     authenticate,
     loaderMsg
   );
+
+  useEffect(() => {
+    if (authData != null) {
+      router.replace("/");
+    }
+  }, [authData, router]);
+
   const [pageState, setPageState] = useState({
     password: "",
     email: "",
@@ -31,7 +40,7 @@ const Authenticate = () => {
       return;
     }
     // setPageState((s) => ({ ...s, email: "", password: "" }));
-    trigger(pageState.isLogin ? "signin" : "signup");
+    trigger(pageState.isLogin ? "login" : "register", pageState);
   };
 
   const checkInputs = () => {

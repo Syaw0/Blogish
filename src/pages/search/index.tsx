@@ -34,7 +34,10 @@ posts.map((p: any, i) => {
 export const getServerSideProps: GetServerSideProps = async ({
   query,
 }): Promise<GetServerSidePropsResult<SearchPagePropsType>> => {
-  const searchQuery = `${query.query}`;
+  let searchQuery = `${query.query}`;
+  if (query.query == null) {
+    searchQuery = "";
+  }
   const data = await search(searchQuery);
   if (!data.status) {
     return {
@@ -49,7 +52,7 @@ export const getServerSideProps: GetServerSideProps = async ({
       isLogin: false,
       posts: data.data != null ? data.data.slice(0, data.data.length) : [],
       profileData: fakePost.author,
-      query: query.query as string,
+      query: searchQuery,
     },
   };
 };

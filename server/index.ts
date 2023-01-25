@@ -2,7 +2,11 @@ import getPostList from "../db/util/getPostList";
 import express from "express";
 import next from "next";
 import fs from "fs";
-import { redisClient } from "../db/dbController";
+import bodyParser from "body-parser";
+import login from "../db/util/login";
+import { SHA256 } from "crypto-js";
+import cookieParser from "cookie-parser";
+import setSession from "../db/util/setSession";
 
 const dev = process.env.NODE_ENV !== "production";
 const hostname = "localhost";
@@ -16,7 +20,8 @@ nextApp
   .then(async () => {
     const app = express();
     app.use(express.static(__dirname + "/static"));
-
+    app.use(bodyParser.json());
+    app.use(cookieParser());
     app.get("/prof/:id", (req, res) => {
       const { id } = req.params;
       const s = fs.existsSync(__dirname + `/static/profile/${id}.png`);
@@ -25,6 +30,30 @@ nextApp
       } else {
         res.sendFile(__dirname + `/static/profile/default.png`);
       }
+    });
+
+    app.post("/login", async (req, res) => {
+      console.log(req.cookies);
+      const { password, email } = req.body;
+      const result = await login(password, email);
+      if (result.status) {
+        const { email } = result.data;
+        const hashedEmail = SHA256(email).toString();
+        const setSessionKeyResult = await setSession(hashedEmail);
+        if (!setSessionKeyResult.status) {
+          res.send(setSessionKeyResult);
+        }
+        res.cookie("session", hashedEmail, {
+          secure: true,
+          sameSite: "strict",
+          httpOnly: true,
+        });
+      }
+      res.send(result);
+    });
+
+    app.post("/register", (req, res) => {
+      console.log(req.body);
     });
 
     app.get("/getMorePost", async (req, res) => {

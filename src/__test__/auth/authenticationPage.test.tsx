@@ -2,9 +2,11 @@ import AuthenticationPage from "../../pages/auth/index";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import authenticate from "../../utils/authenticate";
+import mockRouter from "next-router-mock";
 
 let mockFetcher = authenticate as jest.Mock;
 
+jest.mock("next/router", () => require("next-router-mock"));
 jest.mock("../../utils/authenticate");
 
 describe("Test Page : Authentication Page", () => {
@@ -61,10 +63,14 @@ describe("Test Page : Authentication Page", () => {
       fireEvent.change(textInput, { target: { value: "hello@gmail.com" } });
       fireEvent.change(passwordInput, { target: { value: "hello2w22" } });
     });
-    it("if server response to us with status true show success msg", async () => {
+    it("if server response to us with status true show success msg and redirect to home page", async () => {
       mockFetcher.mockReturnValue(
         new Promise((res) =>
-          res({ status: true, msg: "successfully authenticate" })
+          res({
+            status: true,
+            msg: "successfully authenticate",
+            data: { some: "" },
+          })
         )
       );
       const button = screen.getByTestId("authButton");
@@ -74,6 +80,7 @@ describe("Test Page : Authentication Page", () => {
         expect(screen.getByTestId("successMessage")).toBeInTheDocument()
       );
       expect(screen.getByText("successfully authenticate")).toBeInTheDocument();
+      await waitFor(() => expect(mockRouter.asPath).toEqual("/"));
     });
 
     it("if server response to us with status false show error msg", async () => {
@@ -108,7 +115,7 @@ describe("Test Page : Authentication Page", () => {
       const button = screen.getByTestId("authButton");
       fireEvent.click(button);
       await waitFor(() =>
-        expect(mockFetcher.mock.calls[0][0]).toEqual("signup")
+        expect(mockFetcher.mock.calls[0][0]).toEqual("register")
       );
     });
 
@@ -117,7 +124,7 @@ describe("Test Page : Authentication Page", () => {
       const button = screen.getByTestId("authButton");
       fireEvent.click(button);
       await waitFor(() =>
-        expect(mockFetcher.mock.calls[0][0]).toEqual("signin")
+        expect(mockFetcher.mock.calls[0][0]).toEqual("login")
       );
     });
   });
