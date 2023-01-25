@@ -4,6 +4,7 @@ import makeStore from "../../store/search/searchStore";
 import { GetServerSideProps, GetServerSidePropsResult } from "next";
 import Head from "next/head";
 import { Provider } from "react-redux";
+import search from "../../../db/util/search";
 
 const SearchPage = ({ ...props }: SearchPagePropsType) => {
   return (
@@ -33,10 +34,20 @@ posts.map((p: any, i) => {
 export const getServerSideProps: GetServerSideProps = async ({
   query,
 }): Promise<GetServerSidePropsResult<SearchPagePropsType>> => {
+  const searchQuery = `${query.query}`;
+  const data = await search(searchQuery);
+  if (!data.status) {
+    return {
+      redirect: {
+        destination: "/500",
+        permanent: false,
+      },
+    };
+  }
   return {
     props: {
       isLogin: false,
-      posts,
+      posts: data.data != null ? data.data.slice(0, data.data.length) : [],
       profileData: fakePost.author,
       query: query.query as string,
     },

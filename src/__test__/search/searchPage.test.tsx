@@ -4,6 +4,7 @@ import { render, screen } from "@testing-library/react";
 import { fakePost } from "../../shared/fakePost";
 
 jest.mock("next/router", () => require("next-router-mock"));
+jest.mock("../../../db/util/search.ts", () => jest.fn(() => {}));
 
 let posts: PostType[] = [];
 for (let i = 0; i != 25; i++) {
