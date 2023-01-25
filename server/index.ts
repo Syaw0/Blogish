@@ -7,6 +7,7 @@ import login from "../db/util/login";
 import { SHA256 } from "crypto-js";
 import cookieParser from "cookie-parser";
 import setSession from "../db/util/setSession";
+import signup from "../db/util/signup";
 
 const dev = process.env.NODE_ENV !== "production";
 const hostname = "localhost";
@@ -33,7 +34,6 @@ nextApp
     });
 
     app.post("/login", async (req, res) => {
-      console.log(req.cookies);
       const { password, email } = req.body;
       const result = await login(password, email);
       if (result.status) {
@@ -52,8 +52,24 @@ nextApp
       res.send(result);
     });
 
-    app.post("/register", (req, res) => {
-      console.log(req.body);
+    app.post("/register", async (req, res) => {
+      const { password, email } = req.body;
+      const result = await signup(password, email);
+      if (!result.status) {
+        return res.send(result);
+      }
+
+      const hashedEmail = SHA256(email).toString();
+      const setSessionKeyResult = await setSession(hashedEmail);
+      if (!setSessionKeyResult.status) {
+        res.send(setSessionKeyResult);
+      }
+      res.cookie("session", hashedEmail, {
+        secure: true,
+        sameSite: "strict",
+        httpOnly: true,
+      });
+      res.send(result);
     });
 
     app.get("/getMorePost", async (req, res) => {

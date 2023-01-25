@@ -11,6 +11,10 @@ const setSession = async (hashedEmail: any) => {
     };
   } catch (err) {
     return { status: false, msg: "error during setup session key" };
+  } finally {
+    if (redisClient != null) {
+      await redisClient.quit();
+    }
   }
 };
 

@@ -34,6 +34,10 @@ const login = async (password: string, email: string) => {
       status: false,
       msg: "internal error",
     };
+  } finally {
+    if (con != null) {
+      await con.end();
+    }
   }
 };
 

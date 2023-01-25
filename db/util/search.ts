@@ -21,6 +21,9 @@ const search = async (query: string) => {
       msg: "error during perform action",
     };
   } finally {
+    if (con != null) {
+      await con.end();
+    }
   }
 };
 
