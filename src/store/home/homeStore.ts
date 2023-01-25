@@ -21,7 +21,10 @@ const postSlice = createSlice({
   name: "homeStore",
   reducers: {
     addPost(preState, action: PayloadAction<PostType[]>) {
-      preState.posts.push(...action.payload);
+      return {
+        ...preState,
+        posts: [...preState.posts, ...action.payload],
+      };
     },
   },
 });
@@ -30,7 +33,7 @@ const makeStore = ({ isLogin, posts, profileData }: HomeStateTypes) => {
   return configureStore({
     reducer: postSlice.reducer,
     preloadedState: {
-      posts,
+      posts: posts.slice(0, posts.length),
       isLogin,
       profileData,
     },

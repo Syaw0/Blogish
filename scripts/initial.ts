@@ -16,7 +16,6 @@ const dockerRunMariaCmd = `docker run -d -p 3030:3306 --rm --name=${MariaContain
 const stopContainerCmd = (name: string) => {
   return `docker stop ${name}`;
 };
-
 const killContainers = () => {
   try {
     childProcess.execSync(stopContainerCmd(RedisContainerName));

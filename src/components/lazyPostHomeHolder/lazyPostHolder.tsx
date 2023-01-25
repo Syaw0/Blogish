@@ -27,7 +27,7 @@ const LazyPostHolder = ({ headText }: LazyPostHolderPropsType) => {
   }, [data, dispatch, setMsg]);
 
   const getPosts = () => {
-    trigger();
+    trigger(posts.length);
   };
   return (
     <div data-testid="lazyPostHolder" className={style.holder}>

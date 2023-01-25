@@ -10,8 +10,9 @@ import makeStore from "../../store/user/userStore";
 jest.mock("next/router", () => require("next-router-mock"));
 const mockCallback = jest.fn(() => {});
 
-const myFakePost = fakePost;
+const myFakePost: any = fakePost;
 const myFakeUser = fakeUser;
+
 const CustomParent = ({ isAuthors, post, user }: any) => {
   return (
     // its not difference which store be used we need profileData that pass in all stores
@@ -40,7 +41,7 @@ describe("Component Test : Post", () => {
     });
     expect(screen.getByAltText(fakePost.author.name)).toBeInTheDocument();
     expect(
-      screen.getByTestId(`${fakePost.author}-profile`)
+      screen.getByTestId(`${fakePost.author.id}-profile`)
     ).toBeInTheDocument();
     expect(screen.getByText(fakePost.author.name)).toBeInTheDocument();
     expect(screen.getByText(fakePost.postHead)).toBeInTheDocument();
@@ -56,7 +57,7 @@ describe("Component Test : Post", () => {
 
     let profile, name;
     try {
-      profile = screen.getByTestId(`${fakePost.author}-profile`);
+      profile = screen.getByTestId(`${fakePost.author.id}-profile`);
       name = screen.getByText(fakePost.author.name);
     } catch (err) {}
     expect(profile).toBeUndefined();
