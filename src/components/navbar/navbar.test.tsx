@@ -4,7 +4,12 @@ import "@testing-library/jest-dom";
 import { fakePost } from "../../shared/fakePost";
 import mockRouter from "next-router-mock";
 import { MemoryRouterProvider } from "next-router-mock/MemoryRouterProvider";
+import logout from "../../utils/logout";
+
+jest.mock("../../utils/logout.ts");
 jest.mock("next/router", () => require("next-router-mock"));
+
+const mockLogout = logout as jest.Mock;
 
 const CustomParent = ({ isLogin }: { isLogin: boolean }) => {
   return <Navbar isLogin={isLogin} profileData={fakePost.author} />;
@@ -26,6 +31,7 @@ describe("Component Test : Navbar", () => {
     render(<CustomParent isLogin={true} />);
     expect(screen.getByTestId("navWriteButton")).toBeInTheDocument();
     expect(screen.getByTestId("navProfile")).toBeInTheDocument();
+    expect(screen.getByTestId("navbarLogoutButton")).toBeInTheDocument();
   });
 
   it("if click on the iconLogo navigate to home page", () => {
@@ -63,11 +69,10 @@ describe("Component Test : Navbar", () => {
 
     expect(mockRouter.asPath).toEqual("/search?query=otherQuery");
   });
-
-  // it("if search inputs are empty do nothing", () => {
-  //   render(<CustomParent isLogin={true} />, { wrapper: MemoryRouterProvider });
-  //   const searchBox = screen.getByTestId("navSearchBox");
-  //   fireEvent.keyDown(searchBox, { key: "Enter" });
-  //   expect(mockRouter.asPath).toEqual("");
-  // });
+  it("if we click on the logout ", () => {
+    mockLogout.mockReturnValue(new Promise((res) => res({ status: true })));
+    render(<CustomParent isLogin={true} />, { wrapper: MemoryRouterProvider });
+    fireEvent.click(screen.getByTestId("navbarLogoutButton"));
+    expect(mockLogout).toBeCalledTimes(1);
+  });
 });

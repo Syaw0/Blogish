@@ -1,4 +1,4 @@
-const guestRegex = /\/write|\/publish/;
+const guestRegex = /\/write|\/publish|\/logout/;
 
 const checkGuestUserAccess = (url: string) => {
   return guestRegex.test(url);

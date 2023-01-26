@@ -25,11 +25,13 @@ const Blog = ({
         description={publishDate}
       />
       <BlogMD description={postSubhead} header={postHead} body={postDetail} />
-      <PostHolder
-        headText={`Love This Post? See Other From ${author.name}`}
-        isAuthors={true}
-        posts={similar}
-      />
+      {similar.length >= 1 && (
+        <PostHolder
+          headText={`Love This Post? See Other From ${author.name}`}
+          isAuthors={true}
+          posts={similar}
+        />
+      )}
     </div>
   );
 };

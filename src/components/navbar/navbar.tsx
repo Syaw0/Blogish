@@ -8,6 +8,8 @@ import Button from "../button/button";
 import TextInput from "../input/text/textInput";
 import Profile from "../profile/profile";
 import style from "./navbar.module.css";
+import IconLogout from "../../assets/icons/iconLogout";
+import logoutAndRemoveSession from "../../utils/logout";
 
 interface NavbarPropsType {
   isLogin: boolean;
@@ -45,6 +47,16 @@ const Navbar = ({ isLogin, profileData }: NavbarPropsType) => {
       document.removeEventListener("scroll", scrollEvent);
     };
   }, [isLogin]);
+
+  const logout = async () => {
+    const data = await logoutAndRemoveSession(profileData!.id);
+    if (data.status) {
+      if (location.pathname == "/") {
+        return router.reload();
+      }
+      router.replace("/");
+    }
+  };
 
   const router = useRouter();
   const [searchQuery, setSearchQuery] = useState("");
@@ -121,6 +133,24 @@ const Navbar = ({ isLogin, profileData }: NavbarPropsType) => {
         )}
         {isLogin && profileData != null && (
           <>
+            <Button
+              onClick={logout}
+              variant="shadow"
+              className={style.writeButton}
+              testid="navbarLogoutButton"
+            >
+              Logout
+            </Button>
+
+            <Button
+              onClick={logout}
+              variant="shadow"
+              testid="navbarLogoutIconButton"
+              className={style.writeIconButton}
+            >
+              <IconLogout width="20" height="20" />
+            </Button>
+
             <Link data-testid="navWriteButton" href={"/write"}>
               <Button
                 StartIcon={IconWrite}

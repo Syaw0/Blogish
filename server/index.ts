@@ -12,6 +12,7 @@ import publishChangeToArticle from "../db/util/publishChangeToArticle";
 import publishNewArticle from "../db/util/publishNewArticle";
 import accessibilityMiddleware from "./middleware/accessibilityMiddleware";
 import { redisClient } from "../db/dbController";
+import removeSession from "../db/util/removeSession";
 
 const dev = process.env.NODE_ENV !== "production";
 const hostname = "localhost";
@@ -103,6 +104,13 @@ nextApp
       const { len } = req.query;
       const posts = await getPostList(len);
       res.send(posts);
+    });
+
+    app.get("/logout", async (req, res) => {
+      const { id } = req.query;
+      const { session } = req.cookies;
+      const result = await removeSession(session, id);
+      res.send(result);
     });
 
     app.get("*", (req, res) => {

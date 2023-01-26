@@ -5,6 +5,7 @@ import { GetServerSideProps, GetServerSidePropsResult } from "next";
 import Head from "next/head";
 import { Provider } from "react-redux";
 import search from "../../../db/util/search";
+import checkSession from "../../../server/util/checkSession";
 
 const SearchPage = ({ ...props }: SearchPagePropsType) => {
   return (
@@ -33,7 +34,22 @@ posts.map((p: any, i) => {
 
 export const getServerSideProps: GetServerSideProps = async ({
   query,
+  req,
 }): Promise<GetServerSidePropsResult<SearchPagePropsType>> => {
+  const props = {
+    isLogin: false,
+    profileData: {
+      name: "",
+      profileUrl: "",
+      id: "",
+    },
+  };
+  const isLogged = await checkSession(req.cookies);
+  if (isLogged.status) {
+    props.isLogin = true;
+    props.profileData = isLogged.data;
+  }
+
   let searchQuery = `${query.query}`;
   if (query.query == null) {
     searchQuery = "";
@@ -49,9 +65,8 @@ export const getServerSideProps: GetServerSideProps = async ({
   }
   return {
     props: {
-      isLogin: false,
+      ...props,
       posts: data.data != null ? data.data.slice(0, data.data.length) : [],
-      profileData: fakePost.author,
       query: searchQuery,
     },
   };
