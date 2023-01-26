@@ -1,24 +1,19 @@
-import getPostList from "../db/util/getPostList";
 import express from "express";
 import next from "next";
-import fs from "fs";
 import bodyParser from "body-parser";
-import login from "../db/util/login";
-import { SHA256 } from "crypto-js";
 import cookieParser from "cookie-parser";
-import setSession from "../db/util/setSession";
-import signup from "../db/util/signup";
-import publishChangeToArticle from "../db/util/publishChangeToArticle";
-import publishNewArticle from "../db/util/publishNewArticle";
 import accessibilityMiddleware from "./middleware/accessibilityMiddleware";
 import { redisClient } from "../db/dbController";
-import removeSession from "../db/util/removeSession";
+import getProfileById from "./routes/getProfileById";
+import loginRoute from "./routes/login";
+import register from "./routes/register";
+import publish from "./routes/publish";
+import getMorePosts from "./routes/getMorePosts";
+import logout from "./routes/logout";
 
 const dev = process.env.NODE_ENV !== "production";
 const hostname = "localhost";
 const port = 3000;
-
-console.log("is it dev?", dev);
 
 const nextApp = next({ dev, hostname, port });
 const handle = nextApp.getRequestHandler();
@@ -35,83 +30,17 @@ nextApp
 
     app.use(accessibilityMiddleware);
 
-    app.get("/prof/:id", (req, res) => {
-      const { id } = req.params;
-      const s = fs.existsSync(__dirname + `/static/profile/${id}.png`);
-      if (s) {
-        res.sendFile(__dirname + `/static/profile/${id}.png`);
-      } else {
-        res.sendFile(__dirname + `/static/profile/default.png`);
-      }
-    });
+    app.get("/prof/:id", getProfileById);
 
-    app.post("/login", async (req, res) => {
-      const { password, email } = req.body;
-      const result = await login(password, email);
-      if (result.status) {
-        const { email } = result.data;
-        const hashedEmail = SHA256(email).toString();
-        const setSessionKeyResult = await setSession(
-          hashedEmail,
-          result.data.userId
-        );
-        if (!setSessionKeyResult.status) {
-          res.send(setSessionKeyResult);
-        }
-        res.cookie("session", hashedEmail, {
-          secure: true,
-          sameSite: "strict",
-          httpOnly: true,
-        });
-      }
-      res.send(result);
-    });
+    app.post("/login", loginRoute);
 
-    app.post("/register", async (req, res) => {
-      const { password, email } = req.body;
-      const result = await signup(password, email);
-      if (!result.status) {
-        return res.send(result);
-      }
+    app.post("/register", register);
 
-      const hashedEmail = SHA256(email).toString();
-      const setSessionKeyResult = await setSession(
-        hashedEmail,
-        result.data.userId
-      );
-      if (!setSessionKeyResult.status) {
-        res.send(setSessionKeyResult);
-      }
-      res.cookie("session", hashedEmail, {
-        secure: true,
-        sameSite: "strict",
-        httpOnly: true,
-      });
-      res.send(result);
-    });
+    app.post("/publish", publish);
 
-    app.post("/publish", async (req, res) => {
-      let result;
-      if (req.query && req.query.edit) {
-        result = await publishChangeToArticle(req.body);
-      } else {
-        result = await publishNewArticle(req.body);
-      }
-      res.send(result);
-    });
+    app.get("/getMorePost", getMorePosts);
 
-    app.get("/getMorePost", async (req, res) => {
-      const { len } = req.query;
-      const posts = await getPostList(len);
-      res.send(posts);
-    });
-
-    app.get("/logout", async (req, res) => {
-      const { id } = req.query;
-      const { session } = req.cookies;
-      const result = await removeSession(session, id);
-      res.send(result);
-    });
+    app.get("/logout", logout);
 
     app.get("*", (req, res) => {
       return handle(req, res);
