@@ -16,7 +16,7 @@ const accessibilityMiddleware = async (
     }
   } else if (result.status) {
     if (/\/publish/.test(req.originalUrl)) {
-      if (result.data.userId !== req.body.author) {
+      if (result.data.userId != req.body.author) {
         return res.redirect("/");
       }
     }

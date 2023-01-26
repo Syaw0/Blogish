@@ -10,11 +10,12 @@
     "server:dev": "nodemon",
     "server:build": "NODE_ENV=production npm run server",
     "lint": "next lint",
-    "test": "jest",
+    "test": "npm run test:component &&npm run test:pages &&npm run test:db &&npm run test:server ",
     "prettier": "npx prettier . -c -w",
     "test:component": "npx jest ./src/components",
     "test:pages": "npx jest ./src/__test__/",
-    "test:db": "npx jest --forceExit --testTimeout=50000 --config=./jest.config.node.ts ./tests/db/db.test.ts"
+    "test:db": "npx jest --forceExit --testTimeout=50000 --config=./jest.config.node.ts ./tests/db/db.test.ts",
+    "test:server": "npx jest --forceExit --testTimeout=50000 --config=./jest.config.node.ts ./tests/server/"
   },
   "dependencies": {
     "@next/font": "13.1.2",

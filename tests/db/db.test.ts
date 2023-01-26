@@ -20,7 +20,7 @@ describe("Test : DB", () => {
   afterAll(async () => {
     await mariaClient.end();
     await redisClient.quit();
-    killContainers();
+    // killContainers();
   });
   it("Test If Database Created ", async () => {
     const databases = await mariaClient.query("SHOW DATABASES");

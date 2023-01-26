@@ -8,6 +8,9 @@ const publishNewArticle = async ({
 }: any) => {
   let con;
   try {
+    if (!redisClient.isOpen || !redisClient.isReady) {
+      await redisClient.connect();
+    }
     let publishDate = new Date();
     let compareDate =
       publishDate.getFullYear() +
@@ -33,9 +36,7 @@ const publishNewArticle = async ({
         newPost.map((post: any) => post.postId)
       );
     }
-    console.log(id, postDetail);
-    const redisRes = await redisClient.set(`${id}`, postDetail);
-    console.log("this is redis", redisRes);
+    await redisClient.set(`${id}`, postDetail);
     return {
       status: true,
       msg: "successfully Publish Article",
