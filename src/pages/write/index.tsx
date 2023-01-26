@@ -54,7 +54,6 @@ export const getServerSideProps: GetServerSideProps = async ({
       return { redirect: { destination: "/404", permanent: false } };
     }
     let postDetail = await getPostContent(query.id);
-    console.log(postDetail);
     if (postDetail.status) {
       post.data.postDetail = postDetail.data;
     }
