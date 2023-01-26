@@ -1,3 +1,4 @@
+import getUser from "../../db/util/getUser";
 import { redisClient } from "../../db/dbController";
 
 const checkSession = async (cookie: any) => {
@@ -7,9 +8,18 @@ const checkSession = async (cookie: any) => {
 
   const session = cookie.session;
   try {
+    if (!redisClient.isOpen || !redisClient.isReady) {
+      await redisClient.connect();
+      await redisClient.select(2);
+    }
     const check = await redisClient.get(session);
     if (check != null) {
-      return { status: true };
+      const userData = await getUser(check);
+      if (userData.status) {
+        return { status: true, msg: "ok", data: userData.data };
+      } else {
+        return { status: false, msg: "error during get logged user data" };
+      }
     }
     return { status: false };
   } catch (err) {

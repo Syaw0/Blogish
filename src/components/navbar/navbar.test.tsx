@@ -39,7 +39,7 @@ describe("Component Test : Navbar", () => {
     render(<CustomParent isLogin={true} />, { wrapper: MemoryRouterProvider });
     const profile = screen.getByTestId("navProfile");
     fireEvent.click(profile);
-    expect(mockRouter.asPath).toEqual("/me");
+    expect(mockRouter.asPath).toEqual(`/user/${fakePost.author.id}`);
   });
 
   it("if click on the write button navigate to write page", () => {

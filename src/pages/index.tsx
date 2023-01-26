@@ -1,10 +1,10 @@
 import Home from "../components/pageComponents/home/home";
 import Head from "next/head";
 import { GetServerSideProps, GetServerSidePropsResult } from "next";
-import { fakePost } from "../shared/fakePost";
 import { Provider } from "react-redux";
 import makeStore from "../store/home/homeStore";
 import getPostList from "../../db/util/getPostList";
+import checkSession from "../../server/util/checkSession";
 
 export default function HomePage({ ...params }: MainPagePropsType) {
   return (
@@ -21,9 +21,22 @@ export default function HomePage({ ...params }: MainPagePropsType) {
   );
 }
 
-export const getServerSideProps: GetServerSideProps = async (): Promise<
-  GetServerSidePropsResult<MainPagePropsType>
-> => {
+export const getServerSideProps: GetServerSideProps = async ({
+  req,
+}): Promise<GetServerSidePropsResult<MainPagePropsType>> => {
+  const props = {
+    isLogin: false,
+    profileData: {
+      name: "",
+      profileUrl: "",
+      id: "",
+    },
+  };
+  const isLogged = await checkSession(req.cookies);
+  if (isLogged.status) {
+    props.isLogin = true;
+    props.profileData = isLogged.data;
+  }
   const posts = await getPostList(0);
 
   if (!posts.status) {
@@ -37,9 +50,8 @@ export const getServerSideProps: GetServerSideProps = async (): Promise<
 
   return {
     props: {
-      isLogin: true,
       posts: posts.data,
-      profileData: { ...fakePost.author },
+      ...props,
     },
   };
 };
