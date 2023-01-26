@@ -9,6 +9,7 @@ import getPost from "../../../../db/util/getPost";
 import getUser from "../../../../db/util/getUser";
 import getSimilarPosts from "../../../../db/util/getSimilarPost";
 import getPostContent from "../../../../db/util/getPostContent";
+import checkSession from "../../../../server/util/checkSession";
 
 const PostPage = ({ ...params }: PostPagePropsType) => {
   const { postHead } = params.post;
@@ -27,7 +28,22 @@ const PostPage = ({ ...params }: PostPagePropsType) => {
 
 export const getServerSideProps: GetServerSideProps = async ({
   params,
+  req,
 }): Promise<GetServerSidePropsResult<any>> => {
+  const props = {
+    isLogin: false,
+    profileData: {
+      name: "",
+      profileUrl: "",
+      id: "",
+    },
+  };
+  const isLogged = await checkSession(req.cookies);
+  if (isLogged.status) {
+    props.isLogin = true;
+    props.profileData = isLogged.data;
+  }
+
   const post = await getPost(params && params.id);
   if (!post.status) {
     return { redirect: { destination: "/404", permanent: false } };
@@ -36,7 +52,6 @@ export const getServerSideProps: GetServerSideProps = async ({
   const user = await getUser(authorId);
   const similarPost = await getSimilarPosts(authorId, post.data.id);
   const postContent = await getPostContent(params && params.id);
-  console.log(postContent);
   if (!postContent.status) {
     return { redirect: { destination: "/404", permanent: false } };
   }
@@ -49,8 +64,7 @@ export const getServerSideProps: GetServerSideProps = async ({
   );
   return {
     props: {
-      profileData: fakePost.author,
-      isLogin: true,
+      ...props,
       post: post.data,
       similar: similarPost.data,
     },

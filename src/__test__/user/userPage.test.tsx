@@ -3,6 +3,7 @@ import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
 import { fakePost, fakeUser } from "../../shared/fakePost";
 
+jest.mock("../../../server/util/checkSession.ts", () => jest.fn());
 jest.mock("../../../db/util/getUserPosts.ts", () => jest.fn(() => {}));
 jest.mock("../../../db/util/getUser.ts", () => jest.fn(() => {}));
 jest.mock("next/router", () => require("next-router-mock"));

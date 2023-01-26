@@ -6,6 +6,7 @@ import { Provider } from "react-redux";
 import makeStore from "../../../store/user/userStore";
 import getUser from "../../../../db/util/getUser";
 import getUserPosts from "../../../../db/util/getUserPosts";
+import checkSession from "../../../../server/util/checkSession";
 const UserPage = ({ ...params }: UserPagePropsType) => {
   const { name } = params.user;
   return (
@@ -34,7 +35,21 @@ posts.map((p: any, i) => {
 
 export const getServerSideProps: GetServerSideProps = async ({
   params,
+  req,
 }): Promise<GetServerSidePropsResult<UserPagePropsType>> => {
+  const props = {
+    isLogin: false,
+    profileData: {
+      name: "",
+      profileUrl: "",
+      id: "",
+    },
+  };
+  const isLogged = await checkSession(req.cookies);
+  if (isLogged.status) {
+    props.isLogin = true;
+    props.profileData = isLogged.data;
+  }
   const user = await getUser(params && params.id);
   const posts = await getUserPosts(params && params.id);
 
@@ -49,10 +64,9 @@ export const getServerSideProps: GetServerSideProps = async ({
 
   return {
     props: {
+      ...props,
       posts: posts.data,
-      isLogin: true,
       user: user.data,
-      profileData: fakePost.author,
     },
   };
 };

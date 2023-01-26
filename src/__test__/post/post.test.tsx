@@ -4,6 +4,7 @@ import { render, screen } from "@testing-library/react";
 import { fakePost, fakeUser } from "../../shared/fakePost";
 
 jest.mock("../../../db/util/getUser.ts", () => jest.fn(() => {}));
+jest.mock("../../../server/util/checkSession.ts", () => jest.fn());
 jest.mock("../../../db/util/getSimilarPost.ts", () => jest.fn(() => {}));
 jest.mock("../../../db/util/getPost.ts", () => jest.fn(() => {}));
 jest.mock("../../../db/util/getPostContent.ts", () => jest.fn(() => {}));

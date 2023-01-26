@@ -10,8 +10,8 @@ const checkSession = async (cookie: any) => {
   try {
     if (!redisClient.isOpen || !redisClient.isReady) {
       await redisClient.connect();
-      await redisClient.select(2);
     }
+    await redisClient.select(2);
     const check = await redisClient.get(session);
     if (check != null) {
       const userData = await getUser(check);
