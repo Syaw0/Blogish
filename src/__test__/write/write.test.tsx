@@ -5,6 +5,7 @@ import { fakePost } from "../../shared/fakePost";
 import publishPost from "../../utils/publishPost";
 
 jest.mock("../../utils/publishPost");
+jest.mock("../../../server/util/checkSession.ts", () => jest.fn());
 jest.mock("../../../db/util/getPost.ts", () => jest.fn(() => {}));
 jest.mock("../../../db/util/getPostContent.ts", () => jest.fn(() => {}));
 jest.mock("next/router", () => require("next-router-mock"));

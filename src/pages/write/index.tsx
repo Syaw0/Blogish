@@ -1,11 +1,11 @@
 import Write from "../../components/pageComponents/write/write";
 import Head from "next/head";
 import { GetServerSideProps, GetServerSidePropsResult } from "next";
-import { fakeUser } from "../../shared/fakePost";
 import { Provider } from "react-redux";
 import makeStore from "../../store/write/writeStore";
 import getPost from "../../../db/util/getPost";
 import getPostContent from "../../../db/util/getPostContent";
+import checkSession from "../../../server/util/checkSession";
 
 const WritePage = ({ ...params }: WritePagePropsType) => {
   return (
@@ -24,7 +24,29 @@ const WritePage = ({ ...params }: WritePagePropsType) => {
 
 export const getServerSideProps: GetServerSideProps = async ({
   query,
+  req,
 }): Promise<GetServerSidePropsResult<WritePagePropsType>> => {
+  const props = {
+    isLogin: false,
+    profileData: {
+      name: "",
+      profileUrl: "",
+      id: "",
+    },
+  };
+  const isLogged = await checkSession(req.cookies);
+  if (isLogged.status) {
+    props.isLogin = true;
+    props.profileData = isLogged.data;
+  } else {
+    return {
+      redirect: {
+        destination: "/auth",
+        permanent: false,
+      },
+    };
+  }
+
   let post: any;
   if (query && query.edit && query.id != null) {
     post = await getPost(query.id);
@@ -45,12 +67,9 @@ export const getServerSideProps: GetServerSideProps = async ({
     post.data.id = null;
   }
 
-  const fake = fakeUser;
-  fake.id = "1";
   return {
     props: {
-      isLogin: true,
-      profileData: fake,
+      ...props,
       isEdit: query && query.edit == "true",
       postDetail: post.data.postDetail,
       postHead: post.data.postHead,
