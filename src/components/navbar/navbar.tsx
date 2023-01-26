@@ -84,6 +84,12 @@ const Navbar = ({ isLogin, profileData }: NavbarPropsType) => {
     }
   };
 
+  const navigateToWritePage = () => {
+    if (!/\/write/.test(location.pathname)) {
+      router.replace("/write");
+    }
+  };
+
   return (
     <div data-testid="navbar" ref={divRef} className={`${style.holder} `}>
       <div className={style.left}>
@@ -151,21 +157,24 @@ const Navbar = ({ isLogin, profileData }: NavbarPropsType) => {
               <IconLogout width="20" height="20" />
             </Button>
 
-            <Link data-testid="navWriteButton" href={"/write"}>
-              <Button
-                StartIcon={IconWrite}
-                variant="outlined"
-                className={style.writeButton}
-              >
-                write
-              </Button>
-            </Link>
+            <Button
+              testid="navWriteButton"
+              onClick={navigateToWritePage}
+              StartIcon={IconWrite}
+              variant="outlined"
+              className={style.writeButton}
+            >
+              write
+            </Button>
 
-            <Link href="/write">
-              <Button variant="shadow" className={style.writeIconButton}>
-                <IconWrite width="20" height="20" />
-              </Button>
-            </Link>
+            <Button
+              testid="navWriteIconButton"
+              onClick={navigateToWritePage}
+              variant="shadow"
+              className={style.writeIconButton}
+            >
+              <IconWrite width="20" height="20" />
+            </Button>
 
             <Link data-testid="navProfile" href={`/user/${profileData.id}`}>
               <Profile

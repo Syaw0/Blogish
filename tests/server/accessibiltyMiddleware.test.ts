@@ -6,6 +6,8 @@ import accessibilityMiddleware from "../../server/middleware/accessibilityMiddle
 import { SHA256 } from "crypto-js";
 import loginRoute from "../../server/routes/login";
 
+// TODO initial db on server test
+
 const app = express();
 app.use(cookieParser());
 app.use(bodyParser.json());
