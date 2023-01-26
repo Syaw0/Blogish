@@ -14,7 +14,7 @@ const loginRoute = async (req: Request, res: Response) => {
       result.data.userId
     );
     if (!setSessionKeyResult.status) {
-      res.send(setSessionKeyResult);
+      return res.send(setSessionKeyResult);
     }
     res.cookie("session", hashedEmail, {
       secure: true,

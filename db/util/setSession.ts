@@ -1,8 +1,10 @@
 import { redisClient } from "../dbController";
 
 const setSession = async (hashedEmail: any, id: any) => {
-  console.log(id);
   try {
+    if (!redisClient.isOpen || !redisClient.isReady) {
+      await redisClient.connect();
+    }
     await redisClient.select(2);
     await redisClient.set(`${hashedEmail}`, id);
     return {
