@@ -1,7 +1,10 @@
 import { redisClient } from "../dbController";
 
-const removeSession = async (hashedEmail: any, id: any) => {
+const removeSession = async (hashedEmail: any) => {
   try {
+    if (!redisClient.isOpen || !redisClient.isReady) {
+      await redisClient.connect();
+    }
     await redisClient.select(2);
     const result = await redisClient.del(`${hashedEmail}`);
     if (result == 1) {

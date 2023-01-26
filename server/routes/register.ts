@@ -9,7 +9,6 @@ const register = async (req: Request, res: Response) => {
   if (!result.status) {
     return res.send(result);
   }
-
   const hashedEmail = SHA256(email).toString();
   const setSessionKeyResult = await setSession(hashedEmail, result.data.userId);
   if (!setSessionKeyResult.status) {
