@@ -110,7 +110,9 @@ describe("Test : DB", () => {
       (date.getUTCMonth() == 0 ? "01" : date.getUTCMonth()) +
       "-" +
       date.getUTCDate();
-    const authorId = "4";
+    const authorId = "1";
+    const postId1 = 1010;
+    const postId2 = 1111;
 
     // here redis need post id to store detail of post
     // when we push new post to db we do not specify id of it
@@ -118,14 +120,31 @@ describe("Test : DB", () => {
     // larger id to find id of post
 
     await mariaClient.query(
-      "INSERT INTO blogish.posts (postHead,postSubhead,tagName,publishDate,author) VALUES(?,?,?,?,?)",
-      ["This is Headline", "This is description", "health", date, authorId]
+      "INSERT INTO blogish.posts (postId,postHead,postSubhead,tagName,publishDate,author) VALUES(?,?,?,?,?,?)",
+      [
+        postId1,
+        "This is Headline",
+        "This is description",
+        "health",
+        date,
+        authorId,
+      ]
     );
 
     await mariaClient.query(
-      "INSERT INTO blogish.posts (postHead,postSubhead,tagName,publishDate,author) VALUES(?,?,?,?,?)",
-      ["This is Headline2", "This is description2", "health2", date, authorId]
+      "INSERT INTO blogish.posts (postId,postHead,postSubhead,tagName,publishDate,author) VALUES(?,?,?,?,?,?)",
+      [
+        postId2,
+        "This is Headline2",
+        "This is description2",
+        "health2",
+        date,
+        authorId,
+      ]
     );
+    await redisClient.select(1);
+    await redisClient.set(`${postId1}`, "text content of Article");
+    await redisClient.set(`${postId2}`, "text content of Article2");
 
     let post = await mariaClient.query(
       `SELECT * FROM blogish.posts WHERE author=${authorId} and publishDate>=${date}`
@@ -136,15 +155,13 @@ describe("Test : DB", () => {
     if (post.length > 1) {
       id = Math.max.apply(
         null,
-        post.map((p: any) => p.id)
+        post.map((p: any) => p.postId)
       );
     } else {
       id = post[0];
     }
 
-    // redis must wait until we find post id
-    await redisClient.set(`${id}`, "text content of Article");
     const articleData = await redisClient.get(`${id}`);
-    expect(articleData).toEqual("text content of Article");
+    expect(articleData).toEqual("text content of Article2");
   });
 });
