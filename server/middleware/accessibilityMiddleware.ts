@@ -1,4 +1,5 @@
 import { NextFunction, Request, Response } from "express";
+import checkLoggedUserAccess from "../util/checkLoggedUserAccess";
 import checkGuestUserAccess from "../util/checkGuestUserAccess";
 import checkSession from "../util/checkSession";
 
@@ -10,11 +11,12 @@ const accessibilityMiddleware = async (
   const result = await checkSession(req.cookies);
   if (!result.status) {
     if (checkGuestUserAccess(req.originalUrl)) {
-      console.log("redirect?");
       return res.redirect("/");
     }
   } else if (result.status) {
-    // if user is logged
+    if (checkLoggedUserAccess(req.originalUrl)) {
+      return res.redirect("/");
+    }
   }
 
   next();

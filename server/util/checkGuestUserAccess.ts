@@ -1,5 +1,3 @@
-import { NextFunction, Request, Response } from "express";
-
 const guestRegex = /\/write|\/publish/;
 
 const checkGuestUserAccess = (url: string) => {
