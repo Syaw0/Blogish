@@ -2,7 +2,9 @@ import { redisClient } from "../dbController";
 
 const getPostContent = async (postId: any) => {
   try {
-    await redisClient.connect();
+    if (!redisClient.isReady || !redisClient.isOpen) {
+      await redisClient.connect();
+    }
     await redisClient.select(1);
     const content = await redisClient.get(`${postId}`);
     if (content != null) {
@@ -17,12 +19,11 @@ const getPostContent = async (postId: any) => {
       msg: "content are null",
     };
   } catch (err) {
+    console.log(err);
     return {
       status: false,
       msg: "error during perform action",
     };
-  } finally {
-    await redisClient.quit();
   }
 };
 

@@ -8,7 +8,6 @@ const publishChangeToArticle = async ({
 }: any) => {
   let con;
   try {
-    await redisClient.connect();
     await redisClient.select(1);
     con = await pool.getConnection();
     con.query(
@@ -29,7 +28,6 @@ const publishChangeToArticle = async ({
   } finally {
     if (con != null) {
       await con.end();
-      await redisClient.quit();
     }
   }
 };

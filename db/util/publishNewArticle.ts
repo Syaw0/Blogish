@@ -15,7 +15,6 @@ const publishNewArticle = async ({
       (publishDate.getUTCMonth() == 0 ? "01" : publishDate.getUTCMonth()) +
       "-" +
       (publishDate.getUTCDate() == 0 ? "01" : publishDate.getUTCDate());
-    await redisClient.connect();
     await redisClient.select(1);
     con = await pool.getConnection();
     await con.query(
@@ -51,7 +50,6 @@ const publishNewArticle = async ({
   } finally {
     if (con != null) {
       await con.end();
-      await redisClient.quit();
     }
   }
 };

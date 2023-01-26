@@ -62,14 +62,10 @@ describe("Test : DB", () => {
   });
 
   it("Test Insert To MARIADB : User ", async () => {
+    const hashedPassword = SHA256("123123123").toString();
     await mariaClient.query(
       "INSERT INTO blogish.users (name,description,password,email) VALUES(?,?,?,?)",
-      [
-        "Siavash",
-        "my bioGraphy",
-        SHA256("123123").toString(),
-        "someMagicEmail@gmail.com",
-      ]
+      ["Siavash", "my bioGraphy", hashedPassword, "someMagicEmail@gmail.com"]
     );
     let user = await mariaClient.query(
       'SELECT * FROM blogish.users WHERE name="Siavash" and email="someMagicEmail@gmail.com"'
@@ -80,7 +76,7 @@ describe("Test : DB", () => {
     expect(user.email).toEqual("someMagicEmail@gmail.com");
     expect(user.description).toEqual("my bioGraphy");
     expect(user.profileUrl).toEqual("/prof/default.png");
-    expect(user.password).toEqual(SHA256("123123").toString());
+    expect(user.password).toEqual(hashedPassword);
     // expect(user.id).toEqual('4') //! this is uncertain!
   });
 

@@ -18,10 +18,14 @@ const signup = async (password: string, email: string) => {
       password,
       email,
     ]);
+
+    const newUser = await con.query(
+      `select * from users where email='${email}' and password='${password}'`
+    );
     return {
       status: true,
       msg: "your account created successfully",
-      data: {},
+      data: newUser[0],
     };
   } catch (err) {
     console.log(err);

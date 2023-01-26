@@ -36,6 +36,7 @@ export const getServerSideProps: GetServerSideProps = async ({
   const user = await getUser(authorId);
   const similarPost = await getSimilarPosts(authorId, post.data.id);
   const postContent = await getPostContent(params && params.id);
+  console.log(postContent);
   if (!postContent.status) {
     return { redirect: { destination: "/404", permanent: false } };
   }
@@ -46,7 +47,6 @@ export const getServerSideProps: GetServerSideProps = async ({
   post.data.postDetail = convertor.makeHtml(
     postContent.data != null ? postContent.data : ""
   );
-  console.log(post);
   return {
     props: {
       profileData: fakePost.author,

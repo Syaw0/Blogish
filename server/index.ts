@@ -10,10 +10,14 @@ import setSession from "../db/util/setSession";
 import signup from "../db/util/signup";
 import publishChangeToArticle from "../db/util/publishChangeToArticle";
 import publishNewArticle from "../db/util/publishNewArticle";
+import accessibilityMiddleware from "./middleware/accessibilityMiddleware";
+import { redisClient } from "../db/dbController";
 
 const dev = process.env.NODE_ENV !== "production";
 const hostname = "localhost";
 const port = 3000;
+
+console.log("is it dev?", dev);
 
 const nextApp = next({ dev, hostname, port });
 const handle = nextApp.getRequestHandler();
@@ -21,10 +25,15 @@ const handle = nextApp.getRequestHandler();
 nextApp
   .prepare()
   .then(async () => {
+    await redisClient.connect();
+    await redisClient.select(2);
     const app = express();
     app.use(express.static(__dirname + "/static"));
     app.use(bodyParser.json());
     app.use(cookieParser());
+
+    app.use(accessibilityMiddleware);
+
     app.get("/prof/:id", (req, res) => {
       const { id } = req.params;
       const s = fs.existsSync(__dirname + `/static/profile/${id}.png`);
@@ -41,7 +50,10 @@ nextApp
       if (result.status) {
         const { email } = result.data;
         const hashedEmail = SHA256(email).toString();
-        const setSessionKeyResult = await setSession(hashedEmail);
+        const setSessionKeyResult = await setSession(
+          hashedEmail,
+          result.data.userId
+        );
         if (!setSessionKeyResult.status) {
           res.send(setSessionKeyResult);
         }
@@ -62,7 +74,10 @@ nextApp
       }
 
       const hashedEmail = SHA256(email).toString();
-      const setSessionKeyResult = await setSession(hashedEmail);
+      const setSessionKeyResult = await setSession(
+        hashedEmail,
+        result.data.userId
+      );
       if (!setSessionKeyResult.status) {
         res.send(setSessionKeyResult);
       }

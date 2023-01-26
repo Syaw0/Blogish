@@ -1,5 +1,4 @@
 import { pool } from "../dbController";
-import getUserPosts from "./getUserPosts";
 
 const getUser = async (id: any) => {
   let con;
