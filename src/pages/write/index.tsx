@@ -67,6 +67,16 @@ export const getServerSideProps: GetServerSideProps = async ({
     post.data.id = null;
   }
 
+  // ! this check is so important , if is fail we must redirect to 500Error page
+  if (query.edit && props.profileData.id !== post.data.author) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: true, //* user has not access to edit post when its not his post
+      },
+    };
+  }
+
   return {
     props: {
       ...props,

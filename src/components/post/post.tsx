@@ -59,7 +59,7 @@ const Post = ({
             )}
           </div>
         </Link>
-        {profileData.id === authorObj.id && (
+        {profileData.id == authorObj.id && (
           <Menu
             items={[{ text: "Edit article", onClick: handlePostEditButton }]}
           />

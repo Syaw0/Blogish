@@ -7,6 +7,7 @@ import bodyParser from "body-parser";
 import register from "../../server/routes/register";
 import logout from "../../server/routes/logout";
 import cookieParser from "cookie-parser";
+import publish from "../../server/routes/publish";
 
 // TODO here we need to initial DB's
 // in my environment i have it already running!
@@ -18,6 +19,7 @@ app.get("/getMorePost", getMorePosts);
 app.post("/login", loginRoute);
 app.post("/register", register);
 app.get("/logout", logout);
+app.post("/publish", publish);
 
 describe("TEST SERVER :", () => {
   describe("Test End Point : /getMorePost", () => {
@@ -131,7 +133,7 @@ describe("TEST SERVER :", () => {
     });
   });
 
-  describe.only("Test End Point : /logout", () => {
+  describe("Test End Point : /logout", () => {
     const email = "someMagicEmail@gmail.com";
     const pass = "123123123";
     const hashedPassword = SHA256(pass).toString();
@@ -155,6 +157,12 @@ describe("TEST SERVER :", () => {
       expect(headers["set-cookie"][0]).toContain(
         `session=${SHA256(email).toString()}; Max-Age=0`
       );
+    });
+  });
+
+  describe.only("Test End Point : /publish", () => {
+    it("lets publish new post", async () => {
+      const res = await request(app).post("/publish");
     });
   });
 });

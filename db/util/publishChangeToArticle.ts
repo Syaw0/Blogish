@@ -8,6 +8,9 @@ const publishChangeToArticle = async ({
 }: any) => {
   let con;
   try {
+    if (!redisClient.isOpen || !redisClient.isReady) {
+      await redisClient.connect();
+    }
     await redisClient.select(1);
     con = await pool.getConnection();
     con.query(
