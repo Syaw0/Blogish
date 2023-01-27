@@ -1,0 +1,23 @@
+.holder {
+  width: 100%;
+}
+
+.layout {
+  padding-top: 1rem;
+}
+
+.topRightButton {
+  min-width: fit-content;
+  box-shadow: none;
+}
+
+.topRightHolder {
+  position: relative;
+}
+
+.topRightHolder div {
+  position: absolute;
+  width: max-content;
+  top: 1.3rem;
+  right: 0;
+}

@@ -1,0 +1,124 @@
+.holder {
+  width: 100%;
+  margin-top: 1rem;
+}
+.holder > div p {
+  white-space: nowrap;
+  padding-right: 1rem;
+  width: 10rem;
+  font-family: var(--font-head);
+}
+
+.headInput input,
+.subHeadInput input,
+.bodyInput textarea {
+  border: none;
+  border-bottom: 1px solid var(--onBg100);
+  width: 100%;
+}
+
+.headInput,
+.subHeadInput,
+.bodyInput {
+  width: 100%;
+}
+.headInput input:focus,
+.subHeadInput input:focus,
+.bodyInput textarea:focus {
+  background-color: var(--onBg50);
+  border-color: var(--onBg);
+  box-shadow: var(--shadow1dp);
+}
+
+.head,
+.middle,
+.bottom {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+}
+
+.head {
+  margin-bottom: 3rem;
+}
+
+.head p {
+  font-size: var(--headline4);
+  line-height: var(--headline4_lineHeight);
+}
+
+.head input {
+  font-weight: 400;
+  font-family: var(--font-head);
+  font-size: var(--headline4);
+  line-height: var(--headline4_lineHeight);
+}
+
+.middle {
+  margin-bottom: 4rem;
+}
+
+.middle p {
+  font-size: var(--headline6);
+  line-height: var(--headline6_lineHeight);
+}
+
+.middle input {
+  font-size: var(--headline6);
+  line-height: var(--headline6_lineHeight);
+  color: var(--onBg900);
+  font-weight: 400;
+}
+
+.bottom {
+  display: flex;
+  align-items: flex-start;
+}
+
+.bottom textarea {
+  border: 1px solid var(--onBg100);
+  height: 75vh;
+  font-family: var(--font-sub);
+}
+
+@media (max-width: 800px) {
+  .head,
+  .middle,
+  .bottom {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+  .holder > div p {
+    margin-bottom: 0.5rem;
+    color: var(--onBg800);
+  }
+}
+
+@media (max-width: 450px) {
+  .head p {
+    font-size: var(--headline5);
+    line-height: var(--headline5_lineHeight);
+  }
+
+  .head input {
+    font-weight: 400;
+    font-family: var(--font-head);
+    font-size: var(--headline5);
+    line-height: var(--headline5_lineHeight);
+  }
+
+  .middle p {
+    font-size: var(--subHead1);
+    line-height: var(--subHead1_lineHeight);
+  }
+
+  .middle input {
+    font-size: var(--subHead1);
+    line-height: var(--subHead1_lineHeight);
+    color: var(--onBg900);
+    font-weight: 400;
+  }
+}

@@ -1,0 +1,66 @@
+.holder {
+  width: 100%;
+  padding: 3rem 0;
+  margin-bottom: 3rem;
+  border-bottom: 3px solid var(--onBg100);
+  padding-right: 1rem;
+}
+
+.head {
+  font-size: var(--headline2);
+  line-height: var(--headline3_lineHeight);
+  letter-spacing: 0px;
+  font-family: var(--font-head);
+  margin-bottom: 2rem;
+}
+
+.mdHolder :is(h1, h2, h3, h4, h5, h6) {
+  font-family: var(--font-head);
+  color: var(--onBg900);
+  padding: 2rem 0;
+}
+
+.mdHolder p {
+  font-family: var(--font-sub);
+  color: var(--onBg900);
+  font-size: var(--headline6);
+  line-height: var(--headline5_lineHeight);
+}
+
+.mdHolder :is(ul, ol) {
+  padding: 1rem 0rem 1rem 1rem;
+}
+
+.mdHolder :is(ul li, ol li) {
+  color: var(--onBg900);
+  font-size: var(--headline6);
+  line-height: var(--headline5_lineHeight);
+  font-family: var(--font-sub);
+  padding-bottom: 0.5rem;
+}
+
+.mdHolder a {
+  color: var(--tertiaryOnCon);
+  background-color: var(--tertiaryCon);
+  padding: 0.2rem 0.5rem;
+  border-radius: 5px;
+}
+
+.mdHolder a:hover {
+  color: var(--tertiaryCon);
+  background-color: var(--tertiaryOnCon);
+}
+
+.subhead {
+  border-bottom: 3px solid var(--onBg100);
+  padding-bottom: 2rem;
+}
+
+@media (max-width: 550px) {
+  .head {
+    font-size: var(--headline4-5);
+    line-height: var(--headline4-5_lineHeight);
+
+    letter-spacing: 0px;
+  }
+}

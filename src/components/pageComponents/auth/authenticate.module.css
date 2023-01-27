@@ -1,0 +1,73 @@
+.holder {
+  background-color: var(--bg);
+  width: 24rem;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.holder > * {
+  margin-bottom: 1rem;
+}
+
+.logo {
+  width: 100px;
+  height: 100px;
+}
+
+.header {
+  color: var(--onBg900);
+}
+
+.subhead {
+  color: var(--onBg900);
+}
+
+.textInput {
+  width: 100%;
+}
+.passwordInput {
+  width: 100%;
+}
+
+.button {
+  width: 100%;
+}
+
+.subButton {
+  color: var(--onBg500);
+  display: flex;
+  width: 100%;
+}
+
+.subButton2 {
+  color: var(--onBg700);
+  margin-left: 0.4rem;
+  font-weight: 600;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.subButton2:hover {
+  color: var(--onBg);
+}
+
+@media (max-width: 450px) {
+  .header {
+    font-size: var(--headline3);
+    line-height: var(--headline3);
+    text-align: center;
+  }
+
+  .holder {
+    width: 100%;
+    padding: 0 1rem;
+  }
+
+  .subButton2,
+  .subButton {
+    font-size: var(--subhead3);
+  }
+}

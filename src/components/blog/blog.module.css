@@ -1,0 +1,26 @@
+.holder {
+  width: 100%;
+}
+.blogTop {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--onBg100);
+}
+
+.blogTop div:nth-child(1) {
+  width: 70px;
+  height: 70px;
+}
+
+.blogTop div:nth-child(2) p:nth-child(1) {
+  font-size: var(--headline4);
+  line-height: var(--headline4_lineHeight);
+  font-family: var(--font-head);
+  padding-left: 0.6rem;
+}
+
+.blogTop div:nth-child(2) p:nth-child(2) {
+  padding-left: 0.6rem;
+}
