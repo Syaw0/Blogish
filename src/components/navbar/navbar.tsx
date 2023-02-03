@@ -10,6 +10,7 @@ import Profile from "../profile/profile";
 import style from "./navbar.module.css";
 import IconLogout from "../../assets/icons/iconLogout";
 import logoutAndRemoveSession from "../../utils/logout";
+import SwitchTheme from "../switchTheme/switchTheme";
 
 interface NavbarPropsType {
   isLogin: boolean;
@@ -116,6 +117,7 @@ const Navbar = ({ isLogin, profileData }: NavbarPropsType) => {
         />
       </div>
       <div className={style.right}>
+        <SwitchTheme />
         {/* // TODO write icon button component and reuse that */}
         <Button
           onClick={() => {

@@ -166,3 +166,119 @@
   --subhead3_lineHeight: 18px;
   --button_lineHeight: 20px;
 }
+
+.color_dark {
+  --bg: rgba(26, 28, 27, 1);
+  --bg900: rgba(26, 28, 27, 0.9);
+  --bg800: rgba(26, 28, 27, 0.8);
+  --bg700: rgba(26, 28, 27, 0.7);
+  --bg600: rgba(26, 28, 27, 0.6);
+  --bg500: rgba(26, 28, 27, 0.5);
+  --bg400: rgba(26, 28, 27, 0.4);
+  --bg300: rgba(26, 28, 27, 0.3);
+  --bg200: rgba(26, 28, 27, 0.2);
+  --bg100: rgba(26, 28, 27, 0.1);
+  --bg50: rgba(26, 28, 27, 0.05);
+
+  --onBg: rgb(226, 227, 225);
+  --onBg900: rgba(226, 227, 225, 0.9);
+  --onBg800: rgba(226, 227, 225, 0.8);
+  --onBg700: rgba(226, 227, 225, 0.7);
+  --onBg600: rgba(226, 227, 225, 0.6);
+  --onBg500: rgba(226, 227, 225, 0.5);
+  --onBg400: rgba(226, 227, 225, 0.4);
+  --onBg300: rgba(226, 227, 225, 0.3);
+  --onBg200: rgba(226, 227, 225, 0.2);
+  --onBg100: rgba(226, 227, 225, 0.1);
+
+  --primaryCon: rgb(0, 80, 70);
+  --primaryCon900: rgba(0, 80, 70, 0.9);
+  --primaryCon800: rgba(0, 80, 70, 0.8);
+  --primaryCon700: rgba(0, 80, 70, 0.7);
+  --primaryCon600: rgba(0, 80, 70, 0.6);
+  --primaryCon500: rgba(0, 80, 70, 0.5);
+  --primaryCon400: rgba(0, 80, 70, 0.4);
+  --primaryCon300: rgba(0, 80, 70, 0.3);
+  --primaryCon200: rgba(0, 80, 70, 0.2);
+  --primaryCon100: rgba(0, 80, 70, 0.1);
+
+  --primaryOnCon: rgb(164, 241, 225);
+  --primaryOnCon900: rgba(164, 241, 225, 0.9);
+  --primaryOnCon800: rgba(164, 241, 225, 0.8);
+  --primaryOnCon700: rgba(164, 241, 225, 0.7);
+  --primaryOnCon600: rgba(164, 241, 225, 0.6);
+  --primaryOnCon500: rgba(164, 241, 225, 0.5);
+  --primaryOnCon400: rgba(164, 241, 225, 0.4);
+  --primaryOnCon300: rgba(164, 241, 225, 0.3);
+  --primaryOnCon200: rgba(164, 241, 225, 0.2);
+  --primaryOnCon100: rgba(164, 241, 225, 0.1);
+
+  --tertiaryCon: rgb(55, 73, 87);
+  --tertiaryCon900: rgba(55, 73, 87, 0.9);
+  --tertiaryCon800: rgba(55, 73, 87, 0.8);
+  --tertiaryCon700: rgba(55, 73, 87, 0.7);
+  --tertiaryCon600: rgba(55, 73, 87, 0.6);
+  --tertiaryCon500: rgba(55, 73, 87, 0.5);
+  --tertiaryCon400: rgba(55, 73, 87, 0.4);
+  --tertiaryCon300: rgba(55, 73, 87, 0.3);
+  --tertiaryCon200: rgba(55, 73, 87, 0.2);
+  --tertiaryCon100: rgba(55, 73, 87, 0.1);
+
+  --tertiaryOnCon: rgb(210, 229, 247);
+  --tertiaryOnCon900: rgba(210, 229, 247, 0.9);
+  --tertiaryOnCon800: rgba(210, 229, 247, 0.8);
+  --tertiaryOnCon700: rgba(210, 229, 247, 0.7);
+  --tertiaryOnCon600: rgba(210, 229, 247, 0.6);
+  --tertiaryOnCon500: rgba(210, 229, 247, 0.5);
+  --tertiaryOnCon400: rgba(210, 229, 247, 0.4);
+  --tertiaryOnCon300: rgba(210, 229, 247, 0.3);
+  --tertiaryOnCon200: rgba(210, 229, 247, 0.2);
+  --tertiaryOnCon100: rgba(210, 229, 247, 0.1);
+
+  --gray: rgba(150, 150, 150, 1);
+  --gray900: rgba(150, 150, 150, 0.9);
+  --gray800: rgba(150, 150, 150, 0.8);
+  --gray700: rgba(150, 150, 150, 0.7);
+  --gray600: rgba(150, 150, 150, 0.6);
+  --gray500: rgba(150, 150, 150, 0.5);
+  --gray400: rgba(150, 150, 150, 0.4);
+  --gray300: rgba(150, 150, 150, 0.3);
+  --gray200: rgba(150, 150, 150, 0.2);
+  --gray100: rgba(150, 150, 150, 0.1);
+
+  --success: rgba(202, 241, 225, 1);
+  --onSuccess: rgba(14, 77, 9, 1);
+  --onSuccess500: rgba(14, 77, 9, 0.5);
+
+  --error: rgba(241, 202, 202, 1);
+  --error300: rgba(241, 202, 202, 0.3);
+  --onError: rgba(77, 9, 9, 1);
+  --onError500: rgba(77, 9, 9, 0.5);
+
+  --warn: rgba(241, 228, 202, 1);
+  --onWarn: rgba(77, 54, 9, 1);
+  --onWarn500: rgba(77, 54, 9, 0.5);
+
+  --radial: radial-gradient(
+      29.67% 64.18% at 82.5% 18.29%,
+      rgba(149, 221, 206, 0.2) 0%,
+      rgba(149, 221, 206, 0) 100%
+    ),
+    radial-gradient(
+      20.75% 46.99% at 21.86% 41.82%,
+      rgba(152, 168, 223, 0.2) 0%,
+      rgba(149, 220, 206, 0.00208333) 99.99%,
+      rgba(238, 238, 238, 0) 100%
+    ),
+    radial-gradient(
+      18.86% 52.82% at 35.83% 22.84%,
+      rgba(149, 221, 206, 0.2) 0%,
+      rgba(149, 221, 206, 0) 100%
+    ),
+    radial-gradient(
+      29.17% 65.45% at 77.49% 50%,
+      rgba(28, 60, 53, 0.2) 0%,
+      rgba(149, 221, 206, 0) 100%
+    ),
+    #1a1c1b;
+}

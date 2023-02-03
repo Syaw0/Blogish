@@ -1,3 +1,4 @@
+import ThemeProvider, { ThemeContext } from "../contexts/themeContext";
 import "@/styles/globals.css";
 import { Arvo, Lato } from "@next/font/google";
 import type { AppProps } from "next/app";
@@ -22,14 +23,16 @@ const lato = Lato({
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <div
-      className={`${lato.variable} ${arvo.variable} ${style.color_light} ${style.transitionToken} ${style.shadows} ${style.font_sizes} ${style.line_height} rootHolder`}
-    >
-      <Head>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      <Component {...pageProps} />
-    </div>
+    <ThemeProvider>
+      <div
+        className={`  ${lato.variable} ${arvo.variable} ${style.transitionToken} ${style.shadows} ${style.font_sizes} ${style.line_height} rootHolder`}
+      >
+        <Head>
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
+          <link rel="icon" href="/favicon.ico" />
+        </Head>
+        <Component {...pageProps} />
+      </div>
+    </ThemeProvider>
   );
 }
