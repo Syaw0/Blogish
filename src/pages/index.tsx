@@ -5,6 +5,7 @@ import { Provider } from "react-redux";
 import makeStore from "../store/home/homeStore";
 import getPostList from "../../db/util/getPostList";
 import checkSession from "../../server/util/checkSession";
+import getTheme from "../utils/getTheme";
 
 export default function HomePage({ ...params }: MainPagePropsType) {
   return (
@@ -23,6 +24,7 @@ export default function HomePage({ ...params }: MainPagePropsType) {
 
 export const getServerSideProps: GetServerSideProps = async ({
   req,
+  res,
 }): Promise<GetServerSidePropsResult<MainPagePropsType>> => {
   const props = {
     isLogin: false,
@@ -48,8 +50,11 @@ export const getServerSideProps: GetServerSideProps = async ({
     };
   }
 
+  const theme = getTheme(req, res);
+
   return {
     props: {
+      theme,
       posts: posts.data,
       ...props,
     },

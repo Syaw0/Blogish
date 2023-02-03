@@ -12,12 +12,17 @@ jest.mock("next/router", () => require("next-router-mock"));
 const mockLogout = logout as jest.Mock;
 
 const CustomParent = ({ isLogin }: { isLogin: boolean }) => {
-  return <Navbar isLogin={isLogin} profileData={fakePost.author} />;
+  return (
+    <>
+      <Navbar isLogin={isLogin} profileData={fakePost.author} />
+    </>
+  );
 };
 
 describe("Component Test : Navbar", () => {
   it("check if given data is correct", () => {
     render(<CustomParent isLogin={false} />);
+    expect(screen.getByTestId("themeSwitch")).toBeInTheDocument();
     expect(screen.getByTestId("navAuthButton")).toBeInTheDocument();
     expect(screen.getByTestId("navSearchBox")).toBeInTheDocument();
     expect(screen.getByTestId("navIconLogo")).toBeInTheDocument();
@@ -29,6 +34,7 @@ describe("Component Test : Navbar", () => {
   });
   it("if user is login and its session is store on the server show profile and write button", () => {
     render(<CustomParent isLogin={true} />);
+    expect(screen.getByTestId("themeSwitch")).toBeInTheDocument();
     expect(screen.getByTestId("navWriteButton")).toBeInTheDocument();
     expect(screen.getByTestId("navProfile")).toBeInTheDocument();
     expect(screen.getByTestId("navbarLogoutButton")).toBeInTheDocument();

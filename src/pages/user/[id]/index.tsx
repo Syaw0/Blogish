@@ -7,6 +7,7 @@ import makeStore from "../../../store/user/userStore";
 import getUser from "../../../../db/util/getUser";
 import getUserPosts from "../../../../db/util/getUserPosts";
 import checkSession from "../../../../server/util/checkSession";
+import getTheme from "../../../utils/getTheme";
 const UserPage = ({ ...params }: UserPagePropsType) => {
   const { name } = params.user;
   return (
@@ -36,6 +37,7 @@ posts.map((p: any, i) => {
 export const getServerSideProps: GetServerSideProps = async ({
   params,
   req,
+  res,
 }): Promise<GetServerSidePropsResult<UserPagePropsType>> => {
   const props = {
     isLogin: false,
@@ -61,9 +63,10 @@ export const getServerSideProps: GetServerSideProps = async ({
       },
     };
   }
-
+  const theme = getTheme(req, res);
   return {
     props: {
+      theme,
       ...props,
       posts: posts.data,
       user: user.data,

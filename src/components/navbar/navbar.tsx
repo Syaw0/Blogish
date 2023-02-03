@@ -3,13 +3,15 @@ import IconSearch from "../../assets/icons/iconSearch";
 import IconWrite from "../../assets/icons/iconWrite";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { ChangeEvent, useEffect, useRef, useState } from "react";
+import { ChangeEvent, useRef, useState } from "react";
 import Button from "../button/button";
 import TextInput from "../input/text/textInput";
 import Profile from "../profile/profile";
 import style from "./navbar.module.css";
 import IconLogout from "../../assets/icons/iconLogout";
 import logoutAndRemoveSession from "../../utils/logout";
+import SwitchTheme from "../switchTheme/switchTheme";
+import useControlNavbarStyles from "../../hooks/useControlNavbarStyles";
 
 interface NavbarPropsType {
   isLogin: boolean;
@@ -19,34 +21,7 @@ interface NavbarPropsType {
 const Navbar = ({ isLogin, profileData }: NavbarPropsType) => {
   const divRef: any = useRef(null);
 
-  //TODO may is better write hook for this:
-
-  useEffect(() => {
-    if (location.pathname != "/") {
-      divRef.current.style.background = "var(--bg)";
-      divRef.current.style.boxShadow = "var(--shadow2dp)";
-    }
-    let scrollEvent = () => {
-      const y = divRef.current.offsetTop;
-      if (y > 54) {
-        divRef.current.style.background = "var(--bg)";
-        divRef.current.style.boxShadow = "var(--shadow2dp)";
-      } else if (location.pathname == "/") {
-        divRef.current.style.background = "var(--radial)";
-        divRef.current.style.boxShadow = "none";
-      }
-    };
-
-    if (!isLogin) {
-      document.addEventListener("scroll", scrollEvent);
-    } else {
-      divRef.current.style.background = "var(--bg)";
-      divRef.current.style.boxShadow = "var(--shadow2dp)";
-    }
-    return () => {
-      document.removeEventListener("scroll", scrollEvent);
-    };
-  }, [isLogin]);
+  useControlNavbarStyles(divRef, isLogin);
 
   const logout = async () => {
     const data = await logoutAndRemoveSession(profileData!.id);
@@ -116,7 +91,7 @@ const Navbar = ({ isLogin, profileData }: NavbarPropsType) => {
         />
       </div>
       <div className={style.right}>
-        {/* // TODO write icon button component and reuse that */}
+        <SwitchTheme />
         <Button
           onClick={() => {
             if (location.pathname != "/search") {

@@ -1,0 +1,15 @@
+.holder {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  margin-right: 0.5rem;
+}
+
+.holder svg {
+  fill: var(--onBg700);
+}
+
+.holder svg:hover {
+  fill: var(--onBg900);
+}

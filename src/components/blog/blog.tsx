@@ -1,3 +1,4 @@
+import useHighlightCode from "../../hooks/useHighlightCode";
 import BlogMD from "../blogMd/blogMd";
 import PostHolder from "../postHolder/postHolder";
 import ProfileSummary from "../profileSummary/profileSummary";
@@ -17,6 +18,8 @@ const Blog = ({
   similar,
   postDetail,
 }: BlogPropsType) => {
+  useHighlightCode();
+
   return (
     <div className={style.holder}>
       <ProfileSummary
