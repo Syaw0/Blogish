@@ -6,6 +6,7 @@ import makeStore from "../../store/write/writeStore";
 import getPost from "../../../db/util/getPost";
 import getPostContent from "../../../db/util/getPostContent";
 import checkSession from "../../../server/util/checkSession";
+import Script from "next/script";
 
 const WritePage = ({ ...params }: WritePagePropsType) => {
   return (
@@ -14,6 +15,11 @@ const WritePage = ({ ...params }: WritePagePropsType) => {
         <title>Write a Article</title>
         <meta name="description" content="blogish Write Page" />
       </Head>
+
+      <Script
+        strategy="lazyOnload"
+        src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"
+      />
 
       <Provider store={makeStore(params)}>
         <Write {...params} />

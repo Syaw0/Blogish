@@ -10,6 +10,7 @@ import getUser from "../../../../db/util/getUser";
 import getSimilarPosts from "../../../../db/util/getSimilarPost";
 import getPostContent from "../../../../db/util/getPostContent";
 import checkSession from "../../../../server/util/checkSession";
+import Script from "next/script";
 
 const PostPage = ({ ...params }: PostPagePropsType) => {
   const { postHead } = params.post;
@@ -19,6 +20,10 @@ const PostPage = ({ ...params }: PostPagePropsType) => {
         <title>{postHead}</title>
         <meta name="description" content={`blogish Post ${postHead}`} />
       </Head>
+      <Script
+        strategy="lazyOnload"
+        src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"
+      />
       <Provider store={makeStore(params)}>
         <Post {...params} />
       </Provider>

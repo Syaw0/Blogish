@@ -71,4 +71,5 @@ declare global {
     query: string;
   }
 }
+
 export {};
