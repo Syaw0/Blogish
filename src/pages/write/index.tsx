@@ -7,6 +7,7 @@ import getPost from "../../../db/util/getPost";
 import getPostContent from "../../../db/util/getPostContent";
 import checkSession from "../../../server/util/checkSession";
 import Script from "next/script";
+import getTheme from "../../utils/getTheme";
 
 const WritePage = ({ ...params }: WritePagePropsType) => {
   return (
@@ -31,6 +32,7 @@ const WritePage = ({ ...params }: WritePagePropsType) => {
 export const getServerSideProps: GetServerSideProps = async ({
   query,
   req,
+  res,
 }): Promise<GetServerSidePropsResult<WritePagePropsType>> => {
   const props = {
     isLogin: false,
@@ -81,9 +83,10 @@ export const getServerSideProps: GetServerSideProps = async ({
       },
     };
   }
-
+  const theme = getTheme(req, res);
   return {
     props: {
+      theme,
       ...props,
       isEdit: query && query.edit == "true",
       postDetail: post.data.postDetail,

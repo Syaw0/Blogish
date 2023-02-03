@@ -1,5 +1,4 @@
 import Post from "../../../components/pageComponents/post/post";
-import { fakePost } from "../../../shared/fakePost";
 import { GetServerSideProps, GetServerSidePropsResult } from "next";
 import Head from "next/head";
 import showdown from "showdown";
@@ -11,6 +10,7 @@ import getSimilarPosts from "../../../../db/util/getSimilarPost";
 import getPostContent from "../../../../db/util/getPostContent";
 import checkSession from "../../../../server/util/checkSession";
 import Script from "next/script";
+import getTheme from "../../../utils/getTheme";
 
 const PostPage = ({ ...params }: PostPagePropsType) => {
   const { postHead } = params.post;
@@ -34,6 +34,7 @@ const PostPage = ({ ...params }: PostPagePropsType) => {
 export const getServerSideProps: GetServerSideProps = async ({
   params,
   req,
+  res,
 }): Promise<GetServerSidePropsResult<any>> => {
   const props = {
     isLogin: false,
@@ -67,8 +68,11 @@ export const getServerSideProps: GetServerSideProps = async ({
   post.data.postDetail = convertor.makeHtml(
     postContent.data != null ? postContent.data : ""
   );
+
+  const theme = getTheme(req, res);
   return {
     props: {
+      theme,
       ...props,
       post: post.data,
       similar: similarPost.data,

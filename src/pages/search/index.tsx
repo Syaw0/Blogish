@@ -6,6 +6,7 @@ import Head from "next/head";
 import { Provider } from "react-redux";
 import search from "../../../db/util/search";
 import checkSession from "../../../server/util/checkSession";
+import getTheme from "../../utils/getTheme";
 
 const SearchPage = ({ ...props }: SearchPagePropsType) => {
   return (
@@ -35,6 +36,7 @@ posts.map((p: any, i) => {
 export const getServerSideProps: GetServerSideProps = async ({
   query,
   req,
+  res,
 }): Promise<GetServerSidePropsResult<SearchPagePropsType>> => {
   const props = {
     isLogin: false,
@@ -63,8 +65,10 @@ export const getServerSideProps: GetServerSideProps = async ({
       },
     };
   }
+  const theme = getTheme(req, res);
   return {
     props: {
+      theme,
       ...props,
       posts: data.data != null ? data.data.slice(0, data.data.length) : [],
       query: searchQuery,

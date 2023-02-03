@@ -1,4 +1,4 @@
-import ThemeProvider, { ThemeContext } from "../contexts/themeContext";
+import ThemeProvider from "../contexts/themeContext";
 import "@/styles/globals.css";
 import { Arvo, Lato } from "@next/font/google";
 import type { AppProps } from "next/app";
@@ -23,7 +23,7 @@ const lato = Lato({
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <ThemeProvider>
+    <ThemeProvider defaultTheme={pageProps.theme}>
       <div
         className={`  ${lato.variable} ${arvo.variable} ${style.transitionToken} ${style.shadows} ${style.font_sizes} ${style.line_height} rootHolder`}
       >

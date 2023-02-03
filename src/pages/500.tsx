@@ -1,3 +1,5 @@
+import getTheme from "../utils/getTheme";
+import { GetServerSideProps, GetServerSidePropsResult } from "next";
 import { useRouter } from "next/router";
 import Button from "../components/button/button";
 import Error from "../components/error/error";

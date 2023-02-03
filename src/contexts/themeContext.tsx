@@ -12,8 +12,8 @@ const ThemeContext = React.createContext<contextType>({
   theme: "light",
 });
 
-const ThemeProvider = ({ children }: any) => {
-  const [theme, setTheme] = useState<themeType>("light");
+const ThemeProvider = ({ children, defaultTheme = "light" }: any) => {
+  const [theme, setTheme] = useState<themeType>(defaultTheme);
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>
       <div

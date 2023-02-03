@@ -7,7 +7,11 @@ import IconSun from "../../assets/icons/iconSun";
 const SwitchTheme = () => {
   const { theme, setTheme } = useContext(ThemeContext);
   const handleTheme = () => {
-    setTheme(theme == "dark" ? "light" : "dark");
+    const newTheme = theme == "dark" ? "light" : "dark";
+    if (document.cookie != null) {
+      document.cookie = `theme=${newTheme};SameSite=secure`;
+    }
+    setTheme(newTheme);
   };
   return (
     <div

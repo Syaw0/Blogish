@@ -42,6 +42,7 @@ declare global {
     isLogin: boolean;
     posts: PostType[] | [];
     profileData?: ProfilePropsType;
+    theme?: string;
   }
   interface UserPagePropsType extends MainPagePropsType {
     user: User;
