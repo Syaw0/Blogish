@@ -1,0 +1,46 @@
+.holder {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.headText {
+  animation: scale 2s ease infinite both;
+}
+
+@keyframes scale {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.headText,
+.code {
+  font-size: var(--headline1);
+  line-height: var(--headline1_lineHeight);
+  color: var(--onBg900);
+}
+
+.code {
+  color: red;
+  margin-left: 0.5rem;
+}
+
+.description {
+  font-size: var(--headline6);
+  color: var(--onBg900);
+}
+
+.extra {
+  margin: 1rem 0;
+}
