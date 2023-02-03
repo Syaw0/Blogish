@@ -1,12 +1,14 @@
 import { useEffect } from "react";
 
 const useHighlightCode = () => {
-  var hljs: any = {};
+  const highlight = async () => {
+    const hljs = await import("highlight.js");
+    hljs.default.highlightAll();
+  };
+
   useEffect(() => {
-    if (hljs != null && hljs.highlightAll != null) {
-      hljs.highlightAll();
-    }
-  });
+    highlight();
+  }, []);
 };
 
 export default useHighlightCode;
