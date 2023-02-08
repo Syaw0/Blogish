@@ -12,16 +12,7 @@ import { useRouter } from "next/router";
 
 const Authenticate = () => {
   const router = useRouter();
-  let [authData, trigger, authState, msg, setMsg] = useFetch(
-    authenticate,
-    loaderMsg
-  );
-
-  useEffect(() => {
-    if (authData != null) {
-      router.replace("/");
-    }
-  }, [authData, router]);
+  let [trigger, authState, msg, setMsg] = useFetch([authenticate], [loaderMsg]);
 
   const [pageState, setPageState] = useState({
     password: "",
@@ -35,12 +26,18 @@ const Authenticate = () => {
     setPageState((s) => ({ ...s, [type]: value }));
   };
 
-  const startAuth = () => {
+  const startAuth = async () => {
     if (!checkInputs()) {
       return;
     }
-    // setPageState((s) => ({ ...s, email: "", password: "" }));
-    trigger(pageState.isLogin ? "login" : "register", pageState);
+    const result = await trigger(
+      0,
+      pageState.isLogin ? "login" : "register",
+      pageState
+    );
+    if (result.status) {
+      router.replace("/");
+    }
   };
 
   const checkInputs = () => {

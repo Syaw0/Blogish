@@ -9,7 +9,7 @@ import checkSession from "../../../server/util/checkSession";
 import Script from "next/script";
 import getTheme from "../../utils/getTheme";
 
-const WritePage = ({ ...params }: WritePagePropsType) => {
+const WritePage = (params: WritePagePropsType) => {
   return (
     <>
       <Head>
@@ -40,6 +40,7 @@ export const getServerSideProps: GetServerSideProps = async ({
       name: "",
       profileUrl: "",
       id: "",
+      description: "",
     },
   };
   const isLogged = await checkSession(req.cookies);

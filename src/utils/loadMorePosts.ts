@@ -1,5 +1,6 @@
-const loadMorePosts = async (args: any): Promise<FetchResponse> => {
-  const resp = await fetch(`/getMorePost?len=${args}`);
+const loadMorePosts = async (args: [s: string]): Promise<FetchResponse> => {
+  const len = args[0];
+  const resp = await fetch(`/getMorePost?len=${len}`);
   const data = await resp.json();
   return data;
 };

@@ -3,7 +3,6 @@ import request from "supertest";
 import bodyParser from "body-parser";
 import { SHA256 } from "crypto-js";
 import { pool } from "../../db/dbController";
-import path from "path";
 import expressFileUpload from "express-fileupload";
 import updateNameAndDescriptionRoute from "../../server/routes/updateNameAndDescriptionRoute";
 

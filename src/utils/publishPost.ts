@@ -1,10 +1,6 @@
-const publishPost = async ({
-  postHead,
-  postSubhead,
-  postDetail,
-  id,
-  profileData,
-}: any): Promise<FetchResponse> => {
+const publishPost = async (publishData: [s: any]): Promise<FetchResponse> => {
+  const { postHead, postSubhead, postDetail, id, profileData } = publishData[0];
+  console.log(publishData);
   const query = id != null ? `?edit=true&id=${id}` : "";
   const resp = await fetch(`/publish${query}`, {
     method: "post",

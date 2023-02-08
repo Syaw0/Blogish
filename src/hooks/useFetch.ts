@@ -64,6 +64,7 @@ const useFetch = (
       }));
       return res;
     } catch (err) {
+      console.log(err);
       setState((s) => ({
         ...s,
         state: "error",

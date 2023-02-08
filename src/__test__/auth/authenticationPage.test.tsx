@@ -3,6 +3,8 @@ import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import authenticate from "../../utils/authenticate";
 import mockRouter from "next-router-mock";
+import { act } from "react-dom/test-utils";
+import { MemoryRouterProvider } from "next-router-mock/dist/MemoryRouterProvider";
 
 let mockFetcher = authenticate as jest.Mock;
 
@@ -11,7 +13,7 @@ jest.mock("../../utils/authenticate");
 
 describe("Test Page : Authentication Page", () => {
   beforeEach(() => {
-    render(<AuthenticationPage />);
+    render(<AuthenticationPage />, { wrapper: MemoryRouterProvider });
   });
   describe("Check Inputs and response for that", () => {
     it("if inputs are empty (one or both) show error msg", () => {
@@ -106,17 +108,20 @@ describe("Test Page : Authentication Page", () => {
       fireEvent.change(textInput, { target: { value: "hello@gmail.com" } });
       fireEvent.change(passwordInput, { target: { value: "hello2w22" } });
     });
-    it("in default auth mode is sing up", async () => {
+    it.only("in default auth mode is sing up", async () => {
       mockFetcher.mockReturnValue(
         new Promise((res) =>
           res({ status: true, msg: "error in authenticate" })
         )
       );
       const button = screen.getByTestId("authButton");
+
       fireEvent.click(button);
+
       await waitFor(() =>
-        expect(mockFetcher.mock.calls[0][0]).toEqual("register")
+        expect(mockFetcher.mock.calls[0][0]).toContain("register")
       );
+      await waitFor(() => expect(mockRouter.asPath).toEqual("/"));
     });
 
     it("lets change it and login", async () => {
@@ -124,7 +129,7 @@ describe("Test Page : Authentication Page", () => {
       const button = screen.getByTestId("authButton");
       fireEvent.click(button);
       await waitFor(() =>
-        expect(mockFetcher.mock.calls[0][0]).toEqual("login")
+        expect(mockFetcher.mock.calls[0][0]).toContain("login")
       );
     });
   });

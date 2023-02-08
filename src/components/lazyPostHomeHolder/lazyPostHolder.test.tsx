@@ -5,6 +5,7 @@ import { fakePost, fakeUser } from "../../shared/fakePost";
 import loadMorePosts from "../../utils/loadMorePosts";
 import { Provider } from "react-redux";
 import makeStore from "../../store/home/homeStore";
+import { act } from "react-dom/test-utils";
 
 jest.mock("next/router", () => require("next-router-mock"));
 jest.mock("../../utils/loadMorePosts");
@@ -65,6 +66,7 @@ describe("Component Test : Post", () => {
       "[data-testid='post-head']"
     ).length;
     fireEvent.click(screen.getByTestId("lazyPostHolderButton"));
+
     await waitFor(() =>
       expect(screen.getByTestId("successMessage")).toBeInTheDocument()
     );
