@@ -19,7 +19,7 @@ const CustomParent = () => {
   );
 };
 
-describe("TEST COMPONENT : Setting Profile", () => {
+describe("TEST COMPONENT : Setting Name", () => {
   it("its render properly", () => {
     render(<CustomParent />);
     expect(screen.getByTestId("settingNameHolder")).toBeInTheDocument();

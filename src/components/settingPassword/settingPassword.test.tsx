@@ -6,7 +6,7 @@ import makeStore from "../../store/setting/setting";
 import { fakeUser } from "../../shared/fakePost";
 import updatePassword from "../../utils/updatePassword";
 
-jest.mock("../../utils/changePassword");
+jest.mock("../../utils/updatePassword.ts");
 jest.mock("next/router", () => require("next-router-mock"));
 
 const mockChangePassword = updatePassword as jest.Mock;
@@ -19,7 +19,7 @@ const CustomParent = () => {
   );
 };
 
-describe("TEST COMPONENT : Setting Profile", () => {
+describe("TEST COMPONENT : Setting Password ", () => {
   it("its render properly", () => {
     render(<CustomParent />);
     expect(screen.getByTestId("settingPasswordHolder")).toBeInTheDocument();
@@ -56,7 +56,7 @@ describe("TEST COMPONENT : Setting Profile", () => {
       target: { value: "bealbelaaa" },
     });
     fireEvent.change(screen.getByTestId("settingPasswordOldPasswordInput"), {
-      target: { value: "bealbelaaa" },
+      target: { value: "bealbelaaa33" },
     });
 
     fireEvent.click(screen.getByTestId("settingPasswordUpdateButton"));

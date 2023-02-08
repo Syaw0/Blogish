@@ -108,7 +108,7 @@ describe("Test Page : Authentication Page", () => {
       fireEvent.change(textInput, { target: { value: "hello@gmail.com" } });
       fireEvent.change(passwordInput, { target: { value: "hello2w22" } });
     });
-    it.only("in default auth mode is sing up", async () => {
+    it("in default auth mode is sing up", async () => {
       mockFetcher.mockReturnValue(
         new Promise((res) =>
           res({ status: true, msg: "error in authenticate" })
