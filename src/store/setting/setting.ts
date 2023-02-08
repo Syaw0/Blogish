@@ -11,6 +11,7 @@ const initState: SettingStateTypes = {
     id: "",
     name: "",
     profileUrl: "",
+    description: "",
   },
 };
 

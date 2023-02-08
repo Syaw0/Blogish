@@ -7,7 +7,6 @@ const changeProfileRoute = async (req: Request, res: Response) => {
     const files = req.files;
     const userId = req.body.userId;
     const currentUrl = req.body.userProf;
-    console.log(req.body);
     if (currentUrl.search("/prof/default") != -1) {
       const result = await changeProfileUrl(userId);
       if (!result.status) {

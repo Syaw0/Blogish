@@ -13,6 +13,7 @@ import logout from "./routes/logout";
 import changeProfileRoute from "./routes/changeProfile";
 import fileUpload from "express-fileupload";
 import deleteProfileRoute from "./routes/deleteProfile";
+import updateNameAndDescriptionRoute from "./routes/updateNameAndDescriptionRoute";
 
 const dev = process.env.NODE_ENV !== "production";
 const hostname = "localhost";
@@ -37,7 +38,7 @@ nextApp
     app.get("/prof/:id", getProfileById);
 
     app.post("/login", loginRoute);
-
+    app.post("/updateNameAndDescription", updateNameAndDescriptionRoute);
     app.post("/register", register);
 
     app.post("/publish", publish);
