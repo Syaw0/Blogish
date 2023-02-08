@@ -45,6 +45,7 @@ export const getServerSideProps: GetServerSideProps = async ({
       name: "",
       profileUrl: "",
       id: "",
+      description: "",
     },
   };
   const isLogged = await checkSession(req.cookies);

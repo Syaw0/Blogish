@@ -12,6 +12,8 @@ import IconLogout from "../../assets/icons/iconLogout";
 import logoutAndRemoveSession from "../../utils/logout";
 import SwitchTheme from "../switchTheme/switchTheme";
 import useControlNavbarStyles from "../../hooks/useControlNavbarStyles";
+import Text from "../typography/typography";
+import useOutsideClickHandler from "../../hooks/useOutsideClickHandle";
 
 interface NavbarPropsType {
   isLogin: boolean;
@@ -19,8 +21,9 @@ interface NavbarPropsType {
 }
 
 const Navbar = ({ isLogin, profileData }: NavbarPropsType) => {
+  const menuRef: any = useRef(null);
   const divRef: any = useRef(null);
-
+  const [isNavMenuOpen, setIsNavMenuOpen] = useState(false);
   useControlNavbarStyles(divRef, isLogin);
 
   const logout = async () => {
@@ -64,6 +67,11 @@ const Navbar = ({ isLogin, profileData }: NavbarPropsType) => {
       router.replace("/write");
     }
   };
+
+  const handleNavMenu = () => {
+    setIsNavMenuOpen((s) => !s);
+  };
+  useOutsideClickHandler(menuRef, setIsNavMenuOpen);
 
   return (
     <div data-testid="navbar" ref={divRef} className={`${style.holder} `}>
@@ -115,24 +123,6 @@ const Navbar = ({ isLogin, profileData }: NavbarPropsType) => {
         {isLogin && profileData != null && (
           <>
             <Button
-              onClick={logout}
-              variant="shadow"
-              className={style.writeButton}
-              testid="navbarLogoutButton"
-            >
-              Logout
-            </Button>
-
-            <Button
-              onClick={logout}
-              variant="shadow"
-              testid="navbarLogoutIconButton"
-              className={style.writeIconButton}
-            >
-              <IconLogout width="20" height="20" />
-            </Button>
-
-            <Button
               testid="navWriteButton"
               onClick={navigateToWritePage}
               StartIcon={IconWrite}
@@ -151,14 +141,43 @@ const Navbar = ({ isLogin, profileData }: NavbarPropsType) => {
               <IconWrite width="20" height="20" />
             </Button>
 
-            <Link data-testid="navProfile" href={`/user/${profileData.id}`}>
+            <div
+              data-testid="navbarMenuHolder"
+              ref={menuRef}
+              onClick={handleNavMenu}
+              className={style.menuHolder}
+            >
               <Profile
+                data-testid="navProfile"
                 alt={profileData.name}
                 height={20}
                 width={20}
                 url={profileData.profileUrl}
               />
-            </Link>
+              {isNavMenuOpen && (
+                <div data-testid="navbarMenu" className={style.menu}>
+                  <Link
+                    data-testid="navbarMenuItemProfile"
+                    href={`/user/${profileData.id}`}
+                  >
+                    <Text>Profile</Text>
+                  </Link>
+                  <Text
+                    testid="navbarMenuItemWrite"
+                    onClick={navigateToWritePage}
+                  >
+                    Write
+                  </Text>
+                  <Link data-testid="navbarMenuItemSetting" href={"/setting"}>
+                    <Text>Setting</Text>
+                  </Link>
+
+                  <Text testid="navbarMenuItemLogout" onClick={logout}>
+                    Logout
+                  </Text>
+                </div>
+              )}
+            </div>
           </>
         )}
       </div>

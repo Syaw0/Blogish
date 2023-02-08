@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 // ? Should i test this hook?
 
@@ -13,14 +13,16 @@ interface FetcherState {
 type Fetcher = (...params: any) => Promise<FetchResponse>;
 
 type UseFetchReturnType = [
-  any,
-  (...args: any) => void,
+  (...args: any) => Promise<FetchResponse>,
   FetchStateTypes,
   string,
   (type: FetchStateTypes, msg: string) => void
 ];
 
-const useFetch = (fetcher: Fetcher, loaderMsg: string): UseFetchReturnType => {
+const useFetch = (
+  fetcher: Fetcher[],
+  loaderMsg: string[]
+): UseFetchReturnType => {
   const [state, setState] = useState<FetcherState>({
     state: "pending",
     data: null,
@@ -32,63 +34,47 @@ const useFetch = (fetcher: Fetcher, loaderMsg: string): UseFetchReturnType => {
     },
   });
 
-  const trigger = (...args: any) => {
+  const trigger = async (index: number, ...args: any) => {
     setState((s) => ({
       ...s,
       run: true,
       data: null,
       state: "loader",
-      msg: loaderMsg,
+      msg: loaderMsg[index],
       params: args,
     }));
-  };
-  useEffect(() => {
     try {
-      if (state.run) {
-        fetcher(...state.params)
-          .then((res) => {
-            if (res.status) {
-              setState((s) => ({
-                ...s,
-                state: "success",
-                run: false,
-                data: res.data,
-                msg: res.msg,
-              }));
-              return;
-            }
-            setState((s) => ({
-              ...s,
-              state: "error",
-              run: false,
-              msg: res.msg,
-            }));
-          })
-          .catch(() => {
-            setState((s) => ({
-              ...s,
-              state: "error",
-              run: false,
-              msg: "error from server",
-            }));
-          });
+      const res = await fetcher[index](args);
+      if (!res.status) {
+        setState((s) => ({
+          ...s,
+          state: "error",
+          msg: res.msg,
+        }));
+        return {
+          status: false,
+          msg: res.msg,
+        };
       }
+
+      setState((s) => ({
+        ...s,
+        state: "success",
+        msg: res.msg,
+      }));
+      return res;
     } catch (err) {
+      console.log(err);
       setState((s) => ({
         ...s,
         state: "error",
-        run: false,
-        msg: "error from client",
+        msg: "error in client",
       }));
+      return { status: false, msg: "" };
     }
-  }, [fetcher, state.run, state.params]);
-  return [
-    state.data != null ? state.data : null,
-    trigger,
-    state.state,
-    state.msg,
-    state.setMsg,
-  ];
+  };
+
+  return [trigger, state.state, state.msg, state.setMsg];
 };
 
 export default useFetch;

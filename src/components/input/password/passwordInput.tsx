@@ -11,6 +11,7 @@ interface PasswordInputType {
   id?: string;
   testId: string;
   className?: string;
+  name?: string;
 }
 
 const PasswordInput = ({
@@ -21,6 +22,7 @@ const PasswordInput = ({
   value,
   testId,
   className = "",
+  name = "",
 }: PasswordInputType) => {
   const [showPassword, setShowPassword] = useState(false);
   const changePasswordVisibility = (e: React.MouseEvent<SVGAElement>) => {
@@ -32,6 +34,7 @@ const PasswordInput = ({
       <label htmlFor={id}>{label}</label>
       <div>
         <input
+          name={name}
           placeholder={placeholder}
           data-testid={testId}
           id={id}

@@ -34,10 +34,14 @@ describe("Component Test : Navbar", () => {
   });
   it("if user is login and its session is store on the server show profile and write button", () => {
     render(<CustomParent isLogin={true} />);
+
     expect(screen.getByTestId("themeSwitch")).toBeInTheDocument();
-    expect(screen.getByTestId("navWriteButton")).toBeInTheDocument();
     expect(screen.getByTestId("navProfile")).toBeInTheDocument();
-    expect(screen.getByTestId("navbarLogoutButton")).toBeInTheDocument();
+    fireEvent.click(screen.getByTestId("navbarMenuHolder"));
+    expect(screen.getByTestId("navbarMenuItemProfile")).toBeInTheDocument();
+    expect(screen.getByTestId("navbarMenuItemWrite")).toBeInTheDocument();
+    expect(screen.getByTestId("navbarMenuItemSetting")).toBeInTheDocument();
+    expect(screen.getByTestId("navbarMenuItemLogout")).toBeInTheDocument();
   });
 
   it("if click on the iconLogo navigate to home page", () => {
@@ -47,11 +51,28 @@ describe("Component Test : Navbar", () => {
     expect(mockRouter.asPath).toEqual("/");
   });
 
-  it("if click on the profile navigate to user page page", () => {
+  it("if click on the profile menu open", async () => {
     render(<CustomParent isLogin={true} />, { wrapper: MemoryRouterProvider });
-    const profile = screen.getByTestId("navProfile");
-    fireEvent.click(profile);
+    fireEvent.click(screen.getByTestId("navbarMenuHolder"));
+    const menu = screen.getByTestId("navbarMenu");
+    expect(menu).toBeInTheDocument();
+    fireEvent.click(screen.getByTestId("navbarMenuItemProfile"));
     expect(mockRouter.asPath).toEqual(`/user/${fakePost.author.id}`);
+    // when click on the menu items menu will close
+    expect(menu).not.toBeInTheDocument();
+    fireEvent.click(screen.getByTestId("navbarMenuHolder"));
+    fireEvent.click(screen.getByTestId("navbarMenuItemWrite"));
+    expect(mockRouter.asPath).toEqual(`/write`);
+
+    fireEvent.click(screen.getByTestId("navbarMenuHolder"));
+    fireEvent.click(screen.getByTestId("navbarMenuItemSetting"));
+    expect(mockRouter.asPath).toEqual(`/setting`);
+
+    mockLogout.mockReturnValue(new Promise((res) => res({ status: true })));
+
+    fireEvent.click(screen.getByTestId("navbarMenuHolder"));
+    fireEvent.click(screen.getByTestId("navbarMenuItemLogout"));
+    expect(mockLogout).toBeCalledTimes(1);
   });
 
   it("if click on the write button navigate to write page", () => {
@@ -74,11 +95,5 @@ describe("Component Test : Navbar", () => {
     fireEvent.click(searchBoxIcon);
 
     expect(mockRouter.asPath).toEqual("/search?query=otherQuery");
-  });
-  it("if we click on the logout ", () => {
-    mockLogout.mockReturnValue(new Promise((res) => res({ status: true })));
-    render(<CustomParent isLogin={true} />, { wrapper: MemoryRouterProvider });
-    fireEvent.click(screen.getByTestId("navbarLogoutButton"));
-    expect(mockLogout).toBeCalledTimes(1);
   });
 });

@@ -1,0 +1,19 @@
+.holder {
+  width: 100%;
+}
+
+.headText {
+  margin-bottom: 2rem;
+}
+
+.nameInput {
+  margin-bottom: 1rem;
+}
+
+.descriptionInput {
+  margin-bottom: 2rem;
+}
+
+.updateBtn {
+  margin-bottom: 1rem;
+}

@@ -3,25 +3,17 @@ import PasswordInput from "../../../components/input/password/passwordInput";
 import TextInput from "../../../components/input/text/textInput";
 import Message from "../../../components/message/message";
 import useFetch from "../../../hooks/useFetch";
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, useState } from "react";
 import IconLogo from "../../../assets/icons/IconLogo";
 import Text from "../../../components/typography/typography";
 import style from "./authenticate.module.css";
 import authenticate, { loaderMsg } from "../../../utils/authenticate";
 import { useRouter } from "next/router";
+import inputCheckEmailForm from "../../../utils/inputCheckEmailForm";
 
 const Authenticate = () => {
   const router = useRouter();
-  let [authData, trigger, authState, msg, setMsg] = useFetch(
-    authenticate,
-    loaderMsg
-  );
-
-  useEffect(() => {
-    if (authData != null) {
-      router.replace("/");
-    }
-  }, [authData, router]);
+  let [trigger, authState, msg, setMsg] = useFetch([authenticate], [loaderMsg]);
 
   const [pageState, setPageState] = useState({
     password: "",
@@ -35,19 +27,25 @@ const Authenticate = () => {
     setPageState((s) => ({ ...s, [type]: value }));
   };
 
-  const startAuth = () => {
+  const startAuth = async () => {
     if (!checkInputs()) {
       return;
     }
-    // setPageState((s) => ({ ...s, email: "", password: "" }));
-    trigger(pageState.isLogin ? "login" : "register", pageState);
+    const result = await trigger(
+      0,
+      pageState.isLogin ? "login" : "register",
+      pageState
+    );
+    if (result.status) {
+      router.replace("/");
+    }
   };
 
   const checkInputs = () => {
     if (pageState.email.trim() == "" && pageState.password.trim() == "") {
       setMsg("error", "Please fill all inputs and then click on submit");
       return false;
-    } else if (!checkEmail(pageState.email)) {
+    } else if (!inputCheckEmailForm(pageState.email)) {
       setMsg("error", "Please use a Valid Email Address");
       return false;
     } else if (pageState.password.length < 8) {
@@ -59,13 +57,6 @@ const Authenticate = () => {
 
   const changeAuthType = () => {
     setPageState((s) => ({ ...s, isLogin: !s.isLogin }));
-  };
-
-  const checkEmail = (addr: string) => {
-    if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(addr)) {
-      return true;
-    }
-    return false;
   };
 
   return (

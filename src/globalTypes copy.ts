@@ -19,6 +19,7 @@ declare global {
     profileUrl: string;
     name: string;
     id: string;
+    description: string;
   }
 
   interface Author {

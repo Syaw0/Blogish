@@ -7,9 +7,10 @@ type AuthenticateData = {
 };
 
 const authenticate = async (
-  type: AuthenticateType,
-  userData: AuthenticateData
+  authData: [s: AuthenticateType, w: AuthenticateData]
 ): Promise<FetchResponse> => {
+  const type = authData[0];
+  const userData = authData[1];
   const hashedPassword = SHA256(userData.password).toString();
   const resp = await fetch(`${type}`, {
     method: "POST",

@@ -3,7 +3,6 @@ import useFetch from "../../hooks/useFetch";
 import Button from "../button/button";
 import PostHolder from "../postHolder/postHolder";
 import style from "./lazyPostHolder.module.css";
-import { useEffect } from "react";
 import Message from "../message/message";
 import { homeStateAddPost } from "../../store/home/homeStore";
 import { useDispatch } from "react-redux";
@@ -14,20 +13,16 @@ interface LazyPostHolderPropsType {
 }
 
 const LazyPostHolder = ({ headText }: LazyPostHolderPropsType) => {
-  let [data, trigger, state, msg, setMsg] = useFetch(loadMorePosts, loaderMsg);
+  let [trigger, state, msg] = useFetch([loadMorePosts], [loaderMsg]);
   const posts = useHomeSelector((s) => s.posts);
   const dispatch = useDispatch();
-  useEffect(() => {
-    if (data != null) {
-      dispatch(homeStateAddPost(data));
-      setTimeout(() => {
-        setMsg("pending", "");
-      }, 1000);
-    }
-  }, [data, dispatch, setMsg]);
 
-  const getPosts = () => {
-    trigger(posts.length);
+  const getPosts = async () => {
+    const result = await trigger(0, posts.length);
+    if (result.status) {
+      console.log(result);
+      dispatch(homeStateAddPost(result.data));
+    }
   };
   return (
     <div data-testid="lazyPostHolder" className={style.holder}>
