@@ -7,8 +7,7 @@ const getProfileById = (req: Request, res: Response) => {
   const basePath = path.resolve(__dirname + "./../static/profile/");
   const profs = fs.readdirSync(basePath);
   profs.forEach((profName) => {
-    if (profName.split(".")[0] == id) {
-      console.log(basePath + `/${profName}`);
+    if (profName.split(".")[0] == id.split(".")[0]) {
       return res.sendFile(basePath + `/${profName}`);
     }
   });

@@ -12,6 +12,7 @@ import getMorePosts from "./routes/getMorePosts";
 import logout from "./routes/logout";
 import changeProfileRoute from "./routes/changeProfile";
 import fileUpload from "express-fileupload";
+import deleteProfileRoute from "./routes/deleteProfile";
 
 const dev = process.env.NODE_ENV !== "production";
 const hostname = "localhost";
@@ -31,7 +32,7 @@ nextApp
     app.use(cookieParser());
     app.use(fileUpload());
     app.use(accessibilityMiddleware);
-
+    app.post("/deleteProfile", deleteProfileRoute);
     app.post("/changeProfile", changeProfileRoute);
     app.get("/prof/:id", getProfileById);
 
