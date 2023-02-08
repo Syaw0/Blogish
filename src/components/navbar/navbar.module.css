@@ -61,6 +61,36 @@
   margin-right: 0.5rem;
 }
 
+.menuHolder {
+  position: relative;
+}
+
+.menu {
+  position: absolute;
+  background-color: var(--onBg900);
+  z-index: 10000;
+  padding: 0.2rem;
+  right: 0%;
+  top: 110%;
+  border-radius: 8px;
+}
+
+.menu a:hover p {
+  background-color: var(--bg200);
+}
+
+.menu p {
+  color: var(--bg);
+  padding: 0.2rem 1rem;
+  cursor: pointer;
+  width: 100%;
+  text-align: center;
+}
+
+.menu > p:hover {
+  background-color: var(--bg200);
+}
+
 @media (max-width: 1000px) {
   .holder {
     padding: 0.7rem calc(1rem * 3);
