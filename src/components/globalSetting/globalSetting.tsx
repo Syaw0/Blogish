@@ -4,7 +4,7 @@ import style from "./globalSetting.module.css";
 
 const GlobalSetting = () => {
   return (
-    <div className={style.holder}>
+    <div data-testid="globalSettingHolder" className={style.holder}>
       <SettingProfile />
       <SettingName />
     </div>

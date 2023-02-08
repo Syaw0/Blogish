@@ -14,6 +14,7 @@ import changeProfileRoute from "./routes/changeProfile";
 import fileUpload from "express-fileupload";
 import deleteProfileRoute from "./routes/deleteProfile";
 import updateNameAndDescriptionRoute from "./routes/updateNameAndDescriptionRoute";
+import updatePasswordRoute from "./routes/updatePassword";
 
 const dev = process.env.NODE_ENV !== "production";
 const hostname = "localhost";
@@ -36,7 +37,7 @@ nextApp
     app.post("/deleteProfile", deleteProfileRoute);
     app.post("/changeProfile", changeProfileRoute);
     app.get("/prof/:id", getProfileById);
-
+    app.post("/updatePassword", updatePasswordRoute);
     app.post("/login", loginRoute);
     app.post("/updateNameAndDescription", updateNameAndDescriptionRoute);
     app.post("/register", register);

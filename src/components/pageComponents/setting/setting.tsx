@@ -4,6 +4,7 @@ import MultiSectionHorizontal from "../../..//components/layouts/multiSectionHor
 import IconUser from "../../..//assets/icons/iconUser";
 import IconLock from "../../..//assets/icons/iconLock";
 import GlobalSetting from "../../../components/globalSetting/globalSetting";
+import AuthenticateSetting from "../../../components/authenticateSetting/authenticateSetting";
 
 const Setting = ({ isLogin, profileData }: MainPagePropsType) => {
   return (
@@ -19,7 +20,7 @@ const Setting = ({ isLogin, profileData }: MainPagePropsType) => {
           },
           {
             sectionName: "email and password",
-            component: <div>email and password</div>,
+            component: <AuthenticateSetting />,
             Icon: IconLock,
           },
         ]}
