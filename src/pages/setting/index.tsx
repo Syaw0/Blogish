@@ -1,14 +1,13 @@
-import Home from "../../components/pageComponents/home/home";
 import Head from "next/head";
 import { GetServerSideProps, GetServerSidePropsResult } from "next";
 import { Provider } from "react-redux";
-import makeStore from "../../store/home/homeStore";
 import getPostList from "../../../db/util/getPostList";
 import checkSession from "../../../server/util/checkSession";
 import getTheme from "../../utils/getTheme";
 import Setting from "../../components/pageComponents/setting/setting";
+import makeStore, { SettingState } from "../../store/setting/setting";
 
-export default function HomePage({ ...params }: MainPagePropsType) {
+export default function SettingPage(params: MainPagePropsType) {
   return (
     <>
       <Head>
@@ -26,7 +25,7 @@ export default function HomePage({ ...params }: MainPagePropsType) {
 export const getServerSideProps: GetServerSideProps = async ({
   req,
   res,
-}): Promise<GetServerSidePropsResult<MainPagePropsType>> => {
+}): Promise<GetServerSidePropsResult<SettingState & { theme: string }>> => {
   const props = {
     isLogin: false,
     profileData: {
@@ -40,23 +39,12 @@ export const getServerSideProps: GetServerSideProps = async ({
     props.isLogin = true;
     props.profileData = isLogged.data;
   }
-  const posts = await getPostList(0);
 
-  if (!posts.status) {
-    return {
-      redirect: {
-        destination: "/500",
-        permanent: false,
-      },
-    };
-  }
-
-  const theme = getTheme(req, res);
+  const theme: string = getTheme(req, res) as string;
 
   return {
     props: {
       theme,
-      posts: posts.data,
       ...props,
     },
   };

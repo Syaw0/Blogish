@@ -36,3 +36,5 @@ next-env.d.ts
 /src/shared/somemd.ts
 
 .env
+
+/server/static/

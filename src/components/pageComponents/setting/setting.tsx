@@ -1,8 +1,9 @@
 import style from "./setting.module.css";
 import Navbar from "../../../components/navbar/navbar";
-import MultiSectionHorizontal from "@/components/layouts/multiSectionHorizontal/multiSectionHorizontal";
-import IconUser from "@/assets/icons/iconUser";
-import IconLock from "@/assets/icons/iconLock";
+import MultiSectionHorizontal from "../../..//components/layouts/multiSectionHorizontal/multiSectionHorizontal";
+import IconUser from "../../..//assets/icons/iconUser";
+import IconLock from "../../..//assets/icons/iconLock";
+import GlobalSetting from "../../../components/globalSetting/globalSetting";
 
 const Setting = ({ isLogin, profileData }: MainPagePropsType) => {
   return (
@@ -13,7 +14,7 @@ const Setting = ({ isLogin, profileData }: MainPagePropsType) => {
         layoutData={[
           {
             sectionName: "Information",
-            component: <div>information</div>,
+            component: <GlobalSetting />,
             Icon: IconUser,
           },
           {

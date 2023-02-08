@@ -10,6 +10,8 @@ import register from "./routes/register";
 import publish from "./routes/publish";
 import getMorePosts from "./routes/getMorePosts";
 import logout from "./routes/logout";
+import changeProfileRoute from "./routes/changeProfile";
+import fileUpload from "express-fileupload";
 
 const dev = process.env.NODE_ENV !== "production";
 const hostname = "localhost";
@@ -27,9 +29,10 @@ nextApp
     app.use(express.static(__dirname + "/static"));
     app.use(bodyParser.json());
     app.use(cookieParser());
-
+    app.use(fileUpload());
     app.use(accessibilityMiddleware);
 
+    app.post("/changeProfile", changeProfileRoute);
     app.get("/prof/:id", getProfileById);
 
     app.post("/login", loginRoute);

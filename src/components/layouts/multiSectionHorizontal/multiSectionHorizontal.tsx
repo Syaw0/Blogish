@@ -28,7 +28,9 @@ const MultiSectionHorizontal = ({
       <div data-testid="layoutLeft" className={style.left}>
         {activeSection.component}
       </div>
-      <Layout className={style.lowWidthLeft} layoutData={layoutData} />
+      <div className={style.lowLeft}>
+        <Layout className={style.lowWidthLeft} layoutData={layoutData} />
+      </div>
 
       <div data-testid="layoutRight" className={style.right}>
         {layoutData.map((F, i) => {

@@ -58,6 +58,10 @@
   padding: 0;
 }
 
+.lowLeft {
+  display: none;
+}
+
 @media (max-width: 1000px) {
   .holder {
     padding: 0 calc(1rem * 3);
@@ -74,14 +78,15 @@
     margin-right: 0;
     border-right: none;
     padding-right: 0;
-    display: flex;
-    justify-content: flex-start;
-    align-items: flex-start;
-    padding: 0;
   }
 
   .left {
     display: none;
+  }
+
+  .lowLeft {
+    display: flex;
+    width: 100%;
   }
 }
 
